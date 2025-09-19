@@ -7,6 +7,5 @@ Python
 cmd prompt: pip install flask
 
 ### run app ###
----> cd desktop/mhs-system
----> python app.py
+cmd prompt: python app.py
 
