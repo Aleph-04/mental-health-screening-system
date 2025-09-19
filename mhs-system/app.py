@@ -7,8 +7,12 @@ def home():
     return "Hello, Flask!"
 
 @app.route("/login")
-def dashboard():
+def login():
     return render_template("login.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
