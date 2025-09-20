@@ -18,5 +18,9 @@ def dashboard():
 def charts():
     return render_template("charts.html")
 
+@app.route("/edit-evaluation-form")
+def edit_evaluation_form():
+    return render_template("edit-evaluation-form.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
