@@ -12,7 +12,7 @@ def login():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("index.html")
+    return render_template("dashboard.html")
 
 @app.route("/charts")
 def charts():
