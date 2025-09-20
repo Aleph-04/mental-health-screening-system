@@ -6,7 +6,7 @@ app = Flask(__name__)
 def home():
     return "Hello, Flask!"
 
-@app.route("/login")
+@app.route("/login.html")
 def login():
     return render_template("login.html")
 
@@ -14,7 +14,7 @@ def login():
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/charts")
+@app.route("/charts.html")
 def charts():
     return render_template("charts.html")
 
