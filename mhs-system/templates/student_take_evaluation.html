@@ -43,14 +43,13 @@
 
             <!-- User Information -->
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                     <img class="img-profile rounded-circle" src="static/img/undraw_profile.svg">
                 </a>
                 <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="userDropdown">
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
@@ -81,6 +80,213 @@
                 <h6 class="m-0 font-weight-bold text-primary">I. Personal Information</h6>
             </div>
             <div class="card-body">
+                <form>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-3">
+                            <label for="inputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="inputLastName" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputFirstName">First Name</label>
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputMiddleName">Middle Name</label>
+                            <input type="text" class="form-control" id="inputMiddleName" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="inputExtensionName">Extension(Jr.,Sr.,etc.)</label>
+                            <input type="text" class="form-control" id="inputExtensionName" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputDateofBirth">Date of Birth</label>
+                            <input type="date" class="form-control" id="inputDateofBirth" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for="inputPlaceofBirth">Place of Birth</label>
+                            <input type="text" class="form-control" id="inputPlaceofBirth" placeholder="">
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">Sex</label>
+                            <div class="col-sm-2">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="sex" id="male" value="Male">
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="sex" id="female" value="Female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 col-form-label">Civil Status</label>
+                            <div class="col-sm-7">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="civil_status" value="Single"
+                                        id="single">
+                                    <label class="form-check-label" for="single">Single</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="civil_status" value="Married"
+                                        id="married">
+                                    <label class="form-check-label" for="married">Married</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="civil_status" value="Widowed"
+                                        id="widowed">
+                                    <label class="form-check-label" for="widowed">Widowed</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="civil_status" value="Separated"
+                                        id="separated">
+                                    <label class="form-check-label" for="separated">Separated</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="civil_status" value="Other"
+                                        id="other_cs">
+                                    <label class="form-check-label" for="other_cs">Other</label>
+                                    <input type="text" class="form-control d-inline-block ml-2" style="width:120px;"
+                                        name="civil_status_other">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputReligion">Religion</label>
+                            <input type="text" class="form-control" id="inputReligion" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputContactNo">Contact No</label>
+                            <input type="text" class="form-control" id="inputContactNo" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputEmail">Email Address</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputFBAccount">Facebook Account</label>
+                            <input type="text" class="form-control" id="inputFBAccount" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputDegreeProgram">Degree Program</label>
+                            <input type="text" class="form-control" id="inputDegreeProgram" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for="inputPermanentAddress">Permanent Address</label>
+                            <input type="text" class="form-control" id="inputPermanentAddress" placeholder="">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPresentAddress">Present Address</label>
+                            <input type="text" class="form-control" id="inputPresentAddress" placeholder="">
+                        </div>
+
+                        <!-- to be fix -->
+                        <div class="form-group">
+                            <label class="d-block mb-2">Please check (✅), if applicable:</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" class="form-check-input" id="pwd" name="applicable[]"
+                                            value="PWD">
+                                        <label class="form-check-label" for="pwd">PWD</label>
+                                    </div>
+
+                                    <div class="ml-3 mb-2">
+                                        <label class="d-block">Disability type:</label>
+                                        <div class="form-check"><input type="checkbox" id="visual" name="disability[]"
+                                                value="Visual impairment">
+                                            <label for="visual">Visual impairment</label>
+                                        </div>
+                                        <div class="form-check"><input type="checkbox" id="hearing" name="disability[]"
+                                                value="Hearing loss">
+                                            <label for="hearing">Hearing loss</label>
+                                        </div>
+                                        <div class="form-check"><input type="checkbox" id="ortho" name="disability[]"
+                                                value="Orthopedic disability">
+                                            <label for="ortho">Orthopedic disability</label>
+                                        </div>
+                                        <div class="form-check"><input type="checkbox" id="learning" name="disability[]"
+                                                value="Learning disability">
+                                            <label for="learning">Learning disability</label>
+                                        </div>
+                                        <div class="form-check"><input type="checkbox" id="psycho" name="disability[]"
+                                                value="Psychosocial disability">
+                                            <label for="psycho">Psychosocial disability</label>
+                                        </div>
+                                        <div class="form-check"><input type="checkbox" id="chronic" name="disability[]"
+                                                value="Chronic illness">
+                                            <label for="chronic">Chronic illness</label>
+                                        </div>
+                                        <div class="form-check"><input type="checkbox" id="mental" name="disability[]"
+                                                value="Mental disability">
+                                            <label for="mental">Mental disability</label>
+                                        </div>
+                                        <div class="form-check d-flex align-items-center">
+                                            <input type="checkbox" id="dis_other" name="disability[]" value="Others">
+                                            <label for="dis_other" class="ml-2">Others</label>
+                                            <input type="text" class="form-control ml-2" style="width:200px;"
+                                                name="disability_other">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" id="ip" name="applicable[]" value="Indigenous People">
+                                        <label for="ip">Indigenous People (IP)</label>
+                                    </div>
+
+                                    <div class="form-check d-flex align-items-center mb-2">
+                                        <input type="checkbox" id="solo_parent" name="applicable[]" value="Solo Parent">
+                                        <label for="solo_parent" class="ml-2">Solo Parent</label>
+                                        <input type="text" class="form-control ml-2" style="width:150px;"
+                                            name="children_no" placeholder="No. of Children">
+                                    </div>
+
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" id="ofw" name="applicable[]" value="Child of OFW">
+                                        <label for="ofw">Child of OFW</label>
+                                    </div>
+
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" id="lgbtq" name="applicable[]" value="LGBTQIA+">
+                                        <label for="lgbtq">LGBTQIA+ Member</label>
+                                    </div>
+
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" id="working" name="applicable[]" value="Working Student">
+                                        <label for="working">Working Student</label>
+                                    </div>
+
+                                    <div class="form-check d-flex align-items-center">
+                                        <input type="checkbox" id="other_app" name="applicable[]" value="Others">
+                                        <label for="other_app" class="ml-2">Others</label>
+                                        <input type="text" class="form-control ml-2" style="width:200px;"
+                                            name="applicable_other">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"></div>
+                        
+                        <div class="col-12 d-flex justify-content-end mt-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
