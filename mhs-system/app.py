@@ -22,5 +22,9 @@ def edit_evaluation_form():
 def view_forms():
     return render_template("view-forms.html")
 
+@app.route("/results")
+def results():
+    return render_template("results.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
