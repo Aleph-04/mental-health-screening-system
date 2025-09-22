@@ -4,7 +4,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    return render_template("student_login.html")
+
+@app.route("/admin")
+def admin_login():
     return render_template("admin_login.html")
+
+@app.route("/evaluation")
+def student_take_evaluation():
+    return render_template("student_take_evaluation.html")
 
 @app.route("/dashboard")
 def dashboard():
