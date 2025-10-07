@@ -1,7 +1,11 @@
 from flask import Flask, render_template
 import sqlite3
 
+from database import initialize_db
+
 app = Flask(__name__)
+
+initialize_db()
 
 @app.route('/')
 def home():
