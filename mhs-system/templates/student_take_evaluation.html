@@ -80,22 +80,23 @@
                 <h6 class="m-0 font-weight-bold text-primary">I. Personal Information</h6>
             </div>
             <div class="card-body">
-                <form>
+                <form action="/evaluation" method="post">
+                
                     <div class="form-row">
 
                         <div class="form-group col-md-3">
                             <label for="inputLastName">Last Name</label>
-                            <input type="text" class="form-control" id="inputLastName" placeholder="">
+                            <input type="text" class="form-control" name="inputLastName" placeholder="">
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" placeholder="">
+                            <input type="text" class="form-control" name="inputFirstName" placeholder="">
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="inputMiddleName">Middle Name</label>
-                            <input type="text" class="form-control" id="inputMiddleName" placeholder="">
+                            <input type="text" class="form-control" name="inputMiddleName" placeholder="">
                         </div>
 
                         <div class="form-group col-md-2">
@@ -170,8 +171,8 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label for="inputEmail">Email Address</label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="">
+                            <label for="inputEmailAddress">Email Address</label>
+                            <input type="email" class="form-control" name="inputEmailAddress" placeholder="">
                         </div>
 
                         <div class="form-group col-md-3">
@@ -283,6 +284,10 @@
                         </div>
                         <div class="row"></div>
 
+                        <div class="col-12 d-flex justify-content-end mt-3">
+                            <button type="submit" class="btn btn-primary" name="eval_submit">Submit</button>
+                        </div>
+
 
                 </form>
             </div>
@@ -393,7 +398,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">C. Family Background</h6>
             </div>
             <div class="card-body">
-                <form method="post">
+                <form action="/evaluation" method="post">
                     <div class="form-row">
 
                         <div class="form-group col-md-3">

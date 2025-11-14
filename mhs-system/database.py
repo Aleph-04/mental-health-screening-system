@@ -1,9 +1,9 @@
 import sqlite3
 
-conn = sqlite3.connect('database.db')
-cursor = conn.cursor()
-
 def initialize_db():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS "responses" (
             "id"	INTEGER,
@@ -16,3 +16,17 @@ def initialize_db():
     ''')
     
     print("Hello from database.py")
+    
+def insert_to_db(first_name, middle_name, last_name, email_address):
+    conn = sqlite3.connect('database.db')  
+    cursor = conn.cursor()                      
+
+    cursor.execute(
+        """INSERT INTO responses (first_name, middle_name, last_name, email_address)
+           VALUES (?, ?, ?, ?)""",
+        (first_name, middle_name, last_name, email_address)  
+    )
+
+    conn.commit() 
+    conn.close()  
+

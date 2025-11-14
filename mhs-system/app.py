@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
-from database import initialize_db
+from database import initialize_db, insert_to_db
 
 app = Flask(__name__)
 
@@ -42,6 +42,18 @@ def results():
 @app.route("/evaluation")
 def student_evaluation():
     return render_template("student_evaluation_form.html")
+
+@app.route("/evaluation", methods=['POST'])
+def submit_to_database():
+    first_name = request.form['inputFirstName']
+    middle_name = request.form['inputMiddleName']
+    last_name = request.form['inputLastName']
+    email_address = request.form['inputEmailAddress']
+    
+
+    insert_to_db(first_name, middle_name, last_name, email_address)
+    return redirect(url_for("student_evaluation"))
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
