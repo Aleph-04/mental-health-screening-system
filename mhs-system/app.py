@@ -52,7 +52,7 @@ def submit_to_database():
     last_name = request.form['inputLastName']
     email_address = request.form['inputEmailAddress']
     
-
+    ### function imported from database.py ###
     insert_to_db(first_name, middle_name, last_name, email_address)
     return redirect(url_for("student_evaluation"))
     
