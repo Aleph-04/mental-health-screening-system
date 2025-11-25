@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
+### imports database.py file and its functions###
 from database import initialize_db, insert_to_db
 
 app = Flask(__name__)
@@ -43,6 +44,7 @@ def results():
 def student_evaluation():
     return render_template("student_evaluation_form.html")
 
+### example for database insertion boi; once mag submit ang forms, ga run ang function nga ja.###
 @app.route("/evaluation", methods=['POST'])
 def submit_to_database():
     first_name = request.form['inputFirstName']
