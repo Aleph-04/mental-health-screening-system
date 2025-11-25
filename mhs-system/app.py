@@ -78,6 +78,7 @@ def submit_to_database():
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7
         )
+    print(f"Data inserted successfully for {first_name}")
     return redirect(url_for("student_evaluation"))
     
 
