@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
-
-### imports database.py file and its functions###
-from database import initialize_db, insert_to_db
+from database import initialize_db, insert_to_db, fetch_result ## import functions from database.py ###
+from logistic_regression import load_trained_model, make_prediction
 
 app = Flask(__name__)
 
+print("Hello from app.py")
 initialize_db()
+load_trained_model()
+
 
 @app.route('/')
 def home():
@@ -38,7 +40,9 @@ def view_forms():
 
 @app.route("/results")
 def results():
-    return render_template("admin_results.html")
+    print("IF YOU SEE THE THING BELOW THIS, THEN IT WORKS")
+    row = fetch_result()
+    return render_template("admin_results.html", row=row)
 
 @app.route("/evaluation")
 def student_evaluation():
@@ -72,14 +76,18 @@ def submit_to_database():
     gad6 = int(request.form.get('gad6', 0))
     gad7 = int(request.form.get('gad7', 0))
     
-    ### function imported from database.py ###
+
+    # print(make_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9))
+    # print("It definitely reached here")
+    
     insert_to_db(
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7
         )
-    print(f"Data inserted successfully for {first_name}")
-    return redirect(url_for("student_evaluation"))
+    
+    print("Data inserted to database for ", first_name, flush=True)
+    return redirect(url_for("student_take_evaluation"))
     
 
 if __name__ == '__main__':

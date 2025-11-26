@@ -55,3 +55,24 @@ def insert_to_db(first_name, middle_name, last_name, email_address,
 
     conn.commit()
     conn.close()
+    
+def fetch_responses():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM responses")
+    rows = cursor.fetchall()
+
+    conn.close()
+    return rows
+
+def fetch_result():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM predictions")
+    rows = cursor.fetchall()
+
+    conn.close()
+    return [dict(row) for row in rows] ### return list of rows converted to dictionaries. ###
