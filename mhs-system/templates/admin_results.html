@@ -207,15 +207,16 @@
                     </thead>
  
                     <tbody>
-
                       {% for i in row %}
-                      <tr style={{"pink" if i["result"]=="Moderate" else "white"}};>
-                        <td>{{ i["name"] }}</td>
-                        <td>{{ i["college"] }}</td>
-                        <td>{{ i["age"] }}</td>
-                        <td>{{ "N/A" }}</td>
-                        <td>{{ i["result"] }}</td>
-                      </tr> 
+                        {% if i["result"] in ["Moderately Severe", "Severe"]%}
+                        <tr style=background-color:{{"pink" if i["result"] in ["Moderately Severe", "Severe"] else "white"}};>
+                          <td>{{ i["name"] }}</td>
+                          <td>{{ i["college"] }}</td>
+                          <td>{{ i["age"] }}</td>
+                          <td>{{ "N/A" }}</td>
+                          <td>{{ i["result"] }}</td>
+                        </tr> 
+                        {% endif %}
                       {% endfor %}
 
                     </tbody>
@@ -245,7 +246,7 @@
                     <tbody>
 
                       {% for i in row %}
-                      <tr style=background-color:{{"pink" if i["result"] in ["Moderate","Moderately Severe", "Severe"] else "white"}};>
+                      <tr style=background-color:{{"pink" if i["result"] in ["Moderately Severe", "Severe"] else "white"}};>
                         <td>{{ i["name"] }}</td>
                         <td>{{ i["college"] }}</td>
                         <td>{{ i["age"] }}</td>

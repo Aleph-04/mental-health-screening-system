@@ -34,7 +34,7 @@ def initialize_db():
     conn.close()
 
 
-def insert_to_db(first_name, middle_name, last_name, email_address,
+def insert_to_responses(first_name, middle_name, last_name, email_address,
                  phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
                  gad1, gad2, gad3, gad4, gad5, gad6, gad7):
 
@@ -56,6 +56,26 @@ def insert_to_db(first_name, middle_name, last_name, email_address,
     conn.commit()
     conn.close()
     
+    
+    
+    
+def insert_to_predictions(name, college, age, prediction):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO predictions (
+            name, college, age, result
+        ) VALUES (?,?,?,?)
+    """, (name, college, age, prediction))
+
+    conn.commit()
+    conn.close()
+    print("Inserted prediction for", name)
+    
+    
+    
+    
 def fetch_responses():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -65,6 +85,9 @@ def fetch_responses():
 
     conn.close()
     return rows
+
+
+
 
 def fetch_result():
     conn = sqlite3.connect('database.db')

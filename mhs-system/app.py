@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
-from database import initialize_db, insert_to_db, fetch_result ## import functions from database.py ###
+from database import initialize_db, insert_to_responses, insert_to_predictions, fetch_result ## import functions from database.py ###
 from logistic_regression import load_trained_model, make_prediction
 
 app = Flask(__name__)
@@ -51,6 +51,7 @@ def student_evaluation():
 ### example for database insertion boi; once mag submit ang forms, ga run ang function nga ja.###
 @app.route("/evaluation", methods=['GET', 'POST'])
 def submit_to_database():
+    full_name = request.form['inputFirstName'] + " " + request.form['inputLastName']
     first_name = request.form['inputFirstName']
     middle_name = request.form['inputMiddleName']
     last_name = request.form['inputLastName']
@@ -77,14 +78,18 @@ def submit_to_database():
     gad7 = int(request.form.get('gad7', 0))
     
 
-    # print(make_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9))
-    # print("It definitely reached here")
+    prediction = make_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
     
-    insert_to_db(
+    
+    insert_to_responses(
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7
         )
+    
+    insert_to_predictions(
+        full_name, "N/A", "N/A", prediction
+    )
     
     print("Data inserted to database for ", first_name, flush=True)
     return redirect(url_for("student_take_evaluation"))
