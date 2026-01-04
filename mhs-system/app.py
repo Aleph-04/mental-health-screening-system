@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import initialize_db, insert_to_responses, insert_to_predictions, fetch_result ## import functions from database.py ###
+from database import initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
 
 app = Flask(__name__)
@@ -24,7 +24,8 @@ def student_take_evaluation():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("admin_dashboard.html")
+    row = count_records()
+    return render_template("admin_dashboard.html", row=row)
 
 @app.route("/stats")
 def stats():
@@ -76,6 +77,9 @@ def submit_to_database():
     gad5 = int(request.form.get('gad5', 0))
     gad6 = int(request.form.get('gad6', 0))
     gad7 = int(request.form.get('gad7', 0))
+    
+    ### SBQR - to be added later ###
+    #sbqr1 = None
     
 
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)

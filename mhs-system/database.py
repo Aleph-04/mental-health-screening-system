@@ -87,7 +87,6 @@ def fetch_responses():
 
 
 
-
 def fetch_result():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -98,3 +97,13 @@ def fetch_result():
 
     conn.close()
     return [dict(row) for row in rows] ### return list of rows converted to dictionaries bro. ###
+
+def count_records():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM responses")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+    return count
