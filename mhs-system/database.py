@@ -59,16 +59,15 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
     
     
     
-def insert_to_predictions(name, college, age, prediction):
+def insert_to_predictions(name, college, age, phq9_prediction, gad7_prediction):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     cursor.execute("""
         INSERT INTO predictions (
-            name, college, age, result
-        ) VALUES (?,?,?,?)
-    """, (name, college, age, prediction))
-
+            name, college, age, phq9_result, gad7_result
+        ) VALUES (?,?,?,?,?)
+    """, (name, college, age, phq9_prediction, gad7_prediction))
     conn.commit()
     conn.close()
     print("Inserted prediction for", name)
@@ -98,4 +97,4 @@ def fetch_result():
     rows = cursor.fetchall()
 
     conn.close()
-    return [dict(row) for row in rows] ### return list of rows converted to dictionaries. ###
+    return [dict(row) for row in rows] ### return list of rows converted to dictionaries bro. ###

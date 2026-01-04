@@ -202,19 +202,23 @@
 
                         <th>Age</th>
                         <th>Other Data</th>
-                        <th> Result </th>
+                        <th> PHQ-9 Result </th>
+                        <th> GAD-7 Result </th>
+                        <th> SBQR Result </th>
                       </tr>
                     </thead>
  
                     <tbody>
                       {% for i in row %}
-                        {% if i["result"] in ["Moderately Severe", "Severe"]%}
-                        <tr style=background-color:{{"pink" if i["result"] in ["Moderately Severe", "Severe"] else "white"}};>
+                        {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] %}
+                        <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}};>
                           <td>{{ i["name"] }}</td>
                           <td>{{ i["college"] }}</td>
                           <td>{{ i["age"] }}</td>
                           <td>{{ "N/A" }}</td>
-                          <td>{{ i["result"] }}</td>
+                          <td>{{ i["phq9_result"] }}</td>
+                          <td>{{ i["gad7_result"] }}</td>
+                          <td>{{ i["sbqr_result"] }}</td>
                         </tr> 
                         {% endif %}
                       {% endfor %}
@@ -227,7 +231,7 @@
 
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Forms</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All Forms</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -239,7 +243,9 @@
 
                         <th>Age</th>
                         <th>Other Data</th>
-                        <th>Result</th>
+                        <th> PHQ-9 Result </th>
+                        <th> GAD-7 Result </th>
+                        <th> SBQR Result </th>
                       </tr>
                     </thead>
 
@@ -251,7 +257,9 @@
                         <td>{{ i["college"] }}</td>
                         <td>{{ i["age"] }}</td>
                         <td>{{ "N/A" }}</td>
-                        <td>{{ i["result"] }}</td>
+                        <td>{{ i["phq9_result"] }}</td>
+                        <td>{{ i["gad7_result"] }}</td>
+                        <td>{{ i["sbqr_result"] }}</td>
                       </tr> 
                       {% endfor %}
 

@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
-import sqlite3
 from database import initialize_db, insert_to_responses, insert_to_predictions, fetch_result ## import functions from database.py ###
-from logistic_regression import load_trained_model, make_prediction
+from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
 
 app = Flask(__name__)
 
 print("Hello from app.py")
 initialize_db()
-load_trained_model()
+load_phq9_model()
+load_gad7_model()
 
 
 @app.route('/')
@@ -78,7 +78,8 @@ def submit_to_database():
     gad7 = int(request.form.get('gad7', 0))
     
 
-    prediction = make_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
+    phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
+    gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
     
     
     insert_to_responses(
@@ -88,7 +89,7 @@ def submit_to_database():
         )
     
     insert_to_predictions(
-        full_name, "N/A", "N/A", prediction
+        full_name, "N/A", "N/A", phq9_prediction, gad7_prediction
     )
     
     print("Data inserted to database for ", first_name, flush=True)
