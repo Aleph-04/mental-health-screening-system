@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="static/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="static/css/sb-admin-2.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -66,6 +67,34 @@
 
     <!-- Content Section -->
     <form id="submit_form" action="/evaluation" method="post">
+
+      <!-- Privacy Agreement -->
+        <div class="container-fluid">
+            <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Data Privacy Notice and Consent Form</h6>
+            </div>
+            <div class="card-body">
+            <p> University of Antique (UA) collects information from the students such as personal data, educational background, family background, psychiatric history, and person to be notified if in case of emergency. UA collects, uses and/or processes the information through the Examinee Attendance Sheet, Answer Document/Sheet, and Entrance Exam Results. UA collects, uses and/or processes the information through the Student's Individual Inventory Form. The collected information above will be utilized as basis for counseling. The information will be used solely for record and monitoring purposes. The collected information will not be shared by UA with external parties. Only authorized UA personnel are granted access to personal information collected by UA. Personal information collected through these preliminary registration forms are kept in a secured data facility. We use reasonable security safeguards to protect information loss, unauthorized access, use or disclosure.
+Under the Data Privacy Act of 2012, data subject refers to an individual whose personal information is collected and processed. We are bound to observe and respect your privacy rights, including your right to information, right to access, right to correct, right to remove, right to damages and right to data portability. By indicating and submitting your personal information in this preliminary registration form, you authorize UA to collect and store your personal information, for the period allowed under the applicable law and regulations, for the aforementioned purposes. You acknowledge that the collection and processing of your personal information is necessary for such purposes. You are aware of your rights under Data Privacy Act, including the right to be informed, to access, to object, to erase or blocking, to damages, to file a complaint, to rectify and to data portability, and understand that there are procedures, conditions and exceptions to be complied with in order to our Data Protection Officer at dpo@antiquesu.edu.ph.
+The undersigned is fully aware of the foregoing declarations, and understands the necessity for UA to collect, process and store information to ensure the genuine and legal interests as an educational institution and its ability to fully and effectively carry out its responsibilities are met.
+Further, the undersigned abides and consents to the foregoing freely and voluntarily.
+ </p>
+
+               <div class="form-group col-md-3">
+                <label for="inputFirstName">Complete Name of Student</label>
+                <input type="text" class="form-control" id="complete_name" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                
+                <input type="checkbox" class="large-radio-button" id="inputFirstName" placeholder="" />
+                <label> I agree</label>
+              </div>
+</div>
+            </div>
+        </div>
+
       <!-- PERSONAL INFORMATION -->
       <div class="container-fluid">
         <div class="card shadow mb-4">
@@ -455,144 +484,144 @@
                     <tr>
                     <td>1. Little interest or pleasure in doing things</td>
                     <td class="text-center">
-                        <input type="radio" name="phq1" value="0" id="p1_0" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="0" id="p1_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq1" value="1" id="p1_1" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="1" id="p1_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq1" value="2" id="p1_2" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="2" id="p1_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq1" value="3" id="p1_3" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="3" id="p1_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>2. Feeling down, depressed, or hopeless.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq2" value="0" id="p2_0" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="0" id="p2_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq2" value="1" id="p2_1" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="1" id="p2_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq2" value="2" id="p2_2" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="2" id="p2_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq2" value="3" id="p2_3" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="3" id="p2_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>3. Trouble falling or staying asleep, or sleeping too much.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq3" value="0" id="p3_0" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="0" id="p3_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq3" value="1" id="p3_1" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="1" id="p3_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq3" value="2" id="p3_2" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="2" id="p3_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq3" value="3" id="p3_3" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="3" id="p3_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>4. Feeling tired or having little energy.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq4" value="0" id="p4_0" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="0" id="p4_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq4" value="1" id="p4_1" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="1" id="p4_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq4" value="2" id="p4_2" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="2" id="p4_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq4" value="3" id="p4_3" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="3" id="p4_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>5. Poor appetite or overeating.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq5" value="0" id="p5_0" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="0" id="p5_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq5" value="1" id="p5_1" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="1" id="p5_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq5" value="2" id="p5_2" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="2" id="p5_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq5" value="3" id="p5_3" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="3" id="p5_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq6" value="0" id="p6_0" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="0" id="p6_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq6" value="1" id="p6_1" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="1" id="p6_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq6" value="2" id="p6_2" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="2" id="p6_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq6" value="3" id="p6_3" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="3" id="p6_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>7. Trouble concentrating on things, such as reading the newspaper or watching television.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq7" value="0" id="p7_0" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="0" id="p7_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq7" value="1" id="p7_1" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="1" id="p7_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq7" value="2" id="p7_2" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="2" id="p7_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq7" value="3" id="p7_3" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="3" id="p7_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq8" value="0" id="p8_0" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="0" id="p8_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq8" value="1" id="p8_1" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="1" id="p8_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq8" value="2" id="p8_2" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="2" id="p8_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq8" value="3" id="p8_3" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="3" id="p8_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>9. Thoughts that you would be better off dead, or of hurting yourself in some way.</td>
                     <td class="text-center">
-                        <input type="radio" name="phq9" value="0" id="p9_0" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="0" id="p9_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq9" value="1" id="p9_1" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="1" id="p9_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq9" value="2" id="p9_2" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="2" id="p9_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="phq9" value="3" id="p9_3" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="3" id="p9_3" />
                     </td>
                     </tr>
                 </tbody>
@@ -624,112 +653,112 @@
                     <tr>
                     <td>1. Feeling nervous, anxious, or on edge</td>
                     <td class="text-center">
-                        <input type="radio" name="gad1" value="0" id="gad1_0" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="0" id="gad1_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad1" value="1" id="gad1_1" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="1" id="gad1_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad1" value="2" id="gad1_2" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="2" id="gad1_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad1" value="3" id="gad1_3" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="3" id="gad1_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>2. Not being able to stop or control worrying.</td>
                     <td class="text-center">
-                        <input type="radio" name="gad2" value="0" id="gad2_0" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="0" id="gad2_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad2" value="1" id="gad2_1" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="1" id="gad2_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad2" value="2" id="gad2_2" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="2" id="gad2_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad2" value="3" id="gad2_3" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="3" id="gad2_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>3. Worrying too much about different things.</td>
                     <td class="text-center">
-                        <input type="radio" name="gad3" value="0" id="gad3_0" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="0" id="gad3_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad3" value="1" id="gad3_1" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="1" id="gad3_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad3" value="2" id="gad3_2" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="2" id="gad3_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad3" value="3" id="gad3_3" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="3" id="gad3_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>4. Trouble relaxing.</td>
                     <td class="text-center">
-                        <input type="radio" name="gad4" value="0" id="gad4_0" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="0" id="gad4_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad4" value="1" id="gad4_1" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="1" id="gad4_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad4" value="2" id="gad4_2" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="2" id="gad4_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad4" value="3" id="gad4_3" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="3" id="gad4_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>5. Being so restless that it is hard to sit still.</td>
                     <td class="text-center">
-                        <input type="radio" name="gad5" value="0" id="gad5_0" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="0" id="gad5_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad5" value="1" id="gad5_1" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="1" id="gad5_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad5" value="2" id="gad5_2" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="2" id="gad5_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad5" value="3" id="gad5_3" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="3" id="gad5_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>6. Becoming easily annoyed or irritable.</td>
                     <td class="text-center">
-                        <input type="radio" name="gad6" value="0" id="gad6_0" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="0" id="gad6_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad6" value="1" id="gad6_1" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="1" id="gad6_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad6" value="2" id="gad6_2" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="2" id="gad6_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad6" value="3" id="gad6_3" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="3" id="gad6_3" />
                     </td>
                     </tr>
 
                     <tr>
                     <td>7. Feeling afraid as if something awful might happen.</td>
                     <td class="text-center">
-                        <input type="radio" name="gad7" value="0" id="gad7_0" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="0" id="gad7_0" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad7" value="1" id="gad7_1" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="1" id="gad7_1" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad7" value="2" id="gad7_2" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="2" id="gad7_2" />
                     </td>
                     <td class="text-center">
-                        <input type="radio" name="gad7" value="3" id="gad7_3" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="3" id="gad7_3" />
                     </td>
                     </tr>
                 </tbody>
