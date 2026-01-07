@@ -202,43 +202,27 @@
 
                         <th>Age</th>
                         <th>Other Data</th>
-                        <th>Result</th>
+                        <th> PHQ-9 Result </th>
+                        <th> GAD-7 Result </th>
+                        <th> SBQR Result </th>
                       </tr>
                     </thead>
-                    <!--
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>College</th>
-
-                        <th>Age</th>
-                        <th>Date of Birth</th>
-                        <th>Result</th>
-                      </tr>
-                    </tfoot>
-                    -->
+ 
                     <tbody>
-                      <tr style="background-color: pink;">
-                        <td>Lorenz Opiña</td>
-                        <td>CCIS</td>
-                        <td>22</td>
-                        <td>April 22, 2003</td>
-                        <td>Moderate</td>
-                      </tr>
-                      <tr style="background: brown; color:white">
-                        <td>Mr. White</td>
-                        <td>CEA</td>
-                        <td>22</td>
-                        <td>April 22, 2003</td>
-                        <td>Severe</td>
-                      </tr>
-                      <tr style="background: lavenderblush;">
-                        <td>John Doe</td>
-                        <td>CMS</td>
-                        <td>22</td>
-                        <td>April 22, 2003</td>
-                        <td>Mild</td>
-                      </tr>
+                      {% for i in row %}
+                        {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] %}
+                        <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}};>
+                          <td>{{ i["name"] }}</td>
+                          <td>{{ i["college"] }}</td>
+                          <td>{{ i["age"] }}</td>
+                          <td>{{ "N/A" }}</td>
+                          <td>{{ i["phq9_result"] }}</td>
+                          <td>{{ i["gad7_result"] }}</td>
+                          <td>{{ i["sbqr_result"] }}</td>
+                        </tr> 
+                        {% endif %}
+                      {% endfor %}
+
                     </tbody>
                   </table>
                 </div>
@@ -247,7 +231,7 @@
 
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Forms</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All Forms</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -259,47 +243,26 @@
 
                         <th>Age</th>
                         <th>Other Data</th>
-                        <th>Other Data</th>
+                        <th> PHQ-9 Result </th>
+                        <th> GAD-7 Result </th>
+                        <th> SBQR Result </th>
                       </tr>
                     </thead>
-                    <!--
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>College</th>
-
-                        <th>Age</th>
-                        <th>Date of Birth</th>
-                        <th>Other Data</th>
-                      </tr>
-                    </tfoot>
-                    -->
 
                     <tbody>
-                      <tr>
-                        <td>Lorenz Opiña</td>
-                        <td>CCIS</td>
 
-                        <td>22</td>
-                        <td>April 22, 2003</td>
-                        <td>Normal</td>
-                      </tr>
-                      <tr>
-                        <td>Mr. White</td>
-                        <td>CEA</td>
+                      {% for i in row %}
+                      <tr style=background-color:{{"pink" if i["result"] in ["Moderately Severe", "Severe"] else "white"}};>
+                        <td>{{ i["name"] }}</td>
+                        <td>{{ i["college"] }}</td>
+                        <td>{{ i["age"] }}</td>
+                        <td>{{ "N/A" }}</td>
+                        <td>{{ i["phq9_result"] }}</td>
+                        <td>{{ i["gad7_result"] }}</td>
+                        <td>{{ i["sbqr_result"] }}</td>
+                      </tr> 
+                      {% endfor %}
 
-                        <td>22</td>
-                        <td>April 22, 2003</td>
-                        <td>Normal</td>
-                      </tr>
-                      <tr>
-                        <td>John Doe</td>
-                        <td>CMS</td>
-
-                        <td>22</td>
-                        <td>April 22, 2003</td>
-                        <td>Normal</td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -322,7 +285,7 @@
       </div>
       <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Page Wrapper testiong out githisbefiub -->
 
     <!-- Scroll to Top Button -->
     <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -338,7 +301,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="/admin">Logout</a>
           </div>
         </div>
       </div>

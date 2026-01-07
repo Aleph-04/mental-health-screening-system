@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
-import sqlite3
-
-### imports database.py file and its functions###
-from database import initialize_db, insert_to_db
+from database import initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
+from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
 
 app = Flask(__name__)
 
+print("Hello from app.py")
 initialize_db()
+load_phq9_model()
+load_gad7_model()
+
 
 @app.route('/')
 def home():
@@ -22,7 +24,8 @@ def student_take_evaluation():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("admin_dashboard.html")
+    row = count_records()
+    return render_template("admin_dashboard.html", row=row)
 
 @app.route("/stats")
 def stats():
@@ -38,7 +41,9 @@ def view_forms():
 
 @app.route("/results")
 def results():
-    return render_template("admin_results.html")
+    print("IF YOU SEE THE THING BELOW THIS, THEN IT WORKS")
+    row = fetch_result()
+    return render_template("admin_results.html", row=row)
 
 @app.route("/evaluation")
 def student_evaluation():
@@ -47,6 +52,7 @@ def student_evaluation():
 ### example for database insertion boi; once mag submit ang forms, ga run ang function nga ja.###
 @app.route("/evaluation", methods=['GET', 'POST'])
 def submit_to_database():
+    full_name = request.form['inputFirstName'] + " " + request.form['inputLastName']
     first_name = request.form['inputFirstName']
     middle_name = request.form['inputMiddleName']
     last_name = request.form['inputLastName']
@@ -72,14 +78,26 @@ def submit_to_database():
     gad6 = int(request.form.get('gad6', 0))
     gad7 = int(request.form.get('gad7', 0))
     
-    ### function imported from database.py ###
-    insert_to_db(
+    ### SBQR - to be added later ###
+    #sbqr1 = None
+    
+
+    phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
+    gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
+    
+    
+    insert_to_responses(
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7
         )
-    print(f"Data inserted successfully for {first_name}")
-    return redirect(url_for("student_evaluation"))
+    
+    insert_to_predictions(
+        full_name, "N/A", "N/A", phq9_prediction, gad7_prediction
+    )
+    
+    print("Data inserted to database for ", first_name, flush=True)
+    return redirect(url_for("student_take_evaluation"))
     
 
 if __name__ == '__main__':

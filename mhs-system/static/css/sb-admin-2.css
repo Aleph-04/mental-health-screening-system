@@ -11295,3 +11295,7 @@ body.sidebar-toggled footer.sticky-footer {
   height: 50px;
 }
 
+.large-radio-button {
+  transform: scale(1.5);
+}
+
