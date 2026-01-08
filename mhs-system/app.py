@@ -79,7 +79,15 @@ def submit_to_database():
     gad7 = int(request.form.get('gad7', 0))
     
     ### SBQR - to be added later ###
-    #sbqr1 = None
+    ### SBQ-R (optional, additive)
+    sbqr1 = int(request.form.get('sbq1', 0))
+    sbqr2 = int(request.form.get('sbq2', 0))
+    sbqr3 = int(request.form.get('sbq3', 0))
+    sbqr4 = int(request.form.get('sbq4', 0))
+
+    sbqr_total = sbqr1 + sbqr2 + sbqr3 + sbqr4  ### ja turoka bi lor
+    sbqr_risk = "HIGH" if sbqr_total >= 7 else "LOW" ### pati ja
+
     
 
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
@@ -89,7 +97,8 @@ def submit_to_database():
     insert_to_responses(
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-            gad1, gad2, gad3, gad4, gad5, gad6, gad7
+            gad1, gad2, gad3, gad4, gad5, gad6, gad7,
+            sbqr1, sbqr2, sbqr3, sbqr4, sbqr_total, sbqr_risk
         )
     
     insert_to_predictions(
