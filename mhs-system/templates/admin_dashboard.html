@@ -13,51 +13,25 @@
 
     <!-- Styles -->
     <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet" />
+    <canvas id="chartjs" style="display: none;"></canvas>
   </head>
 
   <body id="page-top">
     <div id="wrapper">
-
       <!-- SIDEBAR INCLUDE -->
-      {% include "partials/sidebar.html" %}
+      {% include 'partials/sidebar.html' %}
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
 
+
         <!-- Main Content -->
         <div id="content">
-
-          <!-- Topbar -->
-          <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-              <i class="fa fa-bars"></i>
-            </button>
-
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                  <img class="img-profile rounded-circle"
-                       src="{{ url_for('static', filename='img/undraw_profile.svg') }}">
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/admin">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </nav>
-          <!-- End Topbar -->
+          <!-- TOPBAR INCLUDE -->
+          {% include 'partials/topbar.html' %}
 
           <!-- Page Content -->
           <div class="container-fluid">
-
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
               <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             </div>
@@ -69,12 +43,8 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                          Records
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          {{ row }}
-                        </div>
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Records</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ row }}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-file fa-2x text-gray-300"></i>
@@ -98,7 +68,6 @@
                 </div>
               </div>
             </div>
-
           </div>
           <!-- End Container -->
         </div>
@@ -112,7 +81,6 @@
             </div>
           </div>
         </footer>
-
       </div>
     </div>
 
@@ -121,5 +89,9 @@
     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+
+    <script src="static/js/demo/chart-area-demo.js"></script>
+    <script src="static/js/demo/chart-pie-demo.js"></script>
+    <script src="static/js/demo/chart-bar-demo.js"></script>
   </body>
 </html>
