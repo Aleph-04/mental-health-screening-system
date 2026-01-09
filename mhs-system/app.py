@@ -84,25 +84,21 @@ def submit_to_database():
     sbqr3 = int(request.form.get('sbq3', 0))
     sbqr4 = int(request.form.get('sbq4', 0))
 
-    sbqr_risk = "HIGH" if sbqr_total >= 7 else "LOW" ### pati ja
-
-
-    sbqr_total = sbqr1 + sbqr2 + sbqr3 + sbqr4  ### ja turoka bi lor
-
     ### Make Predictions (e.g low, moderate, high , severe) ###
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
     gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
+    sbqr_prediction = "SBQR Not Implemented"
     
     
     insert_to_responses(
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7,
-            sbqr1, sbqr2, sbqr3, sbqr4, sbqr_total, sbqr_risk
+            sbqr1, sbqr2, sbqr3, sbqr4
         )
     
     insert_to_predictions(
-        full_name, "N/A", "N/A", phq9_prediction, gad7_prediction
+        full_name, "N/A", "N/A", phq9_prediction, gad7_prediction, sbqr_prediction
     )
     
     print("Data inserted to database for ", first_name, flush=True)
