@@ -121,3 +121,17 @@ def count_by_college(college_name):
 
     conn.close()
     return count
+
+def admin_authenticate(username, password):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM admin_accounts WHERE username = '{username}' AND password = '{password}'") ### unsafe version for demo purposes only, fix later ###
+    # cursor.execute("SELECT * FROM admin_accounts WHERE username = ? AND password = ?", (username, password))
+    result = cursor.fetchone()
+    conn.close()
+    
+    if result:
+        return True
+    else:
+        return False

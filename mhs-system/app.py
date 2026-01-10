@@ -1,8 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
+from database import admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
 
+
 app = Flask(__name__)
+
+### testing for XSS prevention --- remove later###
+app.jinja_env.autoescape = False
+### end of testing for XSS prevention ###
+
+
 
 print("Hello from app.py")
 initialize_db()
@@ -14,8 +21,22 @@ load_gad7_model()
 def home():
     return render_template("student_login.html")
 
-@app.route("/admin")
+@app.route("/admin", methods=['GET', 'POST'])
 def admin_login():
+    if request.method == 'POST':
+        username = request.form['admin_username']
+        password = request.form['admin_password']
+        
+        print(username + " " + password)
+        
+        auth = admin_authenticate(username, password)
+        print(auth)
+        
+        if auth:
+            return redirect(url_for("dashboard"))
+        else:
+            return redirect(url_for("admin_login"))
+
     return render_template("admin_login.html")
 
 @app.route("/evaluation")
@@ -78,7 +99,7 @@ def submit_to_database():
     gad6 = int(request.form.get('gad6', 0))
     gad7 = int(request.form.get('gad7', 0))
     
-    ### SBQ-R (optional, additive)
+    ### SBQ-R ()
     sbqr1 = int(request.form.get('sbq1', 0))
     sbqr2 = int(request.form.get('sbq2', 0))
     sbqr3 = int(request.form.get('sbq3', 0))
@@ -106,4 +127,5 @@ def submit_to_database():
     
 
 if __name__ == '__main__':
+    # app.run(host="0.0.0.0", port=5000, debug=True)
     app.run(debug=True)
