@@ -75,6 +75,10 @@ def results():
 def student_evaluation():
     return render_template("student_evaluation_form.html")
 
+@app.route("/stureg")
+def student_register():
+    return render_template("student_register.html")
+
 ### example for database insertion boi; once mag submit ang forms, ga run ang function nga ja.###
 @app.route("/evaluation", methods=['GET', 'POST'])
 def submit_to_database():
