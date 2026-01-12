@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Mental Health Screening</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+
+    <!-- Bootstrap icons (for bi bi-boxes) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="static/css/sb-admin-2.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <!-- Brand (icon + title) aligned to the left -->
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="bi bi-boxes"></i>
+        </div>
+        <div class="sidebar-brand-text ml-2">Mental Health Evaluation System</div>
+      </a>
+
+      <!-- Push everything else to the right -->
+      <ul class="navbar-nav ml-auto">
+        <!-- User Information -->
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+            <img class="img-profile rounded-circle" src="static/img/undraw_profile.svg" />
+          </a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              Settings
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+              Activity Log
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <!-- End of Topbar -->
+
+    <!-- Content Section -->
+
+      <!-- PERSONAL INFORMATION -->
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">I. Personal Information</h6>
+          </div>
+
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputLastName">Last Name</label>
+                <input disabled pattern="[A-Za-z]+" disabled type="text" class="form-control" name="inputLastName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">First Name</label>
+                <input disabled disabled type="text" class="form-control" name="inputFirstName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Middle Name</label>
+                <input disabled disabled type="text" class="form-control" name="inputMiddleName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Extension(Jr.,Sr.,etc.)</label>
+                <input disabled disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="inputDateofBirth">Date of Birth</label>
+                <input disabled type="date" class="form-control" id="inputDateofBirth" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-5">
+                <label for="inputPlaceofBirth">Place of Birth</label>
+                <input disabled disabled type="text" class="form-control" id="inputPlaceofBirth" placeholder="" />
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Sex</label>
+                <div class="col-sm-2">
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="sex" id="male" value="Male" />
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="sex" id="female" value="Female" />
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                </div>
+
+                <label class="col-sm-2 col-form-label">Civil Status</label>
+                <div class="col-sm-7">
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Single" id="single" />
+                    <label class="form-check-label" for="single">Single</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Married" id="married" />
+                    <label class="form-check-label" for="married">Married</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Widowed" id="widowed" />
+                    <label class="form-check-label" for="widowed">Widowed</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Separated" id="separated" />
+                    <label class="form-check-label" for="separated">Separated</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Other" id="other_cs" />
+                    <label class="form-check-label" for="other_cs">Other</label>
+                    <input disabled disabled type="text" class="form-control d-inline-block ml-2" style="width:120px;" name="civil_status_other" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputReligion">Religion</label>
+                <input disabled disabled type="text" class="form-control" id="inputReligion" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputContactNo">Contact No</label>
+                <input disabled disabled type="text" class="form-control" id="inputContactNo" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputEmailAddress">Email Address</label>
+                <input disabled type="email" class="form-control" name="inputEmailAddress" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFBAccount">Facebook Account</label>
+                <input disabled disabled type="text" class="form-control" id="inputFBAccount" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputDegreeProgram">Degree Program</label>
+                <input disabled disabled type="text" class="form-control" id="inputDegreeProgram" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-5">
+                <label for="inputPermanentAddress">Permanent Address</label>
+                <input disabled disabled type="text" class="form-control" id="inputPermanentAddress" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputPresentAddress">Present Address</label>
+                <input disabled disabled type="text" class="form-control" id="inputPresentAddress" placeholder="" />
+              </div>
+
+              <!-- to be fixed -->
+              <div class="form-group">
+                <label class="d-block mb-2">Please check (✅), if applicable:</label>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-check mb-2">
+                      <input type="checkbox" class="form-check-input" id="pwd" name="applicable[]" value="PWD" />
+                      <label class="form-check-label" for="pwd">PWD</label>
+                    </div>
+
+                    <div class="ml-3 mb-2">
+                      <label class="d-block">Disability type:</label>
+                      <div class="form-check">
+                        <input type="checkbox" id="visual" name="disability[]" value="Visual impairment" />
+                        <label for="visual">Visual impairment</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" id="hearing" name="disability[]" value="Hearing loss" />
+                        <label for="hearing">Hearing loss</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" id="ortho" name="disability[]" value="Orthopedic disability" />
+                        <label for="ortho">Orthopedic disability</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" id="learning" name="disability[]" value="Learning disability" />
+                        <label for="learning">Learning disability</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" id="psycho" name="disability[]" value="Psychosocial disability" />
+                        <label for="psycho">Psychosocial disability</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" id="chronic" name="disability[]" value="Chronic illness" />
+                        <label for="chronic">Chronic illness</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" id="mental" name="disability[]" value="Mental disability" />
+                        <label for="mental">Mental disability</label>
+                      </div>
+                      <div class="form-check d-flex align-items-center">
+                        <input type="checkbox" id="dis_other" name="disability[]" value="Others" />
+                        <label for="dis_other" class="ml-2">Others</label>
+                        <input disabled type="text" class="form-control ml-2" style="width:200px;" name="disability_other" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-check mb-2">
+                      <input type="checkbox" id="ip" name="applicable[]" value="Indigenous People" />
+                      <label for="ip">Indigenous People (IP)</label>
+                    </div>
+
+                    <div class="form-check d-flex align-items-center mb-2">
+                      <input type="checkbox" id="solo_parent" name="applicable[]" value="Solo Parent" />
+                      <label for="solo_parent" class="ml-2">Solo Parent</label>
+                      <input disabled type="text" class="form-control ml-2" style="width:150px;" name="children_no" placeholder="No. of Children" />
+                    </div>
+
+                    <div class="form-check mb-2">
+                      <input type="checkbox" id="ofw" name="applicable[]" value="Child of OFW" />
+                      <label for="ofw">Child of OFW</label>
+                    </div>
+
+                    <div class="form-check mb-2">
+                      <input type="checkbox" id="lgbtq" name="applicable[]" value="LGBTQIA+" />
+                      <label for="lgbtq">LGBTQIA+ Member</label>
+                    </div>
+
+                    <div class="form-check mb-2">
+                      <input type="checkbox" id="working" name="applicable[]" value="Working Student" />
+                      <label for="working">Working Student</label>
+                    </div>
+
+                    <div class="form-check d-flex align-items-center">
+                      <input type="checkbox" id="other_app" name="applicable[]" value="Others" />
+                      <label for="other_app" class="ml-2">Others</label>
+                      <input disabled type="text" class="form-control ml-2" style="width:200px;" name="applicable_other" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATIONAL BACKGROUND -->
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">B. Educational Background</h6>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputLastName">Elementary Level</label>
+                <label for="inputLastName">Name of School</label>
+                <input disabled type="text" class="form-control" id="inputElementaryLevel" name="inputElementaryLevel" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">Basic Education/ Degree Program</label>
+                <input disabled type="text" class="form-control" id="inputBasicEducation" name="inputBasicEducation" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Year Attended/ Graduated</label>
+                <input disabled type="text" class="form-control" id="inputYearAttended" name="inputYearAttended" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Honor/s Received</label>
+                <input disabled type="text" class="form-control" id="inputHonors" name="inputHonors" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputLastName">Junior High School Level</label>
+                <label for="inputLastName">Name of School</label>
+                <input disabled type="text" class="form-control" id="inputJuniorHighSchoolLevel" name="inputJuniorHighSchoolLevel" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">Basic Education/ Degree Program</label>
+                <input disabled type="text" class="form-control" id="inputBasicEducationJuniorHigh" name="inputBasicEducationJuniorHigh" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Year Attended/ Graduated</label>
+                <input disabled type="text" class="form-control" id="inputYearAttendedJuniorHigh" name="inputYearAttendedJuniorHigh" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Honor/s Received</label>
+                <input disabled type="text" class="form-control" id="inputHonorsJuniorHigh" name="inputHonorsJuniorHigh" placeholder="" />
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputLastName">Senior High School Level</label>
+                <label for="inputLastName">Name of School</label>
+                <input disabled type="text" class="form-control" id="inputSeniorHighSchoolLevel" name="inputSeniorHighSchoolLevel" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">Basic Education/ Degree Program</label>
+                <input disabled type="text" class="form-control" id="inputBasicEducationSeniorHigh" name="inputBasicEducationSeniorHigh" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Year Attended/ Graduated</label>
+                <input disabled type="text" class="form-control" id="inputYearAttendedSeniorHigh" name="inputYearAttendedSeniorHigh" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Honor/s Received</label>
+                <input disabled type="text" class="form-control" id="inputHonorsSeniorHigh" name="inputHonorsSeniorHigh" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputCollege">College/ Vocational School</label>
+                <label for="inputCollege">Name of School</label>
+                <input disabled type="text" class="form-control" id="inputLastName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">Basic Education/ Degree Program</label>
+                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Year Attended/ Graduated</label>
+                <input disabled type="text" class="form-control" id="inputMiddleName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Honor/s Received</label>
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILY BACKGROUND -->
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">B. Family Background</h6>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputLastName">Name of Mother</label>
+                <input disabled type="text" class="form-control" id="inputLastName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">Occupation</label>
+                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Estimated Monthly Income</label>
+                <select id="inputMiddleName" class="form-control">
+                  <option selected>Choose...</option>
+                  <option>Less than 10,957</option>
+                  <option>10,957 - 21,914</option>
+                  <option>43,828 - 76,669</option>
+                  <option>76,669 - 131,484</option>
+                  <option>131,484 - 219,140</option>
+                  <option>More than 219,140</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Contact Number</label>
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputLastName">Name of Father</label>
+                <input disabled type="text" class="form-control" id="inputLastName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputFirstName">Occupation</label>
+                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputMiddleName">Estimated Monthly Income</label>
+                <select id="inputMiddleName" class="form-control">
+                  <option selected>Choose...</option>
+                  <option>Less than 10,957</option>
+                  <option>10,957 - 21,914</option>
+                  <option>43,828 - 76,669</option>
+                  <option>76,669 - 131,484</option>
+                  <option>131,484 - 219,140</option>
+                  <option>More than 219,140</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputExtensionName">Contact Number</label>
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- EVALUATION PHQ-9 -->
+        <div class="container-fluid">
+            <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">PHQ-9</h6>
+            </div>
+            <div class="card-body">
+                <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th>Question</th>
+                    <th class="text-center">Not at all (0)</th>
+                    <th class="text-center">Several days (1)</th>
+                    <th class="text-center">More than half (2)</th>
+                    <th class="text-center">Nearly every day (3)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                    <td>1. Little interest or pleasure in doing things</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq1" value="0" id="p1_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq1" value="1" id="p1_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq1" value="2" id="p1_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq1" value="3" id="p1_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>2. Feeling down, depressed, or hopeless.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq2" value="0" id="p2_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq2" value="1" id="p2_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq2" value="2" id="p2_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq2" value="3" id="p2_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>3. Trouble falling or staying asleep, or sleeping too much.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq3" value="0" id="p3_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq3" value="1" id="p3_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq3" value="2" id="p3_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq3" value="3" id="p3_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>4. Feeling tired or having little energy.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq4" value="0" id="p4_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq4" value="1" id="p4_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq4" value="2" id="p4_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq4" value="3" id="p4_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>5. Poor appetite or overeating.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq5" value="0" id="p5_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq5" value="1" id="p5_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq5" value="2" id="p5_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq5" value="3" id="p5_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq6" value="0" id="p6_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq6" value="1" id="p6_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq6" value="2" id="p6_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq6" value="3" id="p6_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>7. Trouble concentrating on things, such as reading the newspaper or watching television.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq7" value="0" id="p7_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq7" value="1" id="p7_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq7" value="2" id="p7_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq7" value="3" id="p7_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq8" value="0" id="p8_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq8" value="1" id="p8_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq8" value="2" id="p8_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq8" value="3" id="p8_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>9. Thoughts that you would be better off dead, or of hurting yourself in some way.</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq9" value="0" id="p9_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq9" value="1" id="p9_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq9" value="2" id="p9_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="phq9" value="3" id="p9_3" />
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!-- EVALUATION GAD7 -->
+        <div class="container-fluid">
+            <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">GAD-7</h6>
+            </div>
+            <div class="card-body">
+                <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th>Question</th>
+                    <th class="text-center">Not at all (0)</th>
+                    <th class="text-center">Several days (1)</th>
+                    <th class="text-center">More than half (2)</th>
+                    <th class="text-center">Nearly every day (3)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                    <td>1. Feeling nervous, anxious, or on edge</td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="gad1" value="0" id="gad1_0" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="gad1" value="1" id="gad1_1" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="gad1" value="2" id="gad1_2" />
+                    </td>
+                    <td class="text-center">
+                        <input class="large-radio-button" type="radio" name="gad1" value="3" id="gad1_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>2. Not being able to stop or control worrying.</td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad2" value="0" id="gad2_0" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad2" value="1" id="gad2_1" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad2" value="2" id="gad2_2" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad2" value="3" id="gad2_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>3. Worrying too much about different things.</td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad3" value="0" id="gad3_0" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad3" value="1" id="gad3_1" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad3" value="2" id="gad3_2" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad3" value="3" id="gad3_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>4. Trouble relaxing.</td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad4" value="0" id="gad4_0" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad4" value="1" id="gad4_1" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad4" value="2" id="gad4_2" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad4" value="3" id="gad4_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>5. Being so restless that it is hard to sit still.</td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad5" value="0" id="gad5_0" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad5" value="1" id="gad5_1" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad5" value="2" id="gad5_2" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad5" value="3" id="gad5_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>6. Becoming easily annoyed or irritable.</td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad6" value="0" id="gad6_0" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad6" value="1" id="gad6_1" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad6" value="2" id="gad6_2" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad6" value="3" id="gad6_3" />
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>7. Feeling afraid as if something awful might happen.</td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad7" value="0" id="gad7_0" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad7" value="1" id="gad7_1" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad7" value="2" id="gad7_2" />
+                    </td>
+                    <td class="text-center">
+                      <input class="large-radio-button" type="radio" name="gad7" value="3" id="gad7_3" />
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+      <!--SBQ-R-->
+        <div class="container-fluid">
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-danger">SBQ-R</h6>
+            </div>
+
+            <div class="card-body">
+              <p>Please select the option that best applies to you.</p>
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th class="text-center">Options</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <!-- Q1 -->
+                  <tr>
+                    <td>
+                      1. Have you ever thought about or attempted to kill yourself?
+                    </td>
+                    <td>
+                      <div><input type="radio" id="sbq1_0" name="sbq1" value="0">  <label for="sbq1_0"> Never </label> </div>
+                      <div><input type="radio" id="sbq1_1" name="sbq1" value="1">  <label for="sbq1_1">Brief passing thought</label></div>
+                      <div><input type="radio" id="sbq1_2" name="sbq1" value="2">  <label for="sbq1_2">Thought about it, no plan</label></div>
+                      <div><input type="radio" id="sbq1_3" name="sbq1" value="3">  <label for="sbq1_3">Had a plan, no attempt</label></div>
+                      <div><input type="radio" id="sbq1_4" name="sbq1" value="4">  <label for="sbq1_4">Attempted, no intent to die</label></div>
+                      <div><input type="radio" id="sbq1_5" name="sbq1" value="5">  <label for="sbq1_5">Attempted, wanted to die</label></div>
+                    </td>
+                  </tr>
+
+                  <!-- Q2 -->
+                  <tr>
+                    <td>
+                      2. How often have you thought about killing yourself in the past year?
+                    </td>
+                    <td>
+                      <div><input type="radio" id="sbq2_0" name="sbq2" value="0"> <label for="sbq2_0">Never</label></div>
+                      <div><input type="radio" id="sbq2_1" name="sbq2" value="1"> <label for="sbq2_1">Rarely (1 time)</label></div>
+                      <div><input type="radio" id="sbq2_2" name="sbq2" value="2"> <label for="sbq2_2">Sometimes (2 times)</label></div>
+                      <div><input type="radio" id="sbq2_3" name="sbq2" value="3"> <label for="sbq2_3">Often (3–4 times)</label></div>
+                      <div><input type="radio" id="sbq2_4" name="sbq2" value="4"> <label for="sbq2_4">Very often (5+ times)</label></div>
+                    </td>
+                  </tr>
+
+                  <!-- Q3 -->
+                  <tr>
+                    <td>
+                      3. Have you ever told someone that you were going to commit suicide?
+                    </td>
+                    <td>
+                      <div><input type="radio" id="sbq3_0" name="sbq3" value="0"> <label for="sbq3_0">No</label></div>
+                      <div><input type="radio" id="sbq3_1" name="sbq3" value="1"> <label for="sbq3_1">Yes, once (no intent)</label></div>
+                      <div><input type="radio" id="sbq3_2" name="sbq3" value="2"> <label for="sbq3_2">Yes, once (intent)</label></div>
+                      <div><input type="radio" id="sbq3_3" name="sbq3" value="3"> <label for="sbq3_3">Yes, more than once</label></div>
+                    </td>
+                  </tr>
+
+                  <!-- Q4 -->
+                  <tr>
+                    <td>
+                      4. How likely is it that you will attempt suicide someday?
+                    </td>
+                    <td>
+                      <div><input type="radio" id="sbq4_0" name="sbq4" value="0"> <label for="sbq4_0">Never / No chance</label></div>
+                      <div><input type="radio" id="sbq4_1" name="sbq4" value="1"> <label for="sbq4_1">Unlikely</label></div>
+                      <div><input type="radio" id="sbq4_2" name="sbq4" value="2"> <label for="sbq4_2">Rather unlikely</label></div>
+                      <div><input type="radio" id="sbq4_3" name="sbq4" value="3"> <label for="sbq4_3">Likely</label></div>
+                      <div><input type="radio" id="sbq4_4" name="sbq4" value="4"> <label for="sbq4_4">Very likely</label></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+    <!-- End Content Section -->
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript -->
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages -->
+    <script src="static/js/sb-admin-2.min.js"></script>
+
+    <!-- Make text inputs read-only by disabling them for view-only mode -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          // disable all text inputs on the page (covers inputs with explicit type="text" and inputs with no type)
+          var textInputs = document.querySelectorAll('input[type="text"], input:not([type])');
+          textInputs.forEach(function (el) {
+            el.setAttribute('disabled', '');
+          });
+        } catch (e) {
+          console.error('Error disabling text inputs:', e);
+        }
+      });
+    </script>
+
+
+
+
+  </body>
+</html>
