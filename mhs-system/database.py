@@ -132,3 +132,16 @@ def admin_authenticate(username, password):
         return True
     else:
         return False
+    
+def delete_entry(id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM responses WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    
+def admin_view_full_form():
+    ### some stuff here later ###
+    pass
+

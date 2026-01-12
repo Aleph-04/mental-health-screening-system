@@ -131,6 +131,10 @@ def submit_to_database():
     
     print("Data inserted to database for ", first_name, flush=True)
     return redirect(url_for("student_take_evaluation"))
+
+@app.route("/admin-view-evaluation")
+def admin_view_evaluation():
+    return render_template("admin_view_evaluation.html")
     
 
 if __name__ == '__main__':
