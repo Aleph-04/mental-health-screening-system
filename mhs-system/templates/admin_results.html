@@ -74,6 +74,7 @@
                           <td>{{ i["sbqr_result"] }}</td>
                           <td>
                             <a href="{{url_for('admin_view_evaluation')}}" class="btn btn-sm btn-primary"><i class="fa-solid fa-file-lines"></i></a>
+                          
                             <a href="/admin/delete/{{ i.get('id') }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this entry?');"><i class="fa-solid fa-trash-can"></i></a>
                           </td>
                         </tr> 
