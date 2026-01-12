@@ -137,7 +137,7 @@ def delete_entry(id):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute("DELETE FROM responses WHERE id = ?", (id,))
+    cursor.execute("DELETE FROM predictions WHERE id = ?", (id,))
     conn.commit()
     conn.close()
     

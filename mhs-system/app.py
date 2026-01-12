@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
+from database import delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
 
 
@@ -132,10 +132,21 @@ def submit_to_database():
     print("Data inserted to database for ", first_name, flush=True)
     return redirect(url_for("student_take_evaluation"))
 
-@app.route("/admin-view-evaluation")
+@app.route("/admin-view-evaluation", methods=['GET', 'POST'])
 def admin_view_evaluation():
-    return render_template("admin_view_evaluation.html")
-    
+    if request.method == 'POST':
+        if "view_button" in request.form:
+            id = request.form['view_button']
+            print("Viewing evaluation for ID:", id)
+            
+        elif "delete_entry" in request.form:
+            id = request.form['delete_entry']
+            print("Deleting evaluation for ID:", id)
+            
+            delete_entry(id)
+            return redirect(url_for("results"))
+        
+        return render_template("admin_view_evaluation.html", id=id)
 
 if __name__ == '__main__':
     # app.run(host="0.0.0.0", port=5000, debug=True)

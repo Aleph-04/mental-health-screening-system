@@ -849,22 +849,6 @@
     <script src="static/js/sb-admin-2.min.js"></script>
 
     <!-- Make text inputs read-only by disabling them for view-only mode -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        try {
-          // disable all text inputs on the page (covers inputs with explicit type="text" and inputs with no type)
-          var textInputs = document.querySelectorAll('input[type="text"], input:not([type])');
-          textInputs.forEach(function (el) {
-            el.setAttribute('disabled', '');
-          });
-        } catch (e) {
-          console.error('Error disabling text inputs:', e);
-        }
-      });
-    </script>
-
-
-
 
   </body>
 </html>
