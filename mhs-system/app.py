@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
+from database import fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
 
 
@@ -68,7 +68,7 @@ def view_forms():
 @app.route("/results")
 def results():
     print("IF YOU SEE THE THING BELOW THIS, THEN IT WORKS")
-    row = fetch_result()
+    row = fetch_all_responses()
     return render_template("admin_results.html", row=row)
 
 @app.route("/evaluation")
