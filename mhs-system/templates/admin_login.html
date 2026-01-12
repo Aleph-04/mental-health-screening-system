@@ -23,6 +23,7 @@
 </head>
 
 <body class="bg-gradient-primary">
+    <p style="background: white; color: black;"> {{ message }} </p>
 
     <div class="container">
 
@@ -44,8 +45,12 @@
 
                                     <form method="post" action="/admin" class="user">
                                         <div class="form-group">
-                                            <input class="form-control form-control-user"
-                                                id="admin_username" name="admin_username" aria-describedby="emailHelp"
+
+                                            <!--FIX THIS --> <input pattern="[A-Za-z0-9_]+" class="form-control form-control-user"
+
+                                                id="admin_username" name="admin_username" ari
+                                                
+                                                a-describedby="emailHelp"
                                                 placeholder="Username">
                                         </div>
 

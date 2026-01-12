@@ -51,10 +51,10 @@
                         <th>College</th>
 
                         <th>Age</th>
-                        <th>Other Data</th>
                         <th> PHQ-9 Result </th>
                         <th> GAD-7 Result </th>
                         <th> SBQR Result </th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
  
@@ -65,10 +65,13 @@
                           <td>{{ i["name"] }}</td>
                           <td>{{ i["college"] }}</td>
                           <td>{{ i["age"] }}</td>
-                          <td>{{ "N/A" }}</td>
                           <td>{{ i["phq9_result"] }}</td>
                           <td>{{ i["gad7_result"] }}</td>
                           <td>{{ i["sbqr_result"] }}</td>
+                          <td>
+                            <a href="/admin/view_entry/{{ i.get('id') }}" class="btn btn-sm btn-primary">View</a>
+                            <a href="/admin/delete/{{ i.get('id') }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this entry?');">Delete</a>
+                          </td>
                         </tr> 
                         {% endif %}
                       {% endfor %}
@@ -92,10 +95,10 @@
                         <th>College</th>
 
                         <th>Age</th>
-                        <th>Other Data</th>
                         <th> PHQ-9 Result </th>
                         <th> GAD-7 Result </th>
                         <th> SBQR Result </th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
 
@@ -103,13 +106,16 @@
 
                       {% for i in row %}
                       <tr style=background-color:{{"pink" if i["result"] in ["Moderately Severe", "Severe"] else "white"}};>
-                        <td>{{ i["name"] }}</td>
+                        <td>{{ i["name"]|e }}</td>
                         <td>{{ i["college"] }}</td>
                         <td>{{ i["age"] }}</td>
-                        <td>{{ "N/A" }}</td>
                         <td>{{ i["phq9_result"] }}</td>
                         <td>{{ i["gad7_result"] }}</td>
                         <td>{{ i["sbqr_result"] }}</td>
+                        <td>
+                          <a href="/admin/view_entry/{{ i.get('id') }}" class="btn btn-sm btn-primary">View</a>
+                          <a href="/admin/delete/{{ i.get('id') }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this entry?');">Delete</a>
+                        </td>
                       </tr> 
                       {% endfor %}
 

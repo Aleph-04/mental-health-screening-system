@@ -61,8 +61,6 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
     conn.close()
     
     
-
-
 def insert_to_predictions(name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
@@ -76,9 +74,7 @@ def insert_to_predictions(name, college, age, phq9_prediction, gad7_prediction, 
     conn.close()
     print("Inserted prediction for", name)
     
-    
-    
-    
+
 def fetch_responses():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -123,11 +119,12 @@ def count_by_college(college_name):
     return count
 
 def admin_authenticate(username, password):
+    
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute(f"SELECT * FROM admin_accounts WHERE username = '{username}' AND password = '{password}'") ### unsafe version for demo purposes only, fix later ###
-    # cursor.execute("SELECT * FROM admin_accounts WHERE username = ? AND password = ?", (username, password))
+        
+    cursor.execute("SELECT * FROM admin_accounts WHERE username = ? AND password = ?", (username, password))
     result = cursor.fetchone()
     conn.close()
     

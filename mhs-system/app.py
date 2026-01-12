@@ -23,21 +23,26 @@ def home():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin_login():
+    message  = ""   
+    
     if request.method == 'POST':
         username = request.form['admin_username']
         password = request.form['admin_password']
         
         print(username + " " + password)
         
-        auth = admin_authenticate(username, password)
-        print(auth)
+        try:
+            auth = admin_authenticate(username, password)
+        except Exception as e:
+            return render_template("error.html")
+
         
         if auth:
             return redirect(url_for("dashboard"))
         else:
-            return redirect(url_for("admin_login"))
+            message = "Invalid username or password"
 
-    return render_template("admin_login.html")
+    return render_template("admin_login.html", message=message)
 
 @app.route("/evaluation")
 def student_take_evaluation():
@@ -75,6 +80,8 @@ def student_evaluation():
 def submit_to_database():
     full_name = request.form['inputFirstName'] + " " + request.form['inputLastName']
     first_name = request.form['inputFirstName']
+    college = "N/A"
+    age = "N/A"
     middle_name = request.form['inputMiddleName']
     last_name = request.form['inputLastName']
     email_address = request.form['inputEmailAddress']
@@ -119,7 +126,7 @@ def submit_to_database():
         )
     
     insert_to_predictions(
-        full_name, "N/A", "N/A", phq9_prediction, gad7_prediction, sbqr_prediction
+        full_name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction
     )
     
     print("Data inserted to database for ", first_name, flush=True)
