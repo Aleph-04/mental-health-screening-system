@@ -78,22 +78,22 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputLastName">Last Name</label>
-                <input disabled pattern="[A-Za-z]+" disabled type="text" class="form-control" name="inputLastName" placeholder="" />
+                <input disabled pattern="[A-Za-z]+" disabled type="text" class="form-control" name="inputLastName" placeholder="{{ last_name }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">First Name</label>
-                <input disabled disabled type="text" class="form-control" name="inputFirstName" placeholder="" />
+                <input disabled type="text" class="form-control" name="inputFirstName" placeholder="{{ first_name }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Middle Name</label>
-                <input disabled disabled type="text" class="form-control" name="inputMiddleName" placeholder="" />
+                <input disabled type="text" class="form-control" name="inputMiddleName" placeholder="{{ middle_name}}" />
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Extension(Jr.,Sr.,etc.)</label>
-                <input disabled disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
               </div>
 
               <div class="form-group col-md-4">
@@ -437,7 +437,7 @@
         <div class="container-fluid">
             <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">PHQ-9</h6>
+                <h6 class="m-0 font-weight-bold text-primary">PHQ-9 | {{phq9_result}}</h6>
             </div>
             <div class="card-body">
                 <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
@@ -456,144 +456,144 @@
                     <tr>
                     <td>1. Little interest or pleasure in doing things</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq1" value="0" id="p1_0" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="0" id="p1_0" {{"checked" if phq1_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq1" value="1" id="p1_1" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="1" id="p1_1" {{"checked" if phq1_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq1" value="2" id="p1_2" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="2" id="p1_2" {{"checked" if phq1_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq1" value="3" id="p1_3" />
+                        <input class="large-radio-button" type="radio" name="phq1" value="3" id="p1_3" {{"checked" if phq1_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>2. Feeling down, depressed, or hopeless.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq2" value="0" id="p2_0" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="0" id="p2_0" {{"checked" if phq2_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq2" value="1" id="p2_1" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="1" id="p2_1" {{"checked" if phq2_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq2" value="2" id="p2_2" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="2" id="p2_2" {{"checked" if phq2_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq2" value="3" id="p2_3" />
+                        <input class="large-radio-button" type="radio" name="phq2" value="3" id="p2_3" {{"checked" if phq2_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>3. Trouble falling or staying asleep, or sleeping too much.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq3" value="0" id="p3_0" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="0" id="p3_0" {{"checked" if phq3_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq3" value="1" id="p3_1" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="1" id="p3_1" {{"checked" if phq3_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq3" value="2" id="p3_2" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="2" id="p3_2" {{"checked" if phq3_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq3" value="3" id="p3_3" />
+                        <input class="large-radio-button" type="radio" name="phq3" value="3" id="p3_3" {{"checked" if phq3_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>4. Feeling tired or having little energy.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq4" value="0" id="p4_0" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="0" id="p4_0" {{"checked" if phq4_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq4" value="1" id="p4_1" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="1" id="p4_1" {{"checked" if phq4_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq4" value="2" id="p4_2" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="2" id="p4_2" {{"checked" if phq4_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq4" value="3" id="p4_3" />
+                        <input class="large-radio-button" type="radio" name="phq4" value="3" id="p4_3" {{"checked" if phq4_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>5. Poor appetite or overeating.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq5" value="0" id="p5_0" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="0" id="p5_0" {{"checked" if phq5_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq5" value="1" id="p5_1" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="1" id="p5_1" {{"checked" if phq5_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq5" value="2" id="p5_2" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="2" id="p5_2" {{"checked" if phq5_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq5" value="3" id="p5_3" />
+                        <input class="large-radio-button" type="radio" name="phq5" value="3" id="p5_3" {{"checked" if phq5_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq6" value="0" id="p6_0" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="0" id="p6_0" {{"checked" if phq6_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq6" value="1" id="p6_1" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="1" id="p6_1" {{"checked" if phq6_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq6" value="2" id="p6_2" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="2" id="p6_2" {{"checked" if phq6_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq6" value="3" id="p6_3" />
+                        <input class="large-radio-button" type="radio" name="phq6" value="3" id="p6_3" {{"checked" if phq6_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>7. Trouble concentrating on things, such as reading the newspaper or watching television.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq7" value="0" id="p7_0" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="0" id="p7_0" {{"checked" if phq7_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq7" value="1" id="p7_1" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="1" id="p7_1" {{"checked" if phq7_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq7" value="2" id="p7_2" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="2" id="p7_2" {{"checked" if phq7_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq7" value="3" id="p7_3" />
+                        <input class="large-radio-button" type="radio" name="phq7" value="3" id="p7_3" {{"checked" if phq7_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq8" value="0" id="p8_0" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="0" id="p8_0" {{"checked" if phq8_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq8" value="1" id="p8_1" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="1" id="p8_1" {{"checked" if phq8_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq8" value="2" id="p8_2" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="2" id="p8_2" {{"checked" if phq8_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq8" value="3" id="p8_3" />
+                        <input class="large-radio-button" type="radio" name="phq8" value="3" id="p8_3" {{"checked" if phq8_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>9. Thoughts that you would be better off dead, or of hurting yourself in some way.</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq9" value="0" id="p9_0" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="0" id="p9_0" {{"checked" if phq9_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq9" value="1" id="p9_1" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="1" id="p9_1" {{"checked" if phq9_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq9" value="2" id="p9_2" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="2" id="p9_2" {{"checked" if phq9_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="phq9" value="3" id="p9_3" />
+                        <input class="large-radio-button" type="radio" name="phq9" value="3" id="p9_3" {{"checked" if phq9_response == 3 else "disabled"}} />
                     </td>
                     </tr>
                 </tbody>
@@ -606,7 +606,7 @@
         <div class="container-fluid">
             <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">GAD-7</h6>
+                <h6 class="m-0 font-weight-bold text-primary">GAD-7 | {{gad7_result}}</h6>
             </div>
             <div class="card-body">
                 <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
@@ -625,112 +625,112 @@
                     <tr>
                     <td>1. Feeling nervous, anxious, or on edge</td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="gad1" value="0" id="gad1_0" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="0" id="gad1_0" {{"checked" if gad1_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="gad1" value="1" id="gad1_1" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="1" id="gad1_1" {{"checked" if gad1_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="gad1" value="2" id="gad1_2" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="2" id="gad1_2" {{"checked" if gad1_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                        <input class="large-radio-button" type="radio" name="gad1" value="3" id="gad1_3" />
+                        <input class="large-radio-button" type="radio" name="gad1" value="3" id="gad1_3" {{"checked" if gad1_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>2. Not being able to stop or control worrying.</td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad2" value="0" id="gad2_0" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="0" id="gad2_0" {{"checked" if gad2_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad2" value="1" id="gad2_1" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="1" id="gad2_1" {{"checked" if gad2_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad2" value="2" id="gad2_2" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="2" id="gad2_2" {{"checked" if gad2_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad2" value="3" id="gad2_3" />
+                      <input class="large-radio-button" type="radio" name="gad2" value="3" id="gad2_3" {{"checked" if gad2_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>3. Worrying too much about different things.</td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad3" value="0" id="gad3_0" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="0" id="gad3_0" {{"checked" if gad3_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad3" value="1" id="gad3_1" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="1" id="gad3_1" {{"checked" if gad3_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad3" value="2" id="gad3_2" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="2" id="gad3_2" {{"checked" if gad3_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad3" value="3" id="gad3_3" />
+                      <input class="large-radio-button" type="radio" name="gad3" value="3" id="gad3_3" {{"checked" if gad3_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>4. Trouble relaxing.</td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad4" value="0" id="gad4_0" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="0" id="gad4_0" {{"checked" if gad4_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad4" value="1" id="gad4_1" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="1" id="gad4_1" {{"checked" if gad4_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad4" value="2" id="gad4_2" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="2" id="gad4_2" {{"checked" if gad4_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad4" value="3" id="gad4_3" />
+                      <input class="large-radio-button" type="radio" name="gad4" value="3" id="gad4_3" {{"checked" if gad4_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>5. Being so restless that it is hard to sit still.</td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad5" value="0" id="gad5_0" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="0" id="gad5_0" {{"checked" if gad5_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad5" value="1" id="gad5_1" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="1" id="gad5_1" {{"checked" if gad5_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad5" value="2" id="gad5_2" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="2" id="gad5_2" {{"checked" if gad5_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad5" value="3" id="gad5_3" />
+                      <input class="large-radio-button" type="radio" name="gad5" value="3" id="gad5_3" {{"checked" if gad5_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>6. Becoming easily annoyed or irritable.</td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad6" value="0" id="gad6_0" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="0" id="gad6_0" {{"checked" if gad6_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad6" value="1" id="gad6_1" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="1" id="gad6_1" {{"checked" if gad6_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad6" value="2" id="gad6_2" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="2" id="gad6_2" {{"checked" if gad6_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad6" value="3" id="gad6_3" />
+                      <input class="large-radio-button" type="radio" name="gad6" value="3" id="gad6_3" {{"checked" if gad6_response == 3 else "disabled"}} />
                     </td>
                     </tr>
 
                     <tr>
                     <td>7. Feeling afraid as if something awful might happen.</td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad7" value="0" id="gad7_0" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="0" id="gad7_0" {{"checked" if gad7_response == 0 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad7" value="1" id="gad7_1" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="1" id="gad7_1" {{"checked" if gad7_response == 1 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad7" value="2" id="gad7_2" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="2" id="gad7_2" {{"checked" if gad7_response == 2 else "disabled"}} />
                     </td>
                     <td class="text-center">
-                      <input class="large-radio-button" type="radio" name="gad7" value="3" id="gad7_3" />
+                      <input class="large-radio-button" type="radio" name="gad7" value="3" id="gad7_3" {{"checked" if gad7_response == 3 else "disabled"}} />
                     </td>
                     </tr>
                 </tbody>
@@ -743,7 +743,7 @@
         <div class="container-fluid">
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-danger">SBQ-R</h6>
+              <h6 class="m-0 font-weight-bold text-danger">SBQ-R | {{sbqr_result}}</h6>
             </div>
 
             <div class="card-body">
@@ -764,12 +764,12 @@
                       1. Have you ever thought about or attempted to kill yourself?
                     </td>
                     <td>
-                      <div><input type="radio" id="sbq1_0" name="sbq1" value="0">  <label for="sbq1_0"> Never </label> </div>
-                      <div><input type="radio" id="sbq1_1" name="sbq1" value="1">  <label for="sbq1_1">Brief passing thought</label></div>
-                      <div><input type="radio" id="sbq1_2" name="sbq1" value="2">  <label for="sbq1_2">Thought about it, no plan</label></div>
-                      <div><input type="radio" id="sbq1_3" name="sbq1" value="3">  <label for="sbq1_3">Had a plan, no attempt</label></div>
-                      <div><input type="radio" id="sbq1_4" name="sbq1" value="4">  <label for="sbq1_4">Attempted, no intent to die</label></div>
-                      <div><input type="radio" id="sbq1_5" name="sbq1" value="5">  <label for="sbq1_5">Attempted, wanted to die</label></div>
+                      <div><input type="radio" id="sbqr1_0" name="sbq1" value="0" {{"checked" if sbqr1_response == 0 else "disabled"}}>  <label for="sbqr1_0"> Never </label> </div>
+                      <div><input type="radio" id="sbqr1_1" name="sbq1" value="1" {{"checked" if sbqr1_response == 1 else "disabled"}}>  <label for="sbqr1_1">Brief passing thought</label></div>
+                      <div><input type="radio" id="sbqr1_2" name="sbq1" value="2" {{"checked" if sbqr1_response == 2 else "disabled"}}>  <label for="sbqr1_2">Thought about it, no plan</label></div>
+                      <div><input type="radio" id="sbqr1_3" name="sbq1" value="3" {{"checked" if sbqr1_response == 3 else "disabled"}}>  <label for="sbqr1_3">Had a plan, no attempt</label></div>
+                      <div><input type="radio" id="sbqr1_4" name="sbq1" value="4" {{"checked" if sbqr1_response == 4 else "disabled"}}>  <label for="sbqr1_4">Attempted, no intent to die</label></div>
+                      <div><input type="radio" id="sbqr1_5" name="sbq1" value="5" {{"checked" if sbqr1_response == 5 else "disabled"}}>  <label for="sbqr1_5">Attempted, wanted to die</label></div>
                     </td>
                   </tr>
 
@@ -779,11 +779,11 @@
                       2. How often have you thought about killing yourself in the past year?
                     </td>
                     <td>
-                      <div><input type="radio" id="sbq2_0" name="sbq2" value="0"> <label for="sbq2_0">Never</label></div>
-                      <div><input type="radio" id="sbq2_1" name="sbq2" value="1"> <label for="sbq2_1">Rarely (1 time)</label></div>
-                      <div><input type="radio" id="sbq2_2" name="sbq2" value="2"> <label for="sbq2_2">Sometimes (2 times)</label></div>
-                      <div><input type="radio" id="sbq2_3" name="sbq2" value="3"> <label for="sbq2_3">Often (3–4 times)</label></div>
-                      <div><input type="radio" id="sbq2_4" name="sbq2" value="4"> <label for="sbq2_4">Very often (5+ times)</label></div>
+                      <div><input type="radio" id="sbq2_0" name="sbq2" value="0" {{"checked" if sbqr2_response == 0 else "disabled"}}> <label for="sbq2_0">Never</label></div>
+                      <div><input type="radio" id="sbq2_1" name="sbq2" value="1" {{"checked" if sbqr2_response == 1 else "disabled"}}> <label for="sbq2_1">Rarely (1 time)</label></div>
+                      <div><input type="radio" id="sbq2_2" name="sbq2" value="2" {{"checked" if sbqr2_response == 2 else "disabled"}}> <label for="sbq2_2">Sometimes (2 times)</label></div>
+                      <div><input type="radio" id="sbq2_3" name="sbq2" value="3" {{"checked" if sbqr2_response == 3 else "disabled"}}> <label for="sbq2_3">Often (3–4 times)</label></div>
+                      <div><input type="radio" id="sbq2_4" name="sbq2" value="4" {{"checked" if sbqr2_response == 4 else "disabled"}}> <label for="sbq2_4">Very often (5+ times)</label></div>
                     </td>
                   </tr>
 
@@ -793,10 +793,10 @@
                       3. Have you ever told someone that you were going to commit suicide?
                     </td>
                     <td>
-                      <div><input type="radio" id="sbq3_0" name="sbq3" value="0"> <label for="sbq3_0">No</label></div>
-                      <div><input type="radio" id="sbq3_1" name="sbq3" value="1"> <label for="sbq3_1">Yes, once (no intent)</label></div>
-                      <div><input type="radio" id="sbq3_2" name="sbq3" value="2"> <label for="sbq3_2">Yes, once (intent)</label></div>
-                      <div><input type="radio" id="sbq3_3" name="sbq3" value="3"> <label for="sbq3_3">Yes, more than once</label></div>
+                      <div><input type="radio" id="sbq3_0" name="sbq3" value="0" {{"checked" if sbqr3_response == 0 else "disabled"}}> <label for="sbq3_0">No</label></div>
+                      <div><input type="radio" id="sbq3_1" name="sbq3" value="1" {{"checked" if sbqr3_response == 1 else "disabled"}}> <label for="sbq3_1">Yes, once (no intent)</label></div>
+                      <div><input type="radio" id="sbq3_2" name="sbq3" value="2" {{"checked" if sbqr3_response == 2 else "disabled"}}> <label for="sbq3_2">Yes, once (intent)</label></div>
+                      <div><input type="radio" id="sbq3_3" name="sbq3" value="3" {{"checked" if sbqr3_response == 3 else "disabled"}}> <label for="sbq3_3">Yes, more than once</label></div>
                     </td>
                   </tr>
 
@@ -806,11 +806,11 @@
                       4. How likely is it that you will attempt suicide someday?
                     </td>
                     <td>
-                      <div><input type="radio" id="sbq4_0" name="sbq4" value="0"> <label for="sbq4_0">Never / No chance</label></div>
-                      <div><input type="radio" id="sbq4_1" name="sbq4" value="1"> <label for="sbq4_1">Unlikely</label></div>
-                      <div><input type="radio" id="sbq4_2" name="sbq4" value="2"> <label for="sbq4_2">Rather unlikely</label></div>
-                      <div><input type="radio" id="sbq4_3" name="sbq4" value="3"> <label for="sbq4_3">Likely</label></div>
-                      <div><input type="radio" id="sbq4_4" name="sbq4" value="4"> <label for="sbq4_4">Very likely</label></div>
+                      <div><input type="radio" id="sbq4_0" name="sbq4" value="0" {{"checked" if sbqr4_response == 0 else "disabled"}}> <label for="sbq4_0">Never / No chance</label></div>
+                      <div><input type="radio" id="sbq4_1" name="sbq4" value="1" {{"checked" if sbqr4_response == 1 else "disabled"}}> <label for="sbq4_1">Unlikely</label></div>
+                      <div><input type="radio" id="sbq4_2" name="sbq4" value="2" {{"checked" if sbqr4_response == 2 else "disabled"}}> <label for="sbq4_2">Rather unlikely</label></div>
+                      <div><input type="radio" id="sbq4_3" name="sbq4" value="3" {{"checked" if sbqr4_response == 3 else "disabled"}}> <label for="sbq4_3">Likely</label></div>
+                      <div><input type="radio" id="sbq4_4" name="sbq4" value="4" {{"checked" if sbqr4_response == 4 else "disabled"}}> <label for="sbq4_4">Very likely</label></div>
                     </td>
                   </tr>
                 </tbody>

@@ -65,7 +65,7 @@
                     <tbody>
                       {% for i in row %}
                         {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] %}
-                        <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}};>
+                        <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}}>
                           <td>{{ i["name"] }}</td>
                           <td>{{ i["college"] }}</td>
                           <td>{{ i["age"] }}</td>

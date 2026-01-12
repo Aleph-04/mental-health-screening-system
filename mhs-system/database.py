@@ -3,6 +3,8 @@ import sqlite3
 def initialize_db():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
+    
+    cursor.execute("PRAGMA foreign_keys = ON")
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS responses (
@@ -32,6 +34,18 @@ def initialize_db():
             sbqr3 INTEGER,
             sbqr4 INTEGER
         )
+    ''')
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS predictions (
+        id INTEGER PRIMARY KEY REFERENCES responses(id) ON DELETE CASCADE,
+        name TEXT,
+        college TEXT,
+        age INTEGER,
+        phq9_result TEXT,
+        gad7_result TEXT,
+        sbqr_result TEXT
+    )
     ''')
 
     print("Hello from database.py")
@@ -75,24 +89,25 @@ def insert_to_predictions(name, college, age, phq9_prediction, gad7_prediction, 
     print("Inserted prediction for", name)
     
 
-def fetch_responses():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM responses")
-    rows = cursor.fetchall()
-
-    conn.close()
-    return rows
-
-
-
-def fetch_result():
+def fetch_responses(id):
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM predictions")
+    cursor.execute("SELECT * FROM responses WHERE id = ?", (id,))
+    rows = cursor.fetchall()
+
+    conn.close()
+    return [dict(row) for row in rows] ### return list of rows converted to dictionaries bro. ###
+
+
+
+def fetch_result(id):
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM predictions WHERE id = ?", (id,))
     rows = cursor.fetchall()
 
     conn.close()
