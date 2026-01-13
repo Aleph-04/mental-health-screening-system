@@ -129,14 +129,14 @@ def count_by_college(college):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college))
+    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college,))
     count = cursor.fetchone()[0]
 
     conn.close()
     print(count)
     return count
 
-def admin_authenticate(username, password):
+def admin_authenticate(username, password): ### move to new file authenticate.py later ###
     
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()

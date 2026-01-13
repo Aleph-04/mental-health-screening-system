@@ -29,16 +29,30 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
+
+// Data and labels extracted so we can compute a dynamic Y max
+var barLabels = ["CCIS", "CEA", "CBA", "CMS", "N/A", "n/A"];
+var barData = (typeof barGraphData !== 'undefined' && Array.isArray(barGraphData)) ? barGraphData : [69, 69, 69, 69, 69, 69];
+
+// Compute a max value with 10% padding and round to a "nice" magnitude
+var maxData = (barData && barData.length) ? Math.max.apply(null, barData) : 0;
+var suggestedMax = Math.ceil(maxData * 1.1) || 10;
+// Round suggestedMax to one significant digit (e.g. 15600 -> 20000)
+if (suggestedMax > 0) {
+  var magnitude = Math.pow(10, Math.floor(Math.log10(suggestedMax)));
+  suggestedMax = Math.ceil(suggestedMax / magnitude) * magnitude;
+}
+
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: barLabels,
     datasets: [{
-      label: "Revenue",
+      label: "Entries",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
+      data: barData,
     }],
   },
   options: {
@@ -68,8 +82,9 @@ var myBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 15000,
-          maxTicksLimit: 5,
+           // Use the computed dynamic max so the scale adapts to the data
+           max: suggestedMax,
+          maxTicksLimit: 10,
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
@@ -103,7 +118,7 @@ var myBarChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
         }
       }
     },
