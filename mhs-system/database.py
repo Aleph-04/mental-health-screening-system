@@ -190,3 +190,15 @@ def insert_registration_code(email, code):
     
     conn.commit()
     conn.close()
+    
+def authenticate_student(code):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute(
+        "SELECT * FROM registration_codes WHERE code = ?", (code,))
+
+    result = cursor.fetchone()
+    conn.close()
+    
+    return bool(result)

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from database import fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from database import authenticate_student, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model
 import random
 import string
@@ -7,10 +7,6 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # Needed for flash messages
-
-### testing for XSS prevention --- remove later###
-app.jinja_env.autoescape = False
-### end of testing for XSS prevention ###
 
 # ------------------- MAIL CONFIG -------------------
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -32,8 +28,16 @@ load_gad7_model()
 
 # ------------------- ROUTES -------------------
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        code = request.form['login_code']
+        
+        if authenticate_student(code):
+            return redirect(url_for('student_evaluation'))
+        else:
+            flash("Invalid code. Please try again.", "danger")
+            
     return render_template("student_login.html")
 
 @app.route("/admin", methods=['GET', 'POST'])
