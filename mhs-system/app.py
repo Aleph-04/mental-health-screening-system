@@ -53,9 +53,9 @@ def dashboard():
     row = count_records()
     return render_template("admin_dashboard.html", row=row)
 
-@app.route("/stats")
-def stats():
-    return render_template("admin_statistics.html")
+@app.route("/manage")
+def manage():
+    return render_template("admin_manage_users.html")
 
 @app.route("/edit-evaluation-form")
 def edit_evaluation_form():
