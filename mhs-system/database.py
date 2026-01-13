@@ -12,6 +12,8 @@ def initialize_db():
             first_name TEXT,
             middle_name TEXT,
             last_name TEXT,
+            college TEXT,
+            age INTEGER,
             email_address TEXT,
             phq1 INTEGER,
             phq2 INTEGER,
@@ -123,14 +125,15 @@ def count_records():
     conn.close()
     return count
 
-def count_by_college(college_name):
+def count_by_college(college):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college_name,))
+    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college))
     count = cursor.fetchone()[0]
 
     conn.close()
+    print(count)
     return count
 
 def admin_authenticate(username, password):
