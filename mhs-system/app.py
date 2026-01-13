@@ -1,20 +1,36 @@
-from flask import Flask, render_template, request, redirect, url_for
-from database import count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records ## import functions from database.py ###
-from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model ## import functions from logistic_regression.py ###
+from flask import Flask, render_template, request, redirect, url_for, flash
+from database import fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model
+import random
+import string
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey"  # Needed for flash messages
 
 ### testing for XSS prevention --- remove later###
 app.jinja_env.autoescape = False
 ### end of testing for XSS prevention ###
 
+# ------------------- MAIL CONFIG -------------------
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'mykekierkier@gmail.com'  # <-- replace
+app.config['MAIL_PASSWORD'] = 'iongrizzkbfpsddh'     # <-- replace
+app.config['MAIL_DEFAULT_SENDER'] = 'mykekierkier@gmail.com'
 
+mail = Mail(app)
 
+# ------------------- INITIALIZE -------------------
 print("Hello from app.py")
 initialize_db()
+from database import initialize_registration_db
+initialize_registration_db()
 load_phq9_model()
 load_gad7_model()
 
+# ------------------- ROUTES -------------------
 
 @app.route('/')
 def home():
@@ -23,24 +39,18 @@ def home():
 @app.route("/admin", methods=['GET', 'POST'])
 def admin_login():
     message  = ""   
-    
     if request.method == 'POST':
         username = request.form['admin_username']
         password = request.form['admin_password']
-        
         print(username + " " + password)
-        
         try:
             auth = admin_authenticate(username, password)
         except Exception as e:
             return render_template("error.html")
-
-        
         if auth:
             return redirect(url_for("dashboard"))
         else:
             message = "Invalid username or password"
-
     return render_template("admin_login.html", message=message)
 
 @app.route("/evaluation")
@@ -50,15 +60,7 @@ def student_take_evaluation():
 @app.route("/dashboard")
 def dashboard():
     row = count_records()
-    bar_graph_data = [count_by_college("CCIS"),
-                      count_by_college("CEA"),
-                      count_by_college("CBA"),
-                      count_by_college("CMS"),
-                      count_by_college("N/A"),
-                      count_by_college("n/A")
-                      ]
-    
-    return render_template("admin_dashboard.html", row=row, bar_graph_data=bar_graph_data)
+    return render_template("admin_dashboard.html", row=row)
 
 @app.route("/manage")
 def manage():
@@ -82,11 +84,33 @@ def results():
 def student_evaluation():
     return render_template("student_evaluation_form.html")
 
-@app.route("/stureg")
+# ------------------- NEW REGISTER ROUTE -------------------
+@app.route("/stureg", methods=['GET', 'POST'])
 def student_register():
+    if request.method == "POST":
+        email = request.form['email']
+
+        # generate 6-digit code
+        code = ''.join(random.choices(string.digits, k=6))
+
+        # save to DB
+        from database import insert_registration_code
+        insert_registration_code(email, code)
+
+        # send email
+        msg = Message(
+            subject="Your Registration Code",
+            recipients=[email],
+            body=f"Hello! Your registration code is: {code}\n\nDo not share it with anyone."
+        )
+        mail.send(msg)
+
+        flash("Registration code sent to your email!", "success")
+        return redirect(url_for("home"))
+
     return render_template("student_register.html")
 
-### example for database insertion boi; once mag submit ang forms, ga run ang function nga ja.###
+# ------------------- SUBMIT EVALUATION TO DATABASE -------------------
 @app.route("/evaluation", methods=['GET', 'POST'])
 def submit_to_database():
     full_name = request.form['inputFirstName'] + " " + request.form['inputLastName']
@@ -128,7 +152,6 @@ def submit_to_database():
     gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
     sbqr_prediction = "SBQR Not Implemented"
     
-    
     insert_to_responses(
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
@@ -143,6 +166,7 @@ def submit_to_database():
     print("Data inserted to database for ", first_name, flush=True)
     return redirect(url_for("student_take_evaluation"))
 
+# ------------------- ADMIN VIEW -------------------
 @app.route("/admin-view-evaluation", methods=['GET', 'POST'])
 def admin_view_evaluation():
     if request.method == 'POST':
@@ -185,11 +209,9 @@ def admin_view_evaluation():
             gad7_result = entry_results[0]['gad7_result']
             sbqr_result = entry_results[0]['sbqr_result']
             
-            
         if "delete_entry" in request.form:
             id = request.form['delete_entry']
             print("Deleting evaluation for ID:", id)
-            
             delete_entry(id)
             return redirect(url_for("results"))
         
@@ -224,5 +246,4 @@ def admin_view_evaluation():
                                )
 
 if __name__ == '__main__':
-    # app.run(host="0.0.0.0", port=5000, debug=True)
     app.run(debug=True)

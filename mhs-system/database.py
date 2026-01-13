@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3 
 
 def initialize_db():
     conn = sqlite3.connect('database.db')
@@ -12,8 +12,6 @@ def initialize_db():
             first_name TEXT,
             middle_name TEXT,
             last_name TEXT,
-            college TEXT,
-            age INTEGER,
             email_address TEXT,
             phq1 INTEGER,
             phq2 INTEGER,
@@ -50,7 +48,6 @@ def initialize_db():
     )
     ''')
 
-    print("Hello from database.py")
     conn.close()
 
 
@@ -88,7 +85,6 @@ def insert_to_predictions(name, college, age, phq9_prediction, gad7_prediction, 
     """, (name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction))
     conn.commit()
     conn.close()
-    print("Inserted prediction for", name)
     
 
 def fetch_responses(id):
@@ -100,8 +96,7 @@ def fetch_responses(id):
     rows = cursor.fetchall()
 
     conn.close()
-    return [dict(row) for row in rows] ### return list of rows converted to dictionaries bro. ###
-
+    return [dict(row) for row in rows]
 
 
 def fetch_result(id):
@@ -113,7 +108,7 @@ def fetch_result(id):
     rows = cursor.fetchall()
 
     conn.close()
-    return [dict(row) for row in rows] ### return list of rows converted to dictionaries bro. ###
+    return [dict(row) for row in rows]
 
 def count_records():
     conn = sqlite3.connect('database.db')
@@ -125,31 +120,25 @@ def count_records():
     conn.close()
     return count
 
-def count_by_college(college):
+def count_by_college(college_name):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college,))
+    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college_name,))
     count = cursor.fetchone()[0]
 
     conn.close()
-    print(count)
     return count
 
-def admin_authenticate(username, password): ### move to new file authenticate.py later ###
-    
+def admin_authenticate(username, password):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-        
     cursor.execute("SELECT * FROM admin_accounts WHERE username = ? AND password = ?", (username, password))
     result = cursor.fetchone()
     conn.close()
     
-    if result:
-        return True
-    else:
-        return False
+    return bool(result)
     
 def delete_entry(id):
     conn = sqlite3.connect('database.db')
@@ -168,4 +157,36 @@ def fetch_all_responses():
     rows = cursor.fetchall()
 
     conn.close()
-    return [dict(row) for row in rows] ### return list of rows converted to dictionaries bro. ###
+    return [dict(row) for row in rows]
+
+
+# ----------------- NEW CODE FOR REGISTRATION -----------------
+
+def initialize_registration_db():
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS registration_codes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL,
+            code TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
+
+def insert_registration_code(email, code):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute(
+        "INSERT INTO registration_codes (email, code) VALUES (?, ?)",
+        (email, code)
+    )
+    
+    conn.commit()
+    conn.close()
