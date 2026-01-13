@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from database import authenticate_student, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from database import authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model
 import random
 import string
@@ -64,7 +64,13 @@ def student_take_evaluation():
 @app.route("/dashboard")
 def dashboard():
     row = count_records()
-    return render_template("admin_dashboard.html", row=row)
+    bar_graph_data = [count_by_college("CCIS"),
+                      count_by_college("CEA"),
+                      count_by_college("CBA"),
+                      count_by_college("CMS"),
+                      count_by_college("CHS"),
+                      count_by_college("CIT"),]
+    return render_template("admin_dashboard.html", row=row, bar_graph_data=bar_graph_data)
 
 @app.route("/manage")
 def manage():
