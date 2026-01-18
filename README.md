@@ -6,6 +6,8 @@ Python
 ### install flask library ###
 >>> pip install flask
 
+### Install flask mail
+>>> pip install Flask-Mail
+
 ### run app ###
 >>> python app.py
-
