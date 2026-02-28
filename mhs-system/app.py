@@ -96,7 +96,7 @@ def student_evaluation():
     return render_template("student_evaluation_form.html")
 
 # ------------------- NEW REGISTER ROUTE -------------------
-@app.route("/stureg", methods=['GET', 'POST'])
+@app.route("/student-register", methods=['GET', 'POST'])
 def student_register():
     if request.method == "POST":
         email = request.form['email']
