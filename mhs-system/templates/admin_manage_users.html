@@ -53,7 +53,7 @@
                       <tr>
                   
                         <th>Username</th>
-                        <th>Password</th>
+                        <th>Type</th>
 
                       </tr>
                     </thead>
@@ -61,7 +61,7 @@
                     <tbody>
                       <tr>
 
-                        <td>Lorenx</td>
+                        <td>Lorenz</td>
                         <td>Admin</td>
                       </tr>
 
@@ -82,19 +82,22 @@
                       <tr>
                   
                         <th>Username</th>
-                        <th>Password</th>
+                        <th>Type</th>
 
                       </tr>
                     </thead>
  
-                    <tbody>
-                      <tr>
+<tbody>
 
-                        <td>Lorenx</td>
-                        <td>Admin</td>
-                      </tr>
+                      {% for i in row %}
+                      <tr>
+                        <td>{{ i["name"]|e }}</td>
+                        <td>{{ "Not Implemented" }}</td>
+                      </tr> 
+                      {% endfor %}
 
                     </tbody>
+                  
                   </table>
                 </div>
               </div>

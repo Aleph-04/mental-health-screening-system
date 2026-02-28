@@ -74,7 +74,8 @@ def dashboard():
 
 @app.route("/manage")
 def manage():
-    return render_template("admin_manage_users.html")
+    row = fetch_all_responses()
+    return render_template("admin_manage_users.html", row=row)
 
 @app.route("/edit-evaluation-form")
 def edit_evaluation_form():
