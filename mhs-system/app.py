@@ -88,21 +88,22 @@ def manage():
     
     try:
         if session["user"] != "admin":
-            return render_temp
-        late("404notfound.html", message="404 not found.")
+            return render_template("404notfound.html", message="404 not found.")
         
         return render_template("admin_manage_users.html", row=row)
     
     except KeyError:
         return render_template("404notfound.html", message="404 not found.")
 
-# @app.route("/edit-evaluation-form")
-# def edit_evaluation_form():
-#     return render_template("admin_edit-evaluation-form.html")
+# ------ Redundant routes. remove later (sidebar.html ln32 will cause an error) ------
+@app.route("/edit-evaluation-form")
+def edit_evaluation_form():
+    return render_template("admin_edit-evaluation-form.html")
 
-# @app.route("/view-forms")
-# def view_forms():
-#     return render_template("admin_view-forms.html")
+@app.route("/view-forms")
+def view_forms():
+    return render_template("admin_view-forms.html")
+# ----------------------------------------- #
 
 @app.route("/results")
 def results():
