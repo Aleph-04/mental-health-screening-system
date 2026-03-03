@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from database import authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model
 import random
@@ -6,7 +6,7 @@ import string
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  # Needed for flash messages
+app.secret_key = "supersecretkey"  # Needed for flash messages; and session.
 
 # ------------------- MAIL CONFIG -------------------
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -30,18 +30,22 @@ load_gad7_model()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    session.clear()
+    
     if request.method == 'POST':
         code = request.form['login_code']
         
         if authenticate_student(code):
+            session["user"] = "student"
             return redirect(url_for('student_evaluation'))
         else:
-            flash("Invalid code. Please try again.", "danger")
+            return render_template("student_login.html", message="Invalid code. Please try again.")
             
     return render_template("student_login.html")
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin_login():
+    session.clear()
     message  = ""   
     if request.method == 'POST':
         username = request.form['admin_username']
@@ -52,14 +56,11 @@ def admin_login():
         except Exception as e:
             return render_template("error.html")
         if auth:
+            session["user"] = "admin"
             return redirect(url_for("dashboard"))
         else:
             message = "Invalid username or password"
     return render_template("admin_login.html", message=message)
-
-@app.route("/evaluation")
-def student_take_evaluation():
-    return render_template("student_take_evaluation.html")
 
 @app.route("/dashboard")
 def dashboard():
@@ -70,31 +71,61 @@ def dashboard():
                       count_by_college("CMS"),
                       count_by_college("CHS"),
                       count_by_college("CIT"),]
-    return render_template("admin_dashboard.html", row=row, bar_graph_data=bar_graph_data)
+    
+    try:
+        if session["user"] != "admin":
+            flash("Unauthorized access. Please log in as admin.", "danger")
+            return redirect(url_for("admin_login"))
+        
+        return render_template("admin_dashboard.html", row=row, bar_graph_data=bar_graph_data)
+    
+    except KeyError:
+        return render_template("404notfound.html", message="404 not found.")
 
 @app.route("/manage")
 def manage():
     row = fetch_all_responses()
-    return render_template("admin_manage_users.html", row=row)
+    
+    try:
+        if session["user"] != "admin":
+            return render_temp
+        late("404notfound.html", message="404 not found.")
+        
+        return render_template("admin_manage_users.html", row=row)
+    
+    except KeyError:
+        return render_template("404notfound.html", message="404 not found.")
 
-@app.route("/edit-evaluation-form")
-def edit_evaluation_form():
-    return render_template("admin_edit-evaluation-form.html")
+# @app.route("/edit-evaluation-form")
+# def edit_evaluation_form():
+#     return render_template("admin_edit-evaluation-form.html")
 
-@app.route("/view-forms")
-def view_forms():
-    return render_template("admin_view-forms.html")
+# @app.route("/view-forms")
+# def view_forms():
+#     return render_template("admin_view-forms.html")
 
 @app.route("/results")
 def results():
-    print("IF YOU SEE THE THING BELOW THIS, THEN IT WORKS")
     row = fetch_all_responses()
-    return render_template("admin_results.html", row=row)
+    
+    try:
+        if session["user"] != "admin":
+            return render_template("404notfound.html", message="404 not found.")
+        
+        return render_template("admin_results.html", row=row)
+    except KeyError:
+        return render_template("404notfound.html", message="404 not found.")
 
 @app.route("/evaluation")
 def student_evaluation():
-    return render_template("student_evaluation_form.html")
-
+    try:
+        if not session.get("user"):
+            return render_template("404notfound.html", message="404 not found.")
+        
+        return render_template("student_take_evaluation.html")
+    except KeyError:
+        return render_template("404notfound.html", message="404 not found.")
+    
 # ------------------- NEW REGISTER ROUTE -------------------
 @app.route("/student-register", methods=['GET', 'POST'])
 def student_register():
