@@ -53,7 +53,7 @@ def initialize_db():
 
 def insert_to_responses(first_name, middle_name, last_name, email_address,
                  phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-                 gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4):
+                 gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code):
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -62,13 +62,15 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
         INSERT INTO responses (
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-            gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     """, (
         first_name, middle_name, last_name, email_address,
         phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-        gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4
+        gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code
     ))
+    
+    cursor.execute("UPDATE registration_codes SET status = 'submitted' WHERE code = ?", (code,))
 
     conn.commit()
     conn.close()
@@ -212,3 +214,14 @@ def check_student_status(code):
     conn.close()
     
     return result[0] or None
+
+def fetch_code_responses(code): # fetch from code. Code will be used as unique id later.
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM responses WHERE code = ?", (code,))
+    rows = cursor.fetchall()
+
+    conn.close()
+    return [dict(row) for row in rows] or None

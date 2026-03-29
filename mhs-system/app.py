@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from database import check_student_status, authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from database import fetch_code_responses, check_student_status, authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model, make_sbqr_prediction
 import random
 import string
@@ -135,11 +135,69 @@ def student_evaluation():
     
 @app.route("/student-view-evaluation")
 def student_view_evaluation():
+    code = session.get("session_code")
+    
+    entry_id = fetch_code_responses(code)
+    first_name = entry_id[0]['first_name']
+    middle_name = entry_id[0]['middle_name']
+    last_name = entry_id[0]['last_name']
+    email_address = entry_id[0]['email_address']
+
+    phq1_response = entry_id[0]['phq1']
+    phq2_response = entry_id[0]['phq2']
+    phq3_response = entry_id[0]['phq3']
+    phq4_response = entry_id[0]['phq4']
+    phq5_response = entry_id[0]['phq5']
+    phq6_response = entry_id[0]['phq6']
+    phq7_response = entry_id[0]['phq7']
+    phq8_response = entry_id[0]['phq8']
+    phq9_response = entry_id[0]['phq9']
+
+    gad1_response = entry_id[0]['gad1']
+    gad2_response = entry_id[0]['gad2']
+    gad3_response = entry_id[0]['gad3']
+    gad4_response = entry_id[0]['gad4']
+    gad5_response = entry_id[0]['gad5']
+    gad6_response = entry_id[0]['gad6']
+    gad7_response = entry_id[0]['gad7']
+    
+    sbqr1_response = entry_id[0]['sbqr1']
+    sbqr2_response = entry_id[0]['sbqr2']
+    sbqr3_response = entry_id[0]['sbqr3']
+    sbqr4_response = entry_id[0]['sbqr4']
+    
+    
     try:
         if not session.get("user"):
             return render_template("404notfound.html", message="404 not found.")
         
-        return render_template("student_view_evaluation.html")
+        return render_template("student_view_evaluation.html",
+                               first_name=first_name,
+                               middle_name=middle_name,
+                               last_name=last_name, 
+                               email_address=email_address,
+                               phq1_response=phq1_response,
+                               phq2_response=phq2_response,
+                               phq3_response=phq3_response,
+                               phq4_response=phq4_response,
+                               phq5_response=phq5_response,
+                               phq6_response=phq6_response,
+                               phq7_response=phq7_response,
+                               phq8_response=phq8_response,
+                               phq9_response=phq9_response,
+                               gad1_response=gad1_response,
+                               gad2_response=gad2_response,
+                               gad3_response=gad3_response,
+                               gad4_response=gad4_response,
+                               gad5_response=gad5_response,
+                               gad6_response=gad6_response,
+                               gad7_response=gad7_response,
+                               sbqr1_response=sbqr1_response,
+                               sbqr2_response=sbqr2_response,
+                               sbqr3_response=sbqr3_response,
+                               sbqr4_response=sbqr4_response,
+                               )
+        
     except KeyError:
         return render_template("404notfound.html", message="404 not found.")
 
