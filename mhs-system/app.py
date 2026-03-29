@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from database import authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from database import check_student_status, authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model, make_sbqr_prediction
 import random
 import string
@@ -34,10 +34,16 @@ def home():
     
     if request.method == 'POST':
         code = request.form['login_code']
+        session["session_code"] = code
         
         if authenticate_student(code):
             session["user"] = "student"
+            if check_student_status(code) == "submitted": ### (check if student has already submitted an evaluation)b
+                print("STUDENT ALREADY SUBMITTED")
+                return redirect(url_for('student_view_evaluation'))
+            
             return redirect(url_for('student_evaluation'))
+        
         else:
             return render_template("student_login.html", message="Invalid code. Please try again.")
             
@@ -95,7 +101,7 @@ def manage():
     except KeyError:
         return render_template("404notfound.html", message="404 not found.")
 
-# ------ Redundant routes. remove later (sidebar.html ln32 will cause an error) ------
+# ------ Redundant routes. remove later (sidebar.html ln32 will cause an error tho) ------
 @app.route("/edit-evaluation-form")
 def edit_evaluation_form():
     return render_template("admin_edit-evaluation-form.html")
@@ -127,6 +133,16 @@ def student_evaluation():
     except KeyError:
         return render_template("404notfound.html", message="404 not found.")
     
+@app.route("/student-view-evaluation")
+def student_view_evaluation():
+    try:
+        if not session.get("user"):
+            return render_template("404notfound.html", message="404 not found.")
+        
+        return render_template("student_view_evaluation.html")
+    except KeyError:
+        return render_template("404notfound.html", message="404 not found.")
+
 # ------------------- NEW REGISTER ROUTE -------------------
 @app.route("/student-register", methods=['GET', 'POST'])
 def student_register():
@@ -189,6 +205,8 @@ def submit_to_database():
     sbqr2 = int(request.form.get('sbq2', 0))
     sbqr3 = int(request.form.get('sbq3', 0))
     sbqr4 = int(request.form.get('sbq4', 0))
+    
+    code = session.get("session_code")
 
     ### Make Predictions (e.g low, moderate, high , severe) ###
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
@@ -199,7 +217,7 @@ def submit_to_database():
             first_name, middle_name, last_name, email_address,
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7,
-            sbqr1, sbqr2, sbqr3, sbqr4
+            sbqr1, sbqr2, sbqr3, sbqr4, code
         )
     
     insert_to_predictions(
@@ -209,7 +227,7 @@ def submit_to_database():
     print("Data inserted to database for ", first_name, flush=True)
     return redirect(url_for("student_evaluation"))
 
-# ------------------- ADMIN VIEW -------------------
+# ------------------- ADMIN VIEW ---------boto----------
 @app.route("/admin-view-evaluation", methods=['GET', 'POST'])
 def admin_view_evaluation():
     if request.method == 'POST':

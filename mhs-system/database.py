@@ -202,3 +202,13 @@ def authenticate_student(code):
     conn.close()
     
     return bool(result)
+
+def check_student_status(code):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT status FROM registration_codes WHERE code = ?", (code,))
+    result = cursor.fetchone()
+    conn.close()
+    
+    return result[0] or None
