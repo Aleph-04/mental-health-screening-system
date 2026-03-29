@@ -12,9 +12,9 @@ app.secret_key = "supersecretkey"  # Needed for flash messages; and session.
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'mykekierkier@gmail.com'  # <-- replace
-app.config['MAIL_PASSWORD'] = 'iongrizzkbfpsddh'     # <-- replace
-app.config['MAIL_DEFAULT_SENDER'] = 'mykekierkier@gmail.com'
+app.config['MAIL_USERNAME'] = 'mykekieran.alfane@antiquespride.edu.ph'  # <-- replace
+app.config['MAIL_PASSWORD'] = 'erqylyfomebaqbwd'     # <-- replace
+app.config['MAIL_DEFAULT_SENDER'] = 'mykekieran.alfane@antiquespride.edu.ph'
 
 mail = Mail(app)
 
