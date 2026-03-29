@@ -53,5 +53,14 @@ def make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7):
             return "Severe"
     
 
-# def make_sbqr_prediction():
-#     return None
+def make_sbqr_prediction(sbqr1,sbqr2, sbqr3, sbqr4):
+    model = load_sbqr_model()
+    input_data = [[sbqr1, sbqr2, sbqr3, sbqr4]]
+    prediction = model.predict(input_data)
+    
+    match prediction[0]:
+        case 0:
+            return "Negative"
+        case 1:
+            return "Positive"
+    

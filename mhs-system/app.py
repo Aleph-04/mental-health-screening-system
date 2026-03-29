@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from database import authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
-from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model
+from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model, make_sbqr_prediction
 import random
 import string
 from flask_mail import Mail, Message
@@ -193,7 +193,7 @@ def submit_to_database():
     ### Make Predictions (e.g low, moderate, high , severe) ###
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
     gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
-    sbqr_prediction = "SBQR Not Implemented"
+    sbqr_prediction = make_sbqr_prediction(sbqr1, sbqr2, sbqr3, sbqr4)
     
     insert_to_responses(
             first_name, middle_name, last_name, email_address,
@@ -207,7 +207,7 @@ def submit_to_database():
     )
     
     print("Data inserted to database for ", first_name, flush=True)
-    return redirect(url_for("student_take_evaluation"))
+    return redirect(url_for("student_evaluation"))
 
 # ------------------- ADMIN VIEW -------------------
 @app.route("/admin-view-evaluation", methods=['GET', 'POST'])
