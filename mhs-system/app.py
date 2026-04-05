@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from database import fetch_code_responses, check_student_status, authenticate_student, count_by_college, fetch_all_responses, fetch_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from database import fetch_responses, fetch_code_responses, check_student_status, authenticate_student, count_by_college, fetch_all_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model, make_sbqr_prediction
 import random
 import string
@@ -26,6 +26,8 @@ initialize_registration_db()
 load_phq9_model()
 load_gad7_model()
 
+x = fetch_all_responses()
+print("TESTING fetch_all_responses():", [i['code'] for i in x])
 # ------------------- ROUTES -------------------
 
 @app.route('/', methods=['GET', 'POST'])
@@ -117,11 +119,11 @@ def results():
     
     try:
         if session["user"] != "admin":
-            return render_template("404notfound.html", message="404 not found.")
+            return render_template("404notfound.html")
         
         return render_template("admin_results.html", row=row)
     except KeyError:
-        return render_template("404notfound.html", message="404 not found.")
+        return render_template("404notfound.html")
 
 @app.route("/evaluation")
 def student_evaluation():
@@ -136,8 +138,8 @@ def student_evaluation():
 @app.route("/student-view-evaluation")
 def student_view_evaluation():
     code = session.get("session_code")
-    
     entry_id = fetch_code_responses(code)
+    
     first_name = entry_id[0]['first_name']
     middle_name = entry_id[0]['middle_name']
     last_name = entry_id[0]['last_name']
@@ -279,22 +281,25 @@ def submit_to_database():
         )
     
     insert_to_predictions(
-        full_name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction
+        code, full_name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction
     )
     
-    print("Data inserted to database for ", first_name, flush=True)
+    print("Data inserted to database for ", code, first_name, flush=True)
     return redirect(url_for("student_evaluation"))
 
-# ------------------- ADMIN VIEW ---------boto----------
+# ------------------- ADMIN Dashboard > Results > View evaluation (blue button) ---------boto, guba pagid----------
 @app.route("/admin-view-evaluation", methods=['GET', 'POST'])
 def admin_view_evaluation():
     if request.method == 'POST':
         if "view_button" in request.form:
-            id = request.form['view_button']
-            print("Viewing evaluation for ID:", id)
+            code = request.form['view_button']
+            print("Viewing evaluation for Code:", code)
+
+            entry_id = fetch_responses(code)
+            entry_results = fetch_result(code)
             
-            entry_id = fetch_responses(id)
-            entry_results = fetch_result(id)
+            print(entry_id)
+        
 
             first_name = entry_id[0]['first_name']
             middle_name = entry_id[0]['middle_name']
@@ -329,9 +334,9 @@ def admin_view_evaluation():
             sbqr_result = entry_results[0]['sbqr_result']
             
         if "delete_entry" in request.form:
-            id = request.form['delete_entry']
-            print("Deleting evaluation for ID:", id)
-            delete_entry(id)
+            code = request.form['delete_entry']
+            print("Deleting evaluation for Code:", code)
+            delete_entry(code)
             return redirect(url_for("results"))
         
         return render_template("admin_view_evaluation.html", id=id,

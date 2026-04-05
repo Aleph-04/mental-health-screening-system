@@ -8,11 +8,21 @@ def initialize_db():
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS responses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            code INTEGER PRIMARY KEY,
             first_name TEXT,
             middle_name TEXT,
             last_name TEXT,
             email_address TEXT,
+            college	TEXT,
+            age	INTEGER,
+            place_of_birth TEXT,
+            extension TEXT,
+            contact_number TEXT,
+            religion TEXT,
+            permanent_address TEXT,
+            present_address	TEXT,
+            pwd	TEXT,
+            facebook TEXT,
             phq1 INTEGER,
             phq2 INTEGER,
             phq3 INTEGER,
@@ -38,17 +48,42 @@ def initialize_db():
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS predictions (
-        id INTEGER PRIMARY KEY REFERENCES responses(id) ON DELETE CASCADE,
+        code INTEGER PRIMARY KEY,    
         name TEXT,
         college TEXT,
         age INTEGER,
         phq9_result TEXT,
         gad7_result TEXT,
-        sbqr_result TEXT
+        sbqr_result TEXT,
+        FOREIGN KEY (code) REFERENCES responses(code) ON DELETE CASCADE
     )
     ''')
-
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS registration_codes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL,
+            code INTEGER NOT NULL,
+            date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            status TEXT DEFAULT 'pending'
+        )
+            ''')
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS admin_accounts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL
+        )
+    ''')
+    
+    ### default rows upon initialization. delete later.
+    cursor.execute("INSERT OR IGNORE INTO admin_accounts (username, password) VALUES (?, ?)", ("admin", "admin123"))
+    cursor.execute("INSERT OR IGNORE INTO registration_codes (id, email, code) VALUES (?, ?, ?)", (0, "sample@email.com", 123456))
+    conn.commit()
+    
     conn.close()
+    print("New database initialized.")
 
 
 def insert_to_responses(first_name, middle_name, last_name, email_address,
@@ -74,39 +109,41 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
 
     conn.commit()
     conn.close()
+    return
     
     
-def insert_to_predictions(name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction):
+def insert_to_predictions(code, name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     cursor.execute("""
         INSERT INTO predictions (
-            name, college, age, phq9_result, gad7_result, sbqr_result
-        ) VALUES (?,?,?,?,?,?)
-    """, (name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction))
+            code, name, college, age, phq9_result, gad7_result, sbqr_result
+        ) VALUES (?,?,?,?,?,?,?)
+    """, (code, name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction))
     conn.commit()
     conn.close()
     
 
-def fetch_responses(id):
+def fetch_responses(code):
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM responses WHERE id = ?", (id,))
+    cursor.execute("SELECT * FROM responses WHERE code = ?", (code,))
     rows = cursor.fetchall()
 
     conn.close()
+    print("manfuckthis: ", [dict(row) for row in rows])
     return [dict(row) for row in rows]
 
 
-def fetch_result(id):
+def fetch_result(code):
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM predictions WHERE id = ?", (id,))
+    cursor.execute("SELECT * FROM predictions WHERE code = ?", (code,))
     rows = cursor.fetchall()
 
     conn.close()
@@ -142,11 +179,12 @@ def admin_authenticate(username, password):
     
     return bool(result)
     
-def delete_entry(id):
+def delete_entry(code):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute("DELETE FROM predictions WHERE id = ?", (id,))
+    cursor.execute("PRAGMA foreign_keys = ON")
+    cursor.execute("DELETE FROM responses WHERE code = ?", (code,))
     conn.commit()
     conn.close()
 
