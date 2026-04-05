@@ -285,7 +285,7 @@ def submit_to_database():
     )
     
     print("Data inserted to database for ", code, first_name, flush=True)
-    return redirect(url_for("student_evaluation"))
+    return render_template("student_submitted.html") ### might change later 
 
 # ------------------- ADMIN Dashboard > Results > View evaluation (blue button) ---------boto, guba pagid----------
 @app.route("/admin-view-evaluation", methods=['GET', 'POST'])

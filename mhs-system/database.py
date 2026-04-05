@@ -8,7 +8,7 @@ def initialize_db():
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS responses (
-            code INTEGER PRIMARY KEY,
+            code TEXT PRIMARY KEY,
             first_name TEXT,
             middle_name TEXT,
             last_name TEXT,
@@ -48,7 +48,7 @@ def initialize_db():
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS predictions (
-        code INTEGER PRIMARY KEY,    
+        code TEXT PRIMARY KEY,    
         name TEXT,
         college TEXT,
         age INTEGER,
@@ -63,7 +63,7 @@ def initialize_db():
         CREATE TABLE IF NOT EXISTS registration_codes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT NOT NULL,
-            code INTEGER NOT NULL,
+            code TEXT NOT NULL,
             date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             status TEXT DEFAULT 'pending'
         )
