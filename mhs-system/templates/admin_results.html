@@ -78,8 +78,8 @@
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->
                           <form method="post" action="/admin-view-evaluation">
 
-                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('id') }}><i class="fa-solid fa-file-lines"></i></button>
-                            <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('id') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
+                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('code') }}><i class="fa-solid fa-file-lines"></i></button>
+                            <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('code') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
                           
                           </form>
                           <!--END FORMS-->
