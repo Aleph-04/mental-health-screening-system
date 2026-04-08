@@ -66,13 +66,14 @@
                       {% for i in row %}
                         {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] %}
                         <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}}>
-                          <td>{{ i["name"] }}</td>
-                          <td>{{ i["college"] }}</td>
-                          <td>{{ i["age"] }}</td>
-                          <td>{{ i["phq9_result"] }}</td>
-                          <td>{{ i["gad7_result"] }}</td>
-                          <td>{{ i["sbqr_result"] }}</td>
-                          <td>
+                        <td>{{ i["code"] }}</td>
+                        <td>{{ i["name"] }}</td>
+                        <td>{{ i["college"] }}</td>
+                        <td>{{ i["age"] }}</td>
+                        <td>{{ i["phq9_result"] }}</td>
+                        <td>{{ i["gad7_result"] }}</td>
+                        <td>{{ i["sbqr_result"] }}</td>
+                        <td>
 
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->
                           <form method="post" action="/admin-view-evaluation">
