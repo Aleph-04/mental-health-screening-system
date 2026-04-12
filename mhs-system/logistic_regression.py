@@ -18,8 +18,6 @@ def load_gad7_model():
 
 
 
-
-
 def make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9):
     model = load_phq9_model()
     input_data = [[phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9]]
@@ -27,16 +25,17 @@ def make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9):
     
     match prediction[0]:
         case 0:
-            return "Mild"
+            return "Minimal"
         case 1:
-            return "Moderate"
+            return "Mild"
         case 2:
-            return "Moderately Severe"
+            return "Moderate"
         case 3:
             return "Severe"
+        # case 4:
+        #     return "Severe"
 
-# def make_sbqr_prediction():
-#     return None
+
 
 def make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7):
     model = load_gad7_model()
@@ -45,10 +44,23 @@ def make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7):
     
     match prediction[0]:
         case 0:
-            return "Mild"
+            return "Minimal"
         case 1:
-            return "Moderate"
+            return "Mild"
         case 2:
-            return "Moderately Severe"
+            return "Moderate"
         case 3:
             return "Severe"
+    
+
+def make_sbqr_prediction(sbqr1,sbqr2, sbqr3, sbqr4):
+    model = load_sbqr_model()
+    input_data = [[sbqr1, sbqr2, sbqr3, sbqr4]]
+    prediction = model.predict(input_data)
+    
+    match prediction[0]:
+        case 0:
+            return "Negative"
+        case 1:
+            return "Positive"
+    

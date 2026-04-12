@@ -66,19 +66,20 @@
                       {% for i in row %}
                         {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] %}
                         <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}}>
-                          <td>{{ i["name"] }}</td>
-                          <td>{{ i["college"] }}</td>
-                          <td>{{ i["age"] }}</td>
-                          <td>{{ i["phq9_result"] }}</td>
-                          <td>{{ i["gad7_result"] }}</td>
-                          <td>{{ i["sbqr_result"] }}</td>
-                          <td>
+                        <td>{{ i["code"] }}</td>
+                        <td>{{ i["name"] }}</td>
+                        <td>{{ i["college"] }}</td>
+                        <td>{{ i["age"] }}</td>
+                        <td>{{ i["phq9_result"] }}</td>
+                        <td>{{ i["gad7_result"] }}</td>
+                        <td>{{ i["sbqr_result"] }}</td>
+                        <td>
 
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->
                           <form method="post" action="/admin-view-evaluation">
 
-                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('id') }}><i class="fa-solid fa-file-lines"></i></button>
-                            <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('id') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
+                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('code') }}><i class="fa-solid fa-file-lines"></i></button>
+                            <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('code') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
                           
                           </form>
                           <!--END FORMS-->
@@ -103,6 +104,7 @@
                   <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                     <thead>
                       <tr>
+                        <th> Code </th>
                         <th>Name</th>
                         <th>College</th>
 
@@ -118,7 +120,8 @@
 
                       {% for i in row %}
                       <tr style=background-color:{{"pink" if i["result"] in ["Moderately Severe", "Severe"] else "white"}};>
-                        <td>{{ i["name"]|e }}</td>
+                        <td>{{ i["code"] }}</td>
+                        <td>{{ i["name"] }}</td>
                         <td>{{ i["college"] }}</td>
                         <td>{{ i["age"] }}</td>
                         <td>{{ i["phq9_result"] }}</td>
@@ -128,8 +131,8 @@
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->
                           <form method="post" action="/admin-view-evaluation">
 
-                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('id') }}><i class="fa-solid fa-file-lines"></i></button>
-                            <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('id') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
+                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('code') }}><i class="fa-solid fa-file-lines"></i></button>
+                            <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('code') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
                           
                           </form>
                           <!--END FORMS-->
