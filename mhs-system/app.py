@@ -229,16 +229,24 @@ def student_register():
 
     return render_template("student_register.html")
 
-# ------------------- SUBMIT EVALUATION TO DATABASE -------------------
+# ---------------------------------------------------- SUBMIT EVALUATION TO DATABASE ------------------------------------------------------
 @app.route("/evaluation", methods=['GET', 'POST'])
 def submit_to_database():
     full_name = request.form['inputFirstName'] + " " + request.form['inputLastName']
     first_name = request.form['inputFirstName']
-    college = "N/A"
+    college = college = request.form['college']
     age = "N/A"
     middle_name = request.form['inputMiddleName']
     last_name = request.form['inputLastName']
     email_address = request.form['inputEmailAddress']
+    place_of_birth = request.form['place_of_birth']
+    extension = request.form['extension']
+    contact_number = request.form['contact_number']
+    religion = request.form['religion']
+    permanent_address = request.form['permanent_address']
+    present_address = request.form['present_address']
+    facebook = request.form['facebook']
+
 
     ### PHQ9
     phq1 = int(request.form.get('phq1', 0))
@@ -275,7 +283,7 @@ def submit_to_database():
     
     insert_to_responses(
             first_name, middle_name, last_name, email_address,
-            phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+            facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7,
             sbqr1, sbqr2, sbqr3, sbqr4, code
         )
