@@ -3,11 +3,8 @@ Thesis for 4th year
 
 Python
 
-### install flask library ###
->>> pip install flask
-
-### Install flask mail
->>> pip install Flask-Mail
+### Install dependencies ###
+pip install -r requirement.txt
 
 ### run app ###
 >>> python app.py
