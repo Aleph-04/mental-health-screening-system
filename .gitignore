@@ -1,0 +1,3 @@
+mhs-system/database.db
+*.db
+*.pyc
