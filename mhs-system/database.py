@@ -88,11 +88,7 @@ def initialize_db():
 
 
 def insert_to_responses(first_name, middle_name, last_name, email_address,
-<<<<<<< HEAD
                  facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, date_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-=======
-                 facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
->>>>>>> parent of 52a20ff (tanan ron nga inputs na pang connect sa db)
                  gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code):
 
     conn = sqlite3.connect('database.db')
@@ -100,7 +96,6 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
 
     cursor.execute("""
         INSERT INTO responses (
-<<<<<<< HEAD
             first_name,
             middle_name,
             last_name,
@@ -171,16 +166,6 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
         sbqr3,
         sbqr4,
         code
-=======
-            first_name, middle_name, last_name, email_address,
-            facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-            gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-    """, (
-        first_name, middle_name, last_name, email_address,
-        facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-        gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code
->>>>>>> parent of 52a20ff (tanan ron nga inputs na pang connect sa db)
     ))
     
     cursor.execute("UPDATE registration_codes SET status = 'submitted' WHERE code = ?", (code,))
