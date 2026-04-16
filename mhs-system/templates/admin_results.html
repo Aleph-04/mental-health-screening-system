@@ -51,9 +51,9 @@
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
+                        <th> Code </th>
                         <th>Name</th>
                         <th>College</th>
-
                         <th>Age</th>
                         <th> PHQ-9 Result </th>
                         <th> GAD-7 Result </th>
@@ -64,15 +64,17 @@
  
                     <tbody>
                       {% for i in row %}
-                        {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] %}
-                        <tr style=background-color:{{"pink" if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] else "white"}}>
+                        {% if i["phq9_result"] in ["Moderately Severe", "Severe"] or i["gad7_result"] in ["Moderately Severe", "Severe"] or i["sbqr_result"] in ["Positive"] %}
+                        <tr>
                         <td>{{ i["code"] }}</td>
                         <td>{{ i["name"] }}</td>
                         <td>{{ i["college"] }}</td>
                         <td>{{ i["age"] }}</td>
-                        <td>{{ i["phq9_result"] }}</td>
-                        <td>{{ i["gad7_result"] }}</td>
-                        <td>{{ i["sbqr_result"] }}</td>
+
+                        <td style="background-color:{{'pink' if i['phq9_result'] in ['Moderately Severe', 'Severe'] else 'white'}}; color:{{'black' if i['phq9_result'] in ['Moderately Severe', 'Severe']}};">{{ i["phq9_result"] }}</td>
+                        <td style="background-color:{{'pink' if i['gad7_result'] in ['Moderately Severe', 'Severe'] else 'white'}}; color:{{'black' if i['gad7_result'] in ['Moderately Severe', 'Severe']}};">{{ i["gad7_result"] }}</td>
+                        <td style="background-color:{{'pink' if i['sbqr_result'] in ['Positive'] else 'white'}}; color:{{'black' if i['sbqr_result'] in ['Positive']}};">{{ i["sbqr_result"] }}</td>
+
                         <td>
 
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->

@@ -45,22 +45,85 @@
 
             <!-- Stats Card -->
             <div class="row">
+
+
+              <!-- Stats Card-1 -->
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Records</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ row }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ records }}</div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-file fa-2x text-gray-300"></i>
+                        <i class="fas fa-file fa-2x text-warning"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+
+              <!-- Stats Card-SBQR -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">SBQR Positive</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{sbqr_positive }}</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stats Card-GAD-7 -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">GAD-7 Severe</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ gad7_severe }}</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-brain fa-2x text-primary"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Stats Card-PH9 -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">PHQ-9 Severe</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ phq9_severe }}</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-frown fa-2x text-info"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
+
+            
+            
+              
+            
 
             <!-- Bar Chart -->
                 <div class="card shadow mb-4">
