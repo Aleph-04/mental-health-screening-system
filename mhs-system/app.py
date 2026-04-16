@@ -313,6 +313,7 @@ def submit_to_database():
     print("this shit dont work bruh: ", code)
     
     insert_to_responses(
+<<<<<<< HEAD
             first_name,
             middle_name,
             last_name,
@@ -348,6 +349,13 @@ def submit_to_database():
             sbqr4,
             code
             )
+=======
+            first_name, middle_name, last_name, email_address,
+            facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+            gad1, gad2, gad3, gad4, gad5, gad6, gad7,
+            sbqr1, sbqr2, sbqr3, sbqr4, code
+        )
+>>>>>>> parent of 52a20ff (tanan ron nga inputs na pang connect sa db)
     
     insert_to_predictions(
         code, full_name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction
