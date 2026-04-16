@@ -16,6 +16,7 @@ def initialize_db():
             college	TEXT,
             age	INTEGER,
             place_of_birth TEXT,
+            date_of_birth TEXT,
             extension TEXT,
             contact_number TEXT,
             religion TEXT,
@@ -87,7 +88,7 @@ def initialize_db():
 
 
 def insert_to_responses(first_name, middle_name, last_name, email_address,
-                 facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+                 facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, date_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
                  gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code):
 
     conn = sqlite3.connect('database.db')
@@ -95,14 +96,76 @@ def insert_to_responses(first_name, middle_name, last_name, email_address,
 
     cursor.execute("""
         INSERT INTO responses (
-            first_name, middle_name, last_name, email_address,
-            facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-            gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            first_name,
+            middle_name,
+            last_name,
+            email_address,
+            facebook,
+            present_address,
+            permanent_address,
+            religion,
+            contact_number,
+            extension,
+            place_of_birth,
+            date_of_birth,
+            college,
+            phq1,
+            phq2,
+            phq3,
+            phq4,
+            phq5,
+            phq6,
+            phq7,
+            phq8,
+            phq9,
+            gad1,
+            gad2,
+            gad3,
+            gad4,
+            gad5,
+            gad6,
+            gad7,
+            sbqr1,
+            sbqr2,
+            sbqr3,
+            sbqr4,
+            code
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     """, (
-        first_name, middle_name, last_name, email_address,
-        facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-        gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code
+        first_name,
+        middle_name,
+        last_name,
+        email_address,
+        facebook,
+        present_address,
+        permanent_address,
+        religion,
+        contact_number,
+        extension,
+        place_of_birth,
+        date_of_birth,
+        college,
+        phq1,
+        phq2,
+        phq3,
+        phq4,
+        phq5,
+        phq6,
+        phq7,
+        phq8,
+        phq9,
+        gad1,
+        gad2,
+        gad3,
+        gad4,
+        gad5,
+        gad6,
+        gad7,
+        sbqr1,
+        sbqr2,
+        sbqr3,
+        sbqr4,
+        code
     ))
     
     cursor.execute("UPDATE registration_codes SET status = 'submitted' WHERE code = ?", (code,))
@@ -154,16 +217,6 @@ def count_records():
     cursor = conn.cursor()
 
     cursor.execute("SELECT COUNT(*) FROM responses")
-    count = cursor.fetchone()[0]
-
-    conn.close()
-    return count
-
-def count_by_college(college_name):
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college_name,))
     count = cursor.fetchone()[0]
 
     conn.close()
@@ -263,3 +316,45 @@ def fetch_code_responses(code): # fetch from code. Code will be used as unique i
 
     conn.close()
     return [dict(row) for row in rows] or None
+
+### FOR Dashboard stats ###
+
+def count_by_college(college_name):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM responses WHERE college = ?", (college_name,))
+    count = cursor.fetchone()[0]
+
+    conn.close()
+    return count
+
+def count_sbqr_positive():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM predictions WHERE sbqr_result = 'Positive'")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+    return count
+
+def count_gad7_severe():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM predictions WHERE gad7_result = 'Moderately Severe' OR gad7_result = 'Severe'")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+    return count
+
+def count_phq9_severe():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM predictions WHERE phq9_result = 'Moderately Severe' OR phq9_result = 'Severe'")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+    return count

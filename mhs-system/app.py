@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from database import fetch_responses, fetch_code_responses, check_student_status, authenticate_student, count_by_college, fetch_all_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
+from database import count_gad7_severe, count_phq9_severe, count_sbqr_positive, fetch_responses, fetch_code_responses, check_student_status, authenticate_student, count_by_college, fetch_all_responses, delete_entry, admin_authenticate, initialize_db, insert_to_responses, insert_to_predictions, fetch_result, count_records
 from logistic_regression import load_phq9_model, make_phq9_prediction, make_gad7_prediction, load_gad7_model, make_sbqr_prediction
 import random
 import string
@@ -28,6 +28,11 @@ load_gad7_model()
 
 x = fetch_all_responses()
 print("TESTING fetch_all_responses():", [i['code'] for i in x])
+
+### for sidebar highlighting active page.
+def is_active(endpoint):
+    return "active" if request.endpoint == endpoint else ""
+
 # ------------------- ROUTES -------------------
 
 @app.route('/', methods=['GET', 'POST'])
@@ -72,20 +77,25 @@ def admin_login():
 
 @app.route("/dashboard")
 def dashboard():
-    row = count_records()
-    bar_graph_data = [count_by_college("CCIS"),
-                      count_by_college("CEA"),
-                      count_by_college("CBA"),
-                      count_by_college("CMS"),
-                      count_by_college("CHS"),
-                      count_by_college("CIT"),]
+    records = count_records()
+    sbqr_positive = count_sbqr_positive()
+    gad7_severe = count_gad7_severe()
+    phq9_severe = count_phq9_severe()
+    
+    bar_graph_data = [count_by_college("ccis"),
+                      count_by_college("cea"),
+                      count_by_college("cba"),
+                      count_by_college("cms"),
+                      count_by_college("chs"),
+                      count_by_college("cit"),]
+
     
     try:
         if session["user"] != "admin":
             flash("Unauthorized access. Please log in as admin.", "danger")
             return redirect(url_for("admin_login"))
         
-        return render_template("admin_dashboard.html", row=row, bar_graph_data=bar_graph_data)
+        return render_template("admin_dashboard.html",is_active=is_active, records=records, sbqr_positive=sbqr_positive, gad7_severe=gad7_severe, phq9_severe=phq9_severe, bar_graph_data=bar_graph_data)
     
     except KeyError:
         return render_template("404notfound.html", message="404 not found.")
@@ -98,7 +108,7 @@ def manage():
         if session["user"] != "admin":
             return render_template("404notfound.html", message="404 not found.")
         
-        return render_template("admin_manage_users.html", row=row)
+        return render_template("admin_manage_users.html", is_active=is_active, row=row)
     
     except KeyError:
         return render_template("404notfound.html", message="404 not found.")
@@ -121,7 +131,7 @@ def results():
         if session["user"] != "admin":
             return render_template("404notfound.html")
         
-        return render_template("admin_results.html", row=row)
+        return render_template("admin_results.html", is_active=is_active, row=row)
     except KeyError:
         return render_template("404notfound.html")
 
@@ -144,6 +154,15 @@ def student_view_evaluation():
     middle_name = entry_id[0]['middle_name']
     last_name = entry_id[0]['last_name']
     email_address = entry_id[0]['email_address']
+    contact_number = entry_id[0]['contact_number']
+    facebook = entry_id[0]['facebook']
+    present_address = entry_id[0]['present_address']
+    permanent_address = entry_id[0]['permanent_address']
+    religion = entry_id[0]['religion']
+    extension = entry_id[0]['extension']
+    place_of_birth = entry_id[0]['place_of_birth']
+    date_of_birth = entry_id[0]['date_of_birth']
+    college = entry_id[0]['college']
 
     phq1_response = entry_id[0]['phq1']
     phq2_response = entry_id[0]['phq2']
@@ -178,6 +197,15 @@ def student_view_evaluation():
                                middle_name=middle_name,
                                last_name=last_name, 
                                email_address=email_address,
+                                facebook=facebook,
+                                present_address=present_address,
+                                permanent_address=permanent_address,
+                                religion=religion,
+                                contact_number=contact_number,
+                                extension=extension,
+                                place_of_birth=place_of_birth,
+                                date_of_birth=date_of_birth,
+                                college=college,
                                phq1_response=phq1_response,
                                phq2_response=phq2_response,
                                phq3_response=phq3_response,
@@ -240,6 +268,7 @@ def submit_to_database():
     last_name = request.form['inputLastName']
     email_address = request.form['inputEmailAddress']
     place_of_birth = request.form['place_of_birth']
+    date_of_birth = request.form['date_of_birth']
     extension = request.form['extension']
     contact_number = request.form['contact_number']
     religion = request.form['religion']
@@ -273,20 +302,52 @@ def submit_to_database():
     sbqr2 = int(request.form.get('sbq2', 0))
     sbqr3 = int(request.form.get('sbq3', 0))
     sbqr4 = int(request.form.get('sbq4', 0))
-    
-    code = session.get("session_code")
 
     ### Make Predictions (e.g low, moderate, high , severe) ###
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
     gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
     sbqr_prediction = make_sbqr_prediction(sbqr1, sbqr2, sbqr3, sbqr4)
     
+    code = session.get("session_code")
+    
+    print("this shit dont work bruh: ", code)
+    
     insert_to_responses(
-            first_name, middle_name, last_name, email_address,
-            facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-            gad1, gad2, gad3, gad4, gad5, gad6, gad7,
-            sbqr1, sbqr2, sbqr3, sbqr4, code
-        )
+            first_name,
+            middle_name,
+            last_name,
+            email_address,
+            facebook,
+            present_address,
+            permanent_address,
+            religion,
+            contact_number,
+            extension,
+            place_of_birth,
+            date_of_birth,
+            college,
+            phq1,
+            phq2,
+            phq3,
+            phq4,
+            phq5,
+            phq6,
+            phq7,
+            phq8,
+            phq9,
+            gad1,
+            gad2,
+            gad3,
+            gad4,
+            gad5,
+            gad6,
+            gad7, 
+            sbqr1,
+            sbqr2,
+            sbqr3,
+            sbqr4,
+            code
+            )
     
     insert_to_predictions(
         code, full_name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction
@@ -313,6 +374,16 @@ def admin_view_evaluation():
             middle_name = entry_id[0]['middle_name']
             last_name = entry_id[0]['last_name']
             email_address = entry_id[0]['email_address']
+            facebook = entry_id[0]['facebook']
+            present_address = entry_id[0]['present_address']
+            permanent_address = entry_id[0]['permanent_address']
+            religion = entry_id[0]['religion']
+            contact_number = entry_id[0]['contact_number']
+            extension = entry_id[0]['extension']
+            place_of_birth = entry_id[0]['place_of_birth']
+            date_of_birth = entry_id[0]['date_of_birth']
+            college = entry_id[0]['college']
+
 
             phq1_response = entry_id[0]['phq1']
             phq2_response = entry_id[0]['phq2']
@@ -352,6 +423,15 @@ def admin_view_evaluation():
                                middle_name=middle_name,
                                last_name=last_name,
                                email_address=email_address,
+                               facebook=facebook,
+                               present_address=present_address,
+                               permanent_address=permanent_address,
+                               religion=religion,
+                               contact_number=contact_number,
+                               extension=extension,
+                               place_of_birth=place_of_birth,
+                               date_of_birth=date_of_birth,
+                               college=college,
                                phq1_response=phq1_response,
                                phq2_response=phq2_response,
                                phq3_response=phq3_response,
