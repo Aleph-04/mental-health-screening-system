@@ -14,7 +14,6 @@ def initialize_db():
             last_name TEXT,
             email_address TEXT,
             college	TEXT,
-            age	INTEGER,
             place_of_birth TEXT,
             date_of_birth TEXT,
             extension TEXT,
