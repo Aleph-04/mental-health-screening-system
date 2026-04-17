@@ -268,13 +268,71 @@ def submit_to_database():
     last_name = request.form['inputLastName']
     email_address = request.form['inputEmailAddress']
     place_of_birth = request.form['place_of_birth']
-    date_of_birth = request.form['date_of_birth']
     extension = request.form['extension']
     contact_number = request.form['contact_number']
     religion = request.form['religion']
     permanent_address = request.form['permanent_address']
     present_address = request.form['present_address']
     facebook = request.form['facebook']
+    elementary_level = request.form['elementary_level']
+    basic_education_elementary = request.form['basic_education_elementary']
+    year_attended_elementary = request.form['year_attended_elementary']
+    honors_elementary = request.form['honors_elementary']
+    junior_high_school = request.form['junior_high_school']
+    basic_education_junior_high = request.form['basic_education_junior_high']
+    year_attended_junior_high = request.form['year_attended_junior_high']
+    honors_junior_high = request.form['honors_junior_high']
+    senior_high_school = request.form['senior_high_school']
+    basic_education_senior_high = request.form['basic_education_senior_high']
+    year_attended_senior_high = request.form['year_attended_senior_high']
+    honors_senior_high = request.form['honors_senior_high']
+    college_level = request.form['college_level']
+    degree_program_college = request.form['degree_program_college']
+    year_attended_college = request.form['year_attended_college']
+    honors_college = request.form['honors_college']
+    name_of_mother = request.form['name_of_mother']
+    occupation_of_mother = request.form['occupation_of_mother']
+    mother_contact_number = request.form['mother_contact_number']
+    name_of_father = request.form['name_of_father']
+    occupation_of_father = request.form['occupation_of_father']
+    father_contact_number = request.form['father_contact_number']
+
+    # --- ja ang PWD, IP, Solo Parent, OFW, LGBTQIA+, Working Student, Others) ---
+    applicable = request.form.getlist('applicable[]')             # captures ALL checked values boss
+
+    # Extra fields
+    children_no = request.form.get('children_no', '')             # solo poarent children number
+    applicable_other = request.form.get('applicable_other', '')   # "Other" text field
+
+    # --- Disability checkboxes ---
+    disability = request.form.getlist('disability[]')             # captures ALL checked values
+    disability_other = request.form.get('disability_other', '')   # "other" text field
+
+    # convert ya to strings for DB storage
+    applicable_str = ", ".join(applicable)
+    disability_str = ", ".join(disability)
+
+    # append Solo Parent children number if provided
+    if children_no and "Solo Parent" in applicable:
+     applicable_str += f" (Children: {children_no})"
+
+    # append "Other" values if provided
+    if applicable_other:
+     applicable_str += f", Other: {applicable_other}"
+    if disability_other:
+     disability_str += f", Other: {disability_other}"
+
+    # --- Civil Status ---
+    civil_status = request.form.get('civil_status', '')   # Single, Married, Widowed, Separated, Other
+    civil_status_other = request.form.get('civil_status_other', '')
+
+    # kung ang "Other" is chosen, append na text field
+    if civil_status == "Other" and civil_status_other:
+     civil_status = f"Other: {civil_status_other}"
+
+
+
+
 
 
     ### PHQ9
@@ -302,60 +360,21 @@ def submit_to_database():
     sbqr2 = int(request.form.get('sbq2', 0))
     sbqr3 = int(request.form.get('sbq3', 0))
     sbqr4 = int(request.form.get('sbq4', 0))
+    
+    code = session.get("session_code")
 
     ### Make Predictions (e.g low, moderate, high , severe) ###
     phq9_prediction = make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9)
     gad7_prediction = make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7)
     sbqr_prediction = make_sbqr_prediction(sbqr1, sbqr2, sbqr3, sbqr4)
     
-    code = session.get("session_code")
-    
-    print("this shit dont work bruh: ", code)
-    
     insert_to_responses(
-<<<<<<< HEAD
-            first_name,
-            middle_name,
-            last_name,
-            email_address,
-            facebook,
-            present_address,
-            permanent_address,
-            religion,
-            contact_number,
-            extension,
-            place_of_birth,
-            date_of_birth,
-            college,
-            phq1,
-            phq2,
-            phq3,
-            phq4,
-            phq5,
-            phq6,
-            phq7,
-            phq8,
-            phq9,
-            gad1,
-            gad2,
-            gad3,
-            gad4,
-            gad5,
-            gad6,
-            gad7, 
-            sbqr1,
-            sbqr2,
-            sbqr3,
-            sbqr4,
-            code
-            )
-=======
             first_name, middle_name, last_name, email_address,
-            facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+            civil_status, father_contact_number, occupation_of_father, name_of_father, mother_contact_number, occupation_of_mother, name_of_mother, honors_college, year_attended_college, degree_program_college, college_level, honors_senior_high, year_attended_senior_high, basic_education_senior_high, senior_high_school, honors_junior_high, year_attended_junior_high, basic_education_junior_high, junior_high_school, honors_elementary, year_attended_elementary, basic_education_elementary, elementary_level, facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, 
+            phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7,
-            sbqr1, sbqr2, sbqr3, sbqr4, code
+            sbqr1, sbqr2, sbqr3, sbqr4, applicable_str, disability_str, code
         )
->>>>>>> parent of 52a20ff (tanan ron nga inputs na pang connect sa db)
     
     insert_to_predictions(
         code, full_name, college, age, phq9_prediction, gad7_prediction, sbqr_prediction
