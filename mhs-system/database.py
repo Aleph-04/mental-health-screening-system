@@ -113,84 +113,22 @@ def initialize_db():
 
 
 def insert_to_responses(first_name, middle_name, last_name, email_address,
-                 facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, date_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
-                 gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, code):
+                 civil_status, father_contact_number, occupation_of_father, name_of_father, mother_contact_number, occupation_of_mother, name_of_mother, honors_college, year_attended_college, degree_program_college, college_level, honors_senior_high, year_attended_senior_high, basic_education_senior_high, senior_high_school, honors_junior_high, year_attended_junior_high, basic_education_junior_high, junior_high_school, honors_elementary, year_attended_elementary, basic_education_elementary, elementary_level, facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+                 gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, applicable, disability, code):
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
     cursor.execute("""
         INSERT INTO responses (
-            first_name,
-            middle_name,
-            last_name,
-            email_address,
-            facebook,
-            present_address,
-            permanent_address,
-            religion,
-            contact_number,
-            extension,
-            place_of_birth,
-            date_of_birth,
-            college,
-            phq1,
-            phq2,
-            phq3,
-            phq4,
-            phq5,
-            phq6,
-            phq7,
-            phq8,
-            phq9,
-            gad1,
-            gad2,
-            gad3,
-            gad4,
-            gad5,
-            gad6,
-            gad7,
-            sbqr1,
-            sbqr2,
-            sbqr3,
-            sbqr4,
-            code
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            first_name, middle_name, last_name, email_address,
+            civil_status, father_contact_number, occupation_of_father, name_of_father, mother_contact_number, occupation_of_mother, name_of_mother, honors_college, year_attended_college, degree_program_college, college_level, honors_senior_high, year_attended_senior_high, basic_education_senior_high, senior_high_school, honors_junior_high, year_attended_junior_high, basic_education_junior_high, junior_high_school, honors_elementary, year_attended_elementary, basic_education_elementary, elementary_level, facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+            gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, applicable, disability, code
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     """, (
-        first_name,
-        middle_name,
-        last_name,
-        email_address,
-        facebook,
-        present_address,
-        permanent_address,
-        religion,
-        contact_number,
-        extension,
-        place_of_birth,
-        date_of_birth,
-        college,
-        phq1,
-        phq2,
-        phq3,
-        phq4,
-        phq5,
-        phq6,
-        phq7,
-        phq8,
-        phq9,
-        gad1,
-        gad2,
-        gad3,
-        gad4,
-        gad5,
-        gad6,
-        gad7,
-        sbqr1,
-        sbqr2,
-        sbqr3,
-        sbqr4,
-        code
+        first_name, middle_name, last_name, email_address,
+        civil_status, father_contact_number, occupation_of_father, name_of_father, mother_contact_number, occupation_of_mother, name_of_mother, honors_college, year_attended_college, degree_program_college, college_level, honors_senior_high, year_attended_senior_high, basic_education_senior_high, senior_high_school, honors_junior_high, year_attended_junior_high, basic_education_junior_high, junior_high_school, honors_elementary, year_attended_elementary, basic_education_elementary, elementary_level, facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
+        gad1, gad2, gad3, gad4, gad5, gad6, gad7, sbqr1, sbqr2, sbqr3, sbqr4, applicable, disability, code
     ))
     
     cursor.execute("UPDATE registration_codes SET status = 'submitted' WHERE code = ?", (code,))
