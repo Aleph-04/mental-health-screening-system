@@ -93,7 +93,7 @@
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Extension(Jr.,Sr.,etc.)</label>
-                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="{{ extension }}" />
               </div>
 
               <div class="form-group col-md-4">
@@ -103,18 +103,18 @@
 
               <div class="form-group col-md-5">
                 <label for="inputPlaceofBirth">Place of Birth</label>
-                <input disabled disabled type="text" class="form-control" id="inputPlaceofBirth" placeholder="{{ place_of_birth }}" />
+                <input disabled disabled type="text" class="form-control" id="inputPlaceofBirth" placeholder=" {{ place_of_birth }}" />
               </div>
 
               <div class="form-group row">
                 <label class="col-sm-1 col-form-label">Sex</label>
                 <div class="col-sm-2">
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="sex" id="male" value="Male" />
+                    <input {{'checked' if sex == 'Male' else 'disabled'}} type="radio" class="form-check-input" name="sex" id="male" value="Male" />
                     <label class="form-check-label" for="male">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="sex" id="female" value="Female" />
+                    <input {{'checked' if sex == 'Female' else 'disabled'}} type="radio" class="form-check-input" name="sex" id="female" value="Female" />
                     <label class="form-check-label" for="female">Female</label>
                   </div>
                 </div>
@@ -122,23 +122,23 @@
                 <label class="col-sm-2 col-form-label">Civil Status</label>
                 <div class="col-sm-7">
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Single" id="single" />
+                    <input {{'checked' if civil_status == 'Single' else 'disabled'}} type="radio" class="form-check-input" name="civil_status" value="Single" id="single" />
                     <label class="form-check-label" for="single">Single</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Married" id="married" />
+                    <input {{'checked' if civil_status == 'Married' else 'disabled'}} type="radio" class="form-check-input" name="civil_status" value="Married" id="married" />
                     <label class="form-check-label" for="married">Married</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Widowed" id="widowed" />
+                    <input disabled {{'checked' if civil_status == 'Widowed' else 'disabled'}} type="radio" class="form-check-input" name="civil_status" value="Widowed" id="widowed" />
                     <label class="form-check-label" for="widowed">Widowed</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Separated" id="separated" />
+                    <input disabled {{'checked' if civil_status == 'Separated' else 'disabled'}} type="radio" class="form-check-input" name="civil_status" value="Separated" id="separated" />
                     <label class="form-check-label" for="separated">Separated</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input disabled type="radio" class="form-check-input" name="civil_status" value="Other" id="other_cs" />
+                    <input disabled {{'checked' if civil_status == 'Other' else 'disabled'}} type="radio" class="form-check-input" name="civil_status" value="Other" id="other_cs" />
                     <label class="form-check-label" for="other_cs">Other</label>
                     <input disabled disabled type="text" class="form-control d-inline-block ml-2" style="width:120px;" name="civil_status_other" />
                   </div>
@@ -157,7 +157,7 @@
 
               <div class="form-group col-md-3">
                 <label for="inputEmailAddress">Email Address</label>
-                <input disabled type="email" class="form-control" name="inputEmailAddress" placeholder="{{ email_address }}" />
+                <input disabled type="email" class="form-control" name="inputEmailAddress" placeholder=" {{ email_address }}" />
               </div>
 
               <div class="form-group col-md-3">
@@ -167,7 +167,7 @@
 
               <div class="form-group col-md-3">
                 <label for="inputDegreeProgram">Degree Program</label>
-                <input disabled disabled type="text" class="form-control" id="inputDegreeProgram" placeholder="{{ college }}" />
+                <input disabled disabled type="text" class="form-control" id="inputDegreeProgram" placeholder="" />
               </div>
 
               <div class="form-group col-md-5">
@@ -186,42 +186,42 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-check mb-2">
-                      <input type="checkbox" class="form-check-input" id="pwd" name="applicable[]" value="PWD" />
+                      <input disabled type="checkbox" class="form-check-input" id="pwd" name="applicable[]" value="PWD" {{ 'checked' if pwd in applicable_str else '' }} />
                       <label class="form-check-label" for="pwd">PWD</label>
                     </div>
 
                     <div class="ml-3 mb-2">
                       <label class="d-block">Disability type:</label>
                       <div class="form-check">
-                        <input type="checkbox" id="visual" name="disability[]" value="Visual impairment" />
+                        <input type="checkbox" disabled id="visual" name="disability[]" value="Visual impairment" {{ 'checked' if 'Visual impairment' in disability else '' }} />
                         <label for="visual">Visual impairment</label>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" id="hearing" name="disability[]" value="Hearing loss" />
+                        <input type="checkbox" disabled id="hearing" name="disability[]" value="Hearing loss" {{ 'checked' if 'Hearing loss' in disability else '' }} />
                         <label for="hearing">Hearing loss</label>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" id="ortho" name="disability[]" value="Orthopedic disability" />
+                        <input type="checkbox" disabled id="ortho" name="disability[]" value="Orthopedic disability" {{ 'checked' if 'Orthopedic disability' in disability else '' }} />
                         <label for="ortho">Orthopedic disability</label>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" id="learning" name="disability[]" value="Learning disability" />
+                        <input type="checkbox" disabled id="learning" name="disability[]" value="Learning disability" {{ 'checked' if 'Learning disability' in disability else '' }} />
                         <label for="learning">Learning disability</label>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" id="psycho" name="disability[]" value="Psychosocial disability" />
+                        <input type="checkbox" disabled id="psycho" name="disability[]" value="Psychosocial disability" {{ 'checked' if 'Psychosocial disability' in disability else '' }} />
                         <label for="psycho">Psychosocial disability</label>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" id="chronic" name="disability[]" value="Chronic illness" />
+                        <input type="checkbox" disabled id="chronic" name="disability[]" value="Chronic illness" {{ 'checked' if 'Chronic illness' in disability else '' }} />
                         <label for="chronic">Chronic illness</label>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" id="mental" name="disability[]" value="Mental disability" />
+                        <input type="checkbox" disabled id="mental" name="disability[]" value="Mental disability" {{ 'checked' if 'Mental disability' in disability else '' }} />
                         <label for="mental">Mental disability</label>
                       </div>
                       <div class="form-check d-flex align-items-center">
-                        <input type="checkbox" id="dis_other" name="disability[]" value="Others" />
+                        <input type="checkbox" disabled id="dis_other" name="disability[]" value="Others" {{ 'checked' if 'Others' in disability else '' }} />
                         <label for="dis_other" class="ml-2">Others</label>
                         <input disabled type="text" class="form-control ml-2" style="width:200px;" name="disability_other" />
                       </div>
@@ -230,35 +230,35 @@
 
                   <div class="col-md-6">
                     <div class="form-check mb-2">
-                      <input type="checkbox" id="ip" name="applicable[]" value="Indigenous People" />
+                      <input type="checkbox" disabled id="ip" name="applicable[]" value="Indigenous People" {{ 'checked' if 'Indigenous People' in applicable else '' }} />
                       <label for="ip">Indigenous People (IP)</label>
                     </div>
 
                     <div class="form-check d-flex align-items-center mb-2">
-                      <input type="checkbox" id="solo_parent" name="applicable[]" value="Solo Parent" />
+                      <input type="checkbox" disabled id="solo_parent" name="applicable[]" value="Solo Parent" {{ 'checked' if 'Solo Parent' in applicable else '' }} />
                       <label for="solo_parent" class="ml-2">Solo Parent</label>
-                      <input disabled type="text" class="form-control ml-2" style="width:150px;" name="children_no" placeholder="No. of Children" />
+                      <input disabled type="text" class="form-control ml-2" style="width:150px;" name="children_no" placeholder=" {{ children_no }}" />
                     </div>
 
                     <div class="form-check mb-2">
-                      <input type="checkbox" id="ofw" name="applicable[]" value="Child of OFW" />
+                      <input type="checkbox" disabled id="ofw" name="applicable[]" value="Child of OFW" {{ 'checked' if 'Child of OFW' in applicable else '' }} />
                       <label for="ofw">Child of OFW</label>
                     </div>
 
                     <div class="form-check mb-2">
-                      <input type="checkbox" id="lgbtq" name="applicable[]" value="LGBTQIA+" />
+                      <input type="checkbox" disabled id="lgbtq" name="applicable[]" value="LGBTQIA+" {{ 'checked' if 'LGBTQIA+' in applicable else '' }} />
                       <label for="lgbtq">LGBTQIA+ Member</label>
                     </div>
 
                     <div class="form-check mb-2">
-                      <input type="checkbox" id="working" name="applicable[]" value="Working Student" />
+                      <input type="checkbox" disabled id="working" name="applicable[]" value="Working Student" {{ 'checked' if 'Working Student' in applicable else '' }} />
                       <label for="working">Working Student</label>
                     </div>
 
                     <div class="form-check d-flex align-items-center">
-                      <input type="checkbox" id="other_app" name="applicable[]" value="Others" />
+                      <input type="checkbox" disabled id="other_app" name="applicable[]" value="Others" {{ 'checked' if 'Others' in applicable else '' }} />
                       <label for="other_app" class="ml-2">Others</label>
-                      <input disabled type="text" class="form-control ml-2" style="width:200px;" name="applicable_other" />
+                      <input disabled type="text" class="form-control ml-2" style="width:200px;" name="applicable_other" placeholder="{{ disability }}" />
                     </div>
                   </div>
                 </div>
@@ -281,22 +281,22 @@
               <div class="form-group col-md-3">
                 <label for="inputLastName">Elementary Level</label>
                 <label for="inputLastName">Name of School</label>
-                <input disabled type="text" class="form-control" id="inputElementaryLevel" name="inputElementaryLevel" />
+                <input disabled type="text" class="form-control" id="inputElementaryLevel" name="inputElementaryLevel" placeholder="{{ elementary_level }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">Basic Education/ Degree Program</label>
-                <input disabled type="text" class="form-control" id="inputBasicEducation" name="inputBasicEducation" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputBasicEducation" name="inputBasicEducation" placeholder="{{ basic_education_elementary }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Year Attended/ Graduated</label>
-                <input disabled type="text" class="form-control" id="inputYearAttended" name="inputYearAttended" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputYearAttended" name="inputYearAttended" placeholder="{{ year_attended_elementary }}" />
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Honor/s Received</label>
-                <input disabled type="text" class="form-control" id="inputHonors" name="inputHonors" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputHonors" name="inputHonors" placeholder="{{ honors_elementary }}" />
               </div>
 
               <div class="form-group col-md-3">
@@ -307,58 +307,58 @@
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">Basic Education/ Degree Program</label>
-                <input disabled type="text" class="form-control" id="inputBasicEducationJuniorHigh" name="inputBasicEducationJuniorHigh" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputBasicEducationJuniorHigh" name="inputBasicEducationJuniorHigh" placeholder="{{ basic_education_junior_high }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Year Attended/ Graduated</label>
-                <input disabled type="text" class="form-control" id="inputYearAttendedJuniorHigh" name="inputYearAttendedJuniorHigh" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputYearAttendedJuniorHigh" name="inputYearAttendedJuniorHigh" placeholder="{{ year_attended_junior_high }}" />
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Honor/s Received</label>
-                <input disabled type="text" class="form-control" id="inputHonorsJuniorHigh" name="inputHonorsJuniorHigh" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputHonorsJuniorHigh" name="inputHonorsJuniorHigh" placeholder="{{ honors_junior_high }}" />
               </div>
               <div class="form-group col-md-3">
                 <label for="inputLastName">Senior High School Level</label>
                 <label for="inputLastName">Name of School</label>
-                <input disabled type="text" class="form-control" id="inputSeniorHighSchoolLevel" name="inputSeniorHighSchoolLevel" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputSeniorHighSchoolLevel" name="inputSeniorHighSchoolLevel" placeholder="{{ year_attended_senior_high }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">Basic Education/ Degree Program</label>
-                <input disabled type="text" class="form-control" id="inputBasicEducationSeniorHigh" name="inputBasicEducationSeniorHigh" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputBasicEducationSeniorHigh" name="inputBasicEducationSeniorHigh" placeholder="{{ basic_education_senior_high }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Year Attended/ Graduated</label>
-                <input disabled type="text" class="form-control" id="inputYearAttendedSeniorHigh" name="inputYearAttendedSeniorHigh" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputYearAttendedSeniorHigh" name="inputYearAttendedSeniorHigh" placeholder="{{ year_attended_senior_high }}" />
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Honor/s Received</label>
-                <input disabled type="text" class="form-control" id="inputHonorsSeniorHigh" name="inputHonorsSeniorHigh" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputHonorsSeniorHigh" name="inputHonorsSeniorHigh" placeholder="{{ honors_senior_high }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputCollege">College/ Vocational School</label>
                 <label for="inputCollege">Name of School</label>
-                <input disabled type="text" class="form-control" id="inputLastName" placeholder="" />
+                <input disabled type="text" class="form-control" placeholder="{{ college }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">Basic Education/ Degree Program</label>
-                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="" />
+                <input disabled type="text" class="form-control" placeholder="{{ degree_program_college }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Year Attended/ Graduated</label>
-                <input disabled type="text" class="form-control" id="inputMiddleName" placeholder="" />
+                <input disabled type="text" class="form-control" placeholder="{{ year_attended_college }}" />
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Honor/s Received</label>
-                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+                <input disabled type="text" class="form-control" placeholder="{{ honors_college }}" />
               </div>
             </div>
           </div>
@@ -369,64 +369,62 @@
       <div class="container-fluid">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">B. Family Background</h6>
+            <h6 class="m-0 font-weight-bold text-primary">B. Family Background</h6> 
           </div>
           <div class="card-body">
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputLastName">Name of Mother</label>
-                <input disabled type="text" class="form-control" id="inputLastName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputLastName" placeholder="{{ name_of_mother }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">Occupation</label>
-                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="{{ occupation_of_mother }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Estimated Monthly Income</label>
-                <select id="inputMiddleName" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>Less than 10,957</option>
-                  <option>10,957 - 21,914</option>
-                  <option>43,828 - 76,669</option>
-                  <option>76,669 - 131,484</option>
-                  <option>131,484 - 219,140</option>
-                  <option>More than 219,140</option>
+                <select disabled id="inputMiddleName" class="form-control">
+                  <option {{'selected' if 'Less than 10,957' in applicable_str }}>Less than 10,957</option>
+                  <option {{'selected' if '10,957 - 21,914' in applicable_str }}>10,957 - 21,914</option>
+                  <option {{'selected' if '43,828 - 76,669' in applicable_str }}>43,828 - 76,669</option>
+                  <option {{'selected' if '76,669 - 131,484' in applicable_str }}>76,669 - 131,484</option>
+                  <option {{'selected' if '131,484 - 219,140' in applicable_str }}>131,484 - 219,140</option>
+                  <option {{'selected' if 'More than 219,140' in applicable_str }}>More than 219,140</option>
                 </select>
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Contact Number</label>
-                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder=" {{contact_number}} " />
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="{{ mother_contact_number }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputLastName">Name of Father</label>
-                <input disabled type="text" class="form-control" id="inputLastName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputLastName" placeholder="{{ name_of_father }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputFirstName">Occupation</label>
-                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputFirstName" placeholder="{{ occupation_of_father }}" />
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputMiddleName">Estimated Monthly Income</label>
-                <select id="inputMiddleName" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>Less than 10,957</option>
-                  <option>10,957 - 21,914</option>
-                  <option>43,828 - 76,669</option>
-                  <option>76,669 - 131,484</option>
-                  <option>131,484 - 219,140</option>
-                  <option>More than 219,140</option>
+                <select disabled id="inputMiddleName" class="form-control">
+                  <option {{'selected' if 'Less than 10,957' in applicable_str }}>Less than 10,957</option>
+                  <option {{'selected' if '10,957 - 21,914' in applicable_str }}>10,957 - 21,914</option>
+                  <option {{'selected' if '43,828 - 76,669' in applicable_str }}>43,828 - 76,669</option>
+                  <option {{'selected' if '76,669 - 131,484' in applicable_str }}>76,669 - 131,484</option>
+                  <option {{'selected' if '131,484 - 219,140' in applicable_str }}>131,484 - 219,140</option>
+                  <option {{'selected' if 'More than 219,140' in applicable_str }}>More than 219,140</option>
                 </select>
               </div>
 
               <div class="form-group col-md-2">
                 <label for="inputExtensionName">Contact Number</label>
-                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="" />
+                <input disabled type="text" class="form-control" id="inputExtensionName" placeholder="{{ father_contact_number }}" />
               </div>
             </div>
           </div>
