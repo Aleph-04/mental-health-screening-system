@@ -154,15 +154,44 @@ def student_view_evaluation():
     middle_name = entry_id[0]['middle_name']
     last_name = entry_id[0]['last_name']
     email_address = entry_id[0]['email_address']
-    contact_number = entry_id[0]['contact_number']
     facebook = entry_id[0]['facebook']
     present_address = entry_id[0]['present_address']
     permanent_address = entry_id[0]['permanent_address']
     religion = entry_id[0]['religion']
+    contact_number = entry_id[0]['contact_number']
     extension = entry_id[0]['extension']
     place_of_birth = entry_id[0]['place_of_birth']
     date_of_birth = entry_id[0]['date_of_birth']
     college = entry_id[0]['college']
+    degree_program_college = entry_id[0]['degree_program_college']
+    elementary_level = entry_id[0]['elementary_level']
+    highest_education = entry_id[0]['college_level'] if entry_id[0]['college_level'] else (entry_id[0]['senior_high_school'] if entry_id[0]['senior_high_school'] else entry_id[0]['junior_high_school'] if entry_id[0]['junior_high_school'] else entry_id[0]['elementary_level'])
+    
+    year_attended_college = entry_id[0]['year_attended_college']
+    year_attended_senior_high = entry_id[0]['year_attended_senior_high']
+    year_attended_junior_high = entry_id[0]['year_attended_junior_high']
+    year_attended_elementary = entry_id[0]['year_attended_elementary']
+    
+    basic_education_senior_high = entry_id[0]['basic_education_senior_high']
+    basic_education_junior_high = entry_id[0]['basic_education_junior_high']
+    basic_education_elementary = entry_id[0]['basic_education_elementary']
+    
+    honors_college = entry_id[0]['honors_college']
+    honors_senior_high = entry_id[0]['honors_senior_high']
+    honors_junior_high = entry_id[0]['honors_junior_high']
+    honors_elementary = entry_id[0]['honors_elementary']
+    name_of_mother = entry_id[0]['name_of_mother']
+    occupation_of_mother = entry_id[0]['occupation_of_mother']
+    mother_contact_number = entry_id[0]['mother_contact_number']
+    name_of_father = entry_id[0]['name_of_father']
+    occupation_of_father = entry_id[0]['occupation_of_father']
+    father_contact_number = entry_id[0]['father_contact_number']
+    
+    disability_str = entry_id[0]['disability']
+    applicable_str = entry_id[0]['applicable']
+    
+    sex = entry_id[0]['sex']
+    civil_status = entry_id[0]['civil_status']
 
     phq1_response = entry_id[0]['phq1']
     phq2_response = entry_id[0]['phq2']
@@ -187,25 +216,49 @@ def student_view_evaluation():
     sbqr3_response = entry_id[0]['sbqr3']
     sbqr4_response = entry_id[0]['sbqr4']
     
-    
     try:
         if not session.get("user"):
             return render_template("404notfound.html", message="404 not found.")
         
         return render_template("student_view_evaluation.html",
+ id=id,
                                first_name=first_name,
                                middle_name=middle_name,
-                               last_name=last_name, 
+                               last_name=last_name,
                                email_address=email_address,
-                                facebook=facebook,
-                                present_address=present_address,
-                                permanent_address=permanent_address,
-                                religion=religion,
-                                contact_number=contact_number,
-                                extension=extension,
-                                place_of_birth=place_of_birth,
-                                date_of_birth=date_of_birth,
-                                college=college,
+                               facebook=facebook,
+                               present_address=present_address,
+                               permanent_address=permanent_address,
+                               religion=religion,
+                               contact_number=contact_number,
+                               extension=extension,
+                               place_of_birth=place_of_birth,
+                               date_of_birth=date_of_birth,
+                               college=college,
+                               degree_program_college=degree_program_college,
+                               elementary_level=elementary_level,
+                               highest_education=highest_education,
+                               year_attended_college=year_attended_college,
+                               year_attended_senior_high=year_attended_senior_high,
+                               year_attended_junior_high=year_attended_junior_high,
+                               year_attended_elementary=year_attended_elementary,
+                               basic_education_senior_high=basic_education_senior_high,
+                               basic_education_junior_high=basic_education_junior_high,
+                               basic_education_elementary=basic_education_elementary,
+                               honors_college=honors_college,
+                               honors_senior_high=honors_senior_high,
+                               honors_junior_high=honors_junior_high,
+                               honors_elementary=honors_elementary,
+                               name_of_mother=name_of_mother,
+                               occupation_of_mother=occupation_of_mother,
+                               mother_contact_number=mother_contact_number,
+                               name_of_father=name_of_father,
+                               occupation_of_father=occupation_of_father,
+                               father_contact_number=father_contact_number,
+                               disability=disability_str,
+                               applicable=applicable_str,
+                               sex=sex,
+                               civil_status=civil_status,
                                phq1_response=phq1_response,
                                phq2_response=phq2_response,
                                phq3_response=phq3_response,
@@ -334,10 +387,6 @@ def submit_to_database():
      civil_status = f"Other: {civil_status_other}"
 
 
-
-
-
-
     ### PHQ9
     phq1 = int(request.form.get('phq1', 0))
     phq2 = int(request.form.get('phq2', 0))
@@ -373,7 +422,13 @@ def submit_to_database():
     
     insert_to_responses(
             first_name, middle_name, last_name, email_address,
-            sex, monthly_income, date_of_birth, civil_status, father_contact_number, occupation_of_father, name_of_father, mother_contact_number, occupation_of_mother, name_of_mother, honors_college, year_attended_college, degree_program_college, college_level, honors_senior_high, year_attended_senior_high, basic_education_senior_high, senior_high_school, honors_junior_high, year_attended_junior_high, basic_education_junior_high, junior_high_school, honors_elementary, year_attended_elementary, basic_education_elementary, elementary_level, facebook, present_address, permanent_address, religion, contact_number, extension, place_of_birth, college, 
+            sex, monthly_income, date_of_birth, civil_status, father_contact_number,
+            occupation_of_father, name_of_father, mother_contact_number, occupation_of_mother, name_of_mother,
+            honors_college, year_attended_college, degree_program_college, college_level, honors_senior_high,
+            year_attended_senior_high, basic_education_senior_high, senior_high_school, honors_junior_high,
+            year_attended_junior_high, basic_education_junior_high, junior_high_school, honors_elementary,
+            year_attended_elementary, basic_education_elementary, elementary_level, facebook, present_address,
+            permanent_address, religion, contact_number, extension, place_of_birth, college, 
             phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9,
             gad1, gad2, gad3, gad4, gad5, gad6, gad7,
             sbqr1, sbqr2, sbqr3, sbqr4, applicable_str, disability_str, code
@@ -413,7 +468,35 @@ def admin_view_evaluation():
             place_of_birth = entry_id[0]['place_of_birth']
             date_of_birth = entry_id[0]['date_of_birth']
             college = entry_id[0]['college']
-
+            degree_program_college = entry_id[0]['degree_program_college']
+            elementary_level = entry_id[0]['elementary_level']
+            highest_education = entry_id[0]['college_level'] if entry_id[0]['college_level'] else (entry_id[0]['senior_high_school'] if entry_id[0]['senior_high_school'] else entry_id[0]['junior_high_school'] if entry_id[0]['junior_high_school'] else entry_id[0]['elementary_level'])
+            
+            year_attended_college = entry_id[0]['year_attended_college']
+            year_attended_senior_high = entry_id[0]['year_attended_senior_high']
+            year_attended_junior_high = entry_id[0]['year_attended_junior_high']
+            year_attended_elementary = entry_id[0]['year_attended_elementary']
+            
+            basic_education_senior_high = entry_id[0]['basic_education_senior_high']
+            basic_education_junior_high = entry_id[0]['basic_education_junior_high']
+            basic_education_elementary = entry_id[0]['basic_education_elementary']
+            
+            honors_college = entry_id[0]['honors_college']
+            honors_senior_high = entry_id[0]['honors_senior_high']
+            honors_junior_high = entry_id[0]['honors_junior_high']
+            honors_elementary = entry_id[0]['honors_elementary']
+            name_of_mother = entry_id[0]['name_of_mother']
+            occupation_of_mother = entry_id[0]['occupation_of_mother']
+            mother_contact_number = entry_id[0]['mother_contact_number']
+            name_of_father = entry_id[0]['name_of_father']
+            occupation_of_father = entry_id[0]['occupation_of_father']
+            father_contact_number = entry_id[0]['father_contact_number']
+            
+            disability_str = entry_id[0]['disability']
+            applicable_str = entry_id[0]['applicable']
+            
+            sex = entry_id[0]['sex']
+            civil_status = entry_id[0]['civil_status']
 
             phq1_response = entry_id[0]['phq1']
             phq2_response = entry_id[0]['phq2']
@@ -462,6 +545,30 @@ def admin_view_evaluation():
                                place_of_birth=place_of_birth,
                                date_of_birth=date_of_birth,
                                college=college,
+                               degree_program_college=degree_program_college,
+                               elementary_level=elementary_level,
+                               highest_education=highest_education,
+                               year_attended_college=year_attended_college,
+                               year_attended_senior_high=year_attended_senior_high,
+                               year_attended_junior_high=year_attended_junior_high,
+                               year_attended_elementary=year_attended_elementary,
+                               basic_education_senior_high=basic_education_senior_high,
+                               basic_education_junior_high=basic_education_junior_high,
+                               basic_education_elementary=basic_education_elementary,
+                               honors_college=honors_college,
+                               honors_senior_high=honors_senior_high,
+                               honors_junior_high=honors_junior_high,
+                               honors_elementary=honors_elementary,
+                               name_of_mother=name_of_mother,
+                               occupation_of_mother=occupation_of_mother,
+                               mother_contact_number=mother_contact_number,
+                               name_of_father=name_of_father,
+                               occupation_of_father=occupation_of_father,
+                               father_contact_number=father_contact_number,
+                               disability=disability_str,
+                               applicable=applicable_str,
+                               sex=sex,
+                               civil_status=civil_status,
                                phq1_response=phq1_response,
                                phq2_response=phq2_response,
                                phq3_response=phq3_response,
@@ -484,7 +591,7 @@ def admin_view_evaluation():
                                sbqr4_response=sbqr4_response,
                                phq9_result=phq9_result,
                                gad7_result=gad7_result,
-                               sbqr_result=sbqr_result
+                               sbqr_result=sbqr_result,
                                )
 
 if __name__ == '__main__':
