@@ -7,4 +7,5 @@ Python
 pip install -r requirement.txt
 
 ### run app ###
->>> python app.py
+cd mhs-system
+python app.py
