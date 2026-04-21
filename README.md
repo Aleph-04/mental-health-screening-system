@@ -3,9 +3,9 @@ Thesis for 4th year
 
 Python
 
-### Install dependencies ###
+--- Install dependencies ---
 pip install -r requirement.txt
 
-### run app ###
-cd mhs-system
-python app.py
+--- run app ---
+> cd mhs-system
+> python app.py
