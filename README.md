@@ -2,6 +2,8 @@
 Thesis for 4th year
 
 Python
+Flask
+Sqlite3
 
 --- Install dependencies ---
 >>> pip install -r requirement.txt
@@ -9,4 +11,4 @@ Python
 --- run app ---
 >>> cd mhs-system
 
->>> python app.py
+>>> py app.py
