@@ -12,9 +12,9 @@ app.secret_key = "supersecretkey"  # Needed for flash messages; and session.
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'mykekieran.alfane@antiquespride.edu.ph'  # <-- replace
-app.config['MAIL_PASSWORD'] = 'erqylyfomebaqbwd'     # <-- replace
-app.config['MAIL_DEFAULT_SENDER'] = 'mykekieran.alfane@antiquespride.edu.ph'
+app.config['MAIL_USERNAME'] = 'ljadopina@antiquespride.edu.ph'  # <-- replace
+app.config['MAIL_PASSWORD'] = 'xghgxfwoxxwqokyw'     # <-- replace
+app.config['MAIL_DEFAULT_SENDER'] = 'ljadopina@antiquespride.edu.ph'
 
 mail = Mail(app)
 
@@ -84,7 +84,7 @@ def dashboard():
     
     bar_graph_data = [count_by_college("ccis"),
                       count_by_college("cea"),
-                      count_by_college("cba"),
+                      count_by_college("cmg"),
                       count_by_college("cms"),
                       count_by_college("chs"),
                       count_by_college("cit"),]
@@ -595,4 +595,5 @@ def admin_view_evaluation():
                                )
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
+

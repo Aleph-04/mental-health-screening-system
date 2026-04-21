@@ -54,7 +54,6 @@
                         <th> Code </th>
                         <th>Name</th>
                         <th>College</th>
-                        <th>Age</th>
                         <th> PHQ-9 Result </th>
                         <th> GAD-7 Result </th>
                         <th> SBQR Result </th>
@@ -68,8 +67,7 @@
                         <tr>
                         <td>{{ i["code"] }}</td>
                         <td>{{ i["name"] }}</td>
-                        <td>{{ i["college"] }}</td>
-                        <td>{{ i["age"] }}</td>
+                        <td>{{ i["college"] }}</td> 
 
                         <td style="background-color:{{'pink' if i['phq9_result'] in ['Moderately Severe', 'Severe'] else 'white'}}; color:{{'black' if i['phq9_result'] in ['Moderately Severe', 'Severe']}};">{{ i["phq9_result"] }}</td>
                         <td style="background-color:{{'pink' if i['gad7_result'] in ['Moderately Severe', 'Severe'] else 'white'}}; color:{{'black' if i['gad7_result'] in ['Moderately Severe', 'Severe']}};">{{ i["gad7_result"] }}</td>
@@ -110,7 +108,6 @@
                         <th>Name</th>
                         <th>College</th>
 
-                        <th>Age</th>
                         <th> PHQ-9 Result </th>
                         <th> GAD-7 Result </th>
                         <th> SBQR Result </th>
@@ -125,7 +122,6 @@
                         <td>{{ i["code"] }}</td>
                         <td>{{ i["name"] }}</td>
                         <td>{{ i["college"] }}</td>
-                        <td>{{ i["age"] }}</td>
                         <td>{{ i["phq9_result"] }}</td>
                         <td>{{ i["gad7_result"] }}</td>
                         <td>{{ i["sbqr_result"] }}</td>
