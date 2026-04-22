@@ -31,9 +31,9 @@ def make_phq9_prediction(phq1, phq2, phq3, phq4, phq5, phq6, phq7, phq8, phq9):
         case 2:
             return "Moderate"
         case 3:
+            return "Moderately Severe"
+        case 4:
             return "Severe"
-        # case 4:
-        #     return "Severe"
 
 
 
@@ -50,8 +50,9 @@ def make_gad7_prediction(gad1, gad2, gad3, gad4, gad5, gad6, gad7):
         case 2:
             return "Moderate"
         case 3:
+            return "Moderately Severe"
+        case 4:
             return "Severe"
-    
 
 def make_sbqr_prediction(sbqr1,sbqr2, sbqr3, sbqr4):
     model = load_sbqr_model()
