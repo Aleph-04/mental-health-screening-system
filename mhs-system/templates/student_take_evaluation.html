@@ -66,8 +66,17 @@
     <!-- End of Topbar -->
 
     <!-- Content Section -->
+    <!-- Progress Indicator -->
+    <div class="container-fluid mb-4">
+      <div class="progress shadow-sm" style="height: 25px;">
+        <div id="form-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 20%; font-size: 14px; font-weight: bold;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Step 1 of 5: Personal Info</div>
+      </div>
+    </div>
+
     <form id="submit_form" action="/evaluation" method="post">
       
+      <!-- STEP 1 START -->
+      <div class="form-step" id="step-1">
       <!-- Privacy Agreement -->
       <div class="container-fluid">
         <div class="card shadow mb-4">
@@ -301,8 +310,15 @@
             </div>
           </div>
         </div>
+        <div class="container-fluid mb-4 px-3 d-flex justify-content-end">
+          <button type="button" class="btn btn-primary next-step shadow-sm">Next: Educational Background <i class="fas fa-arrow-right ml-1"></i></button>
+        </div>
       </div>
+      </div>
+      <!-- STEP 1 END -->
 
+      <!-- STEP 2 START -->
+      <div class="form-step" id="step-2" style="display: none;">
       <!-- EDUCATIONAL BACKGROUND -->
       <div class="container-fluid">
         <div class="card shadow mb-4">
@@ -481,8 +497,16 @@
             </div>
           </div>
         </div>
+        <div class="container-fluid mb-4 px-3 d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary prev-step shadow-sm"><i class="fas fa-arrow-left mr-1"></i> Previous</button>
+          <button type="button" class="btn btn-primary next-step shadow-sm">Next: PHQ-9 Evaluation <i class="fas fa-arrow-right ml-1"></i></button>
+        </div>
       </div>
+      </div>
+      <!-- STEP 2 END -->
 
+      <!-- STEP 3 START -->
+      <div class="form-step" id="step-3" style="display: none;">
       <!-- EVALUATION PHQ-9 -->
       <div class="container-fluid">
         <div class="card shadow mb-4">
@@ -650,8 +674,16 @@
             </table>
           </div>
         </div>
+        <div class="container-fluid mb-4 px-3 d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary prev-step shadow-sm"><i class="fas fa-arrow-left mr-1"></i> Previous</button>
+          <button type="button" class="btn btn-primary next-step shadow-sm">Next: GAD-7 Evaluation <i class="fas fa-arrow-right ml-1"></i></button>
+        </div>
       </div>
+      </div>
+      <!-- STEP 3 END -->
 
+      <!-- STEP 4 START -->
+      <div class="form-step" id="step-4" style="display: none;">
       <!-- EVALUATION GAD7 -->
       <div class="container-fluid">
         <div class="card shadow mb-4">
@@ -787,8 +819,16 @@
             </table>
           </div>
         </div>
+        <div class="container-fluid mb-4 px-3 d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary prev-step shadow-sm"><i class="fas fa-arrow-left mr-1"></i> Previous</button>
+          <button type="button" class="btn btn-primary next-step shadow-sm">Next: SBQ-R Evaluation <i class="fas fa-arrow-right ml-1"></i></button>
+        </div>
       </div>
+      </div>
+      <!-- STEP 4 END -->
 
+      <!-- STEP 5 START -->
+      <div class="form-step" id="step-5" style="display: none;">
       <!-- SBQ-R -->
       <div class="container-fluid">
         <div class="card shadow mb-4">
@@ -903,10 +943,13 @@
 
       <!-- SUBMIT BUTTON -->
       <div class="container-fluid">
-        <div class="col-12 d-flex justify-content-end mb-4">
-          <button type="submit" class="btn btn-primary" name="eval_submit">Submit</button>
+        <div class="col-12 d-flex justify-content-between mb-4">
+          <button type="button" class="btn btn-secondary prev-step shadow-sm"><i class="fas fa-arrow-left mr-1"></i> Previous</button>
+          <button type="submit" class="btn btn-success shadow-sm" name="eval_submit" id="final-submit-btn"><i class="fas fa-check mr-1"></i> Submit Evaluation</button>
         </div>
       </div>
+      </div>
+      <!-- STEP 5 END -->
     </form>
 
     <!-- End Content Section -->
@@ -937,5 +980,68 @@
 
     <!-- Custom scripts for all pages -->
     <script src="static/js/sb-admin-2.min.js"></script>
+
+    <!-- Multi-step Form Wizard Logic -->
+    <script>
+      $(document).ready(function() {
+        let currentStep = 1;
+        const totalSteps = 5;
+        const stepNames = [
+          "Personal Info", 
+          "Educational & Family", 
+          "PHQ-9", 
+          "GAD-7", 
+          "SBQ-R"
+        ];
+
+        function updateProgressBar() {
+          const percentage = (currentStep / totalSteps) * 100;
+          $('#form-progress-bar')
+            .css('width', percentage + '%')
+            .attr('aria-valuenow', percentage)
+            .text(`Step ${currentStep} of ${totalSteps}: ${stepNames[currentStep - 1]}`);
+        }
+
+        // Basic frontend validation for the current step
+        function validateStep(step) {
+          let isValid = true;
+          
+          // Basic validation checking for any fields explicitly marked 'required'
+          $(`#step-${step} input[required], #step-${step} select[required]`).each(function() {
+            if ($(this).val() === '' || $(this).val() === null) {
+              isValid = false;
+              $(this).addClass('is-invalid');
+            } else {
+              $(this).removeClass('is-invalid');
+            }
+          });
+          
+          if (!isValid) {
+            alert('Please fill out all required fields before proceeding.');
+          }
+          return isValid;
+        }
+
+        $('.next-step').click(function(e) {
+          e.preventDefault();
+          if (validateStep(currentStep)) {
+            $(`#step-${currentStep}`).hide();
+            currentStep++;
+            $(`#step-${currentStep}`).fadeIn();
+            updateProgressBar();
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+          }
+        });
+
+        $('.prev-step').click(function(e) {
+          e.preventDefault();
+          $(`#step-${currentStep}`).hide();
+          currentStep--;
+          $(`#step-${currentStep}`).fadeIn();
+          updateProgressBar();
+          $('html, body').animate({ scrollTop: 0 }, 'fast');
+        });
+      });
+    </script>
   </body>
 </html>

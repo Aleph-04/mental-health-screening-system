@@ -67,9 +67,161 @@
 
     <!-- Content Section -->
 
-      <!-- PERSONAL INFORMATION -->
       <div class="container-fluid">
-        <div class="card shadow mb-4">
+        <!-- High Risk Summary Dashboard (XAI) -->
+        <div class="card shadow mb-4 {% if has_critical_warning %}border-left-danger{% else %}border-left-primary{% endif %}">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold {% if has_critical_warning %}text-danger{% else %}text-primary{% endif %}">
+              <i class="fas fa-exclamation-triangle mr-2"></i> High Risk Summary Dashboard (Explainable AI)
+            </h6>
+            {% if has_critical_warning %}
+              <span class="badge badge-danger">CRITICAL ATTENTION REQUIRED</span>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Section 1: Red Flag Indicators -->
+              <div class="col-lg-6 mb-4">
+                <h6 class="font-weight-bold text-gray-800"><i class="fas fa-flag text-danger mr-2"></i> Red Flag Indicators</h6>
+                <hr class="mt-1 mb-2">
+                <ul class="list-group list-group-flush">
+                  {% if phq9_response and phq9_response > 0 %}
+                  <li class="list-group-item list-group-item-danger py-2">
+                    <strong>Suicidal Ideation (PHQ-9 Q9):</strong> Student reported thoughts of self-harm.
+                  </li>
+                  {% endif %}
+                  {% if sbqr1_response > 1 or sbqr2_response > 1 or sbqr3_response > 1 or sbqr4_response > 0 %}
+                  <li class="list-group-item list-group-item-danger py-2">
+                    <strong>SBQ-R Suicide Risk:</strong> High scores detected in suicide behavior questionnaire.
+                  </li>
+                  {% endif %}
+                  {% if not (phq9_response and phq9_response > 0) and not (sbqr1_response > 1 or sbqr2_response > 1 or sbqr3_response > 1 or sbqr4_response > 0) %}
+                  <li class="list-group-item py-2 text-muted">No immediate life-threat indicators detected.</li>
+                  {% endif %}
+                </ul>
+              </div>
+
+              <!-- Section 2: High-Scoring Symptoms -->
+              <div class="col-lg-6 mb-4">
+                <h6 class="font-weight-bold text-gray-800"><i class="fas fa-chart-line text-warning mr-2"></i> Driving Symptoms (High Scores)</h6>
+                <hr class="mt-1 mb-2">
+                {% if driving_symptoms %}
+                <div class="small">
+                  {% for symptom in driving_symptoms %}
+                    <div class="mb-1">
+                      <span class="badge {% if symptom.score == 3 %}badge-danger{% else %}badge-warning{% endif %}">Score: {{ symptom.score }}</span>
+                      <span class="ml-2">{{ symptom.text }}</span>
+                    </div>
+                  {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted small">No symptoms scored 'More than half the days' or higher.</p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Section 3: Contextual Vulnerability Factors -->
+              <div class="col-lg-6 mb-4">
+                <h6 class="font-weight-bold text-gray-800"><i class="fas fa-info-circle text-info mr-2"></i> Contextual Vulnerability Factors</h6>
+                <hr class="mt-1 mb-2">
+                <div class="mb-2">
+                  {% if applicable and "Working Student" in applicable %}<span class="badge badge-info mr-1">Working Student</span>{% endif %}
+                  {% if applicable and "Child of OFW" in applicable %}<span class="badge badge-info mr-1">Child of OFW</span>{% endif %}
+                  {% if applicable and "Solo Parent" in applicable %}<span class="badge badge-info mr-1">Solo Parent</span>{% endif %}
+                  {% if applicable and "LGBTQIA+" in applicable %}<span class="badge badge-info mr-1">LGBTQIA+</span>{% endif %}
+                  {% if applicable and "PWD" in applicable %}<span class="badge badge-info mr-1">PWD</span>{% endif %}
+                </div>
+                <div class="small">
+                  <strong>Estimated Monthly Income:</strong> {{ monthly_income or "Not Specified" }}<br>
+                  <strong>Living Status:</strong> 
+                  {% if present_address != permanent_address %}
+                    <span class="text-danger font-weight-bold">Living away from home</span>
+                  {% else %}
+                    Living at permanent address
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Section 4: Final Classification Summary -->
+              <div class="col-lg-6 mb-4">
+                <h6 class="font-weight-bold text-gray-800"><i class="fas fa-clipboard-check text-success mr-2"></i> Final ML Classification</h6>
+                <hr class="mt-1 mb-2">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Depression (PHQ-9)</div>
+                    <div class="h6 mb-0 font-weight-bold text-gray-800">{{ phq9_result }}</div>
+                  </div>
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Anxiety (GAD-7)</div>
+                    <div class="h6 mb-0 font-weight-bold text-gray-800">{{ gad7_result }}</div>
+                  </div>
+                  <div class="col">
+                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Suicide Risk (SBQ-R)</div>
+                    <div class="h6 mb-0 font-weight-bold text-gray-800">{{ sbqr_result }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+      <!-- CLINICAL VALIDATION (HITL) -->
+      <div class="card shadow mb-4 border-bottom-success">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-user-md mr-2"></i> Clinical Validation (Human-in-the-Loop)</h6>
+        </div>
+        <div class="card-body bg-light">
+          <form action="/admin/feedback/{{ id }}" method="POST">
+            <p class="small text-muted mb-4">Review the ML predictions above. If your clinical assessment differs, override the severity levels below and provide your clinical notes to help retrain the model.</p>
+            
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label class="font-weight-bold">Verified PHQ-9 Severity</label>
+                <select name="verified_phq9" class="form-control">
+                  <option value="Minimal" {% if (feedback and feedback.verified_phq9 == "Minimal") or (not feedback and "Minimal" in phq9_result|default('')) %}selected{% endif %}>Minimal</option>
+                  <option value="Mild" {% if (feedback and feedback.verified_phq9 == "Mild") or (not feedback and "Mild" in phq9_result|default('')) %}selected{% endif %}>Mild</option>
+                  <option value="Moderate" {% if (feedback and feedback.verified_phq9 == "Moderate") or (not feedback and "Moderate" in phq9_result|default('')) %}selected{% endif %}>Moderate</option>
+                  <option value="Moderately Severe" {% if (feedback and feedback.verified_phq9 == "Moderately Severe") or (not feedback and "Moderately Severe" in phq9_result|default('')) %}selected{% endif %}>Moderately Severe</option>
+                  <option value="Severe" {% if (feedback and feedback.verified_phq9 == "Severe") or (not feedback and "Severe" in phq9_result|default('')) %}selected{% endif %}>Severe</option>
+                </select>
+              </div>
+              
+              <div class="form-group col-md-4">
+                <label class="font-weight-bold">Verified GAD-7 Severity</label>
+                <select name="verified_gad7" class="form-control">
+                  <option value="Minimal" {% if (feedback and feedback.verified_gad7 == "Minimal") or (not feedback and "Minimal" in gad7_result|default('')) %}selected{% endif %}>Minimal</option>
+                  <option value="Mild" {% if (feedback and feedback.verified_gad7 == "Mild") or (not feedback and "Mild" in gad7_result|default('')) %}selected{% endif %}>Mild</option>
+                  <option value="Moderate" {% if (feedback and feedback.verified_gad7 == "Moderate") or (not feedback and "Moderate" in gad7_result|default('')) %}selected{% endif %}>Moderate</option>
+                  <option value="Severe" {% if (feedback and feedback.verified_gad7 == "Severe") or (not feedback and "Severe" in gad7_result|default('')) %}selected{% endif %}>Severe</option>
+                </select>
+              </div>
+              
+              <div class="form-group col-md-4">
+                <label class="font-weight-bold">Verified SBQ-R Risk</label>
+                <select name="verified_sbqr" class="form-control">
+                  <option value="Negative" {% if (feedback and feedback.verified_sbqr == "Negative") or (not feedback and "Negative" in sbqr_result|default('')) %}selected{% endif %}>Negative</option>
+                  <option value="Positive" {% if (feedback and feedback.verified_sbqr == "Positive") or (not feedback and "Positive" in sbqr_result|default('')) %}selected{% endif %}>Positive</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="font-weight-bold">Clinical Notes</label>
+              <textarea name="clinical_notes" class="form-control" rows="3" placeholder="Explain your assessment or why you overrode the ML prediction...">{% if feedback %}{{ feedback.clinical_notes }}{% endif %}</textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-success"><i class="fas fa-save mr-1"></i> Save Clinical Assessment</button>
+            {% if feedback %}
+              <small class="text-success ml-2 font-weight-bold"><i class="fas fa-check-circle"></i> Assessment previously validated</small>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+
+      <!-- PERSONAL INFORMATION -->
+      <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">I. Personal Information</h6>
           </div>

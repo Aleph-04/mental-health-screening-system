@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.venv
+venv.bak
+.env
+.flaskenv
+
+# Databases
+seed.py
+SYSTEM_MANUSCRIPT.models
+SYSTEM_MANUSCRIPT.md
+docs/
+scratch/
+test_integration.py
+*.sqbpro
+
+# ML Models (Optional: keep if you want models in repo, but often ignored)
+
+
+# IDEs/Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
