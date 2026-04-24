@@ -23,6 +23,7 @@
 
   <body id="page-top">
     <!-- Topbar -->
+    {% if not is_modal %}
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
       <!-- Brand (icon + title) aligned to the left -->
       <a class="navbar-brand d-flex align-items-center" href="index.html">
@@ -64,6 +65,7 @@
       </ul>
     </nav>
     <!-- End of Topbar -->
+    {% endif %}
 
     <!-- Content Section -->
 
@@ -90,12 +92,12 @@
                     <strong>Suicidal Ideation (PHQ-9 Q9):</strong> Student reported thoughts of self-harm.
                   </li>
                   {% endif %}
-                  {% if sbqr1_response > 1 or sbqr2_response > 1 or sbqr3_response > 1 or sbqr4_response > 0 %}
+                  {% if sbqr1_response > 1 or sbqr2_response > 1 or sbqr3_response > 1 or sbqr4_response > 1 %}
                   <li class="list-group-item list-group-item-danger py-2">
                     <strong>SBQ-R Suicide Risk:</strong> High scores detected in suicide behavior questionnaire.
                   </li>
                   {% endif %}
-                  {% if not (phq9_response and phq9_response > 0) and not (sbqr1_response > 1 or sbqr2_response > 1 or sbqr3_response > 1 or sbqr4_response > 0) %}
+                  {% if not (phq9_response and phq9_response > 0) and not (sbqr1_response > 1 or sbqr2_response > 1 or sbqr3_response > 1 or sbqr4_response > 1) %}
                   <li class="list-group-item py-2 text-muted">No immediate life-threat indicators detected.</li>
                   {% endif %}
                 </ul>

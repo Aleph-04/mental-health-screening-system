@@ -579,9 +579,17 @@ def submit_to_database():
 # ------------------- ADMIN Dashboard > Results > View evaluation (blue button) ---------boto, guba pagid----------
 @app.route("/admin-view-evaluation", methods=['GET', 'POST'])
 def admin_view_evaluation():
-    if request.method == 'POST':
-        if "view_button" in request.form:
-            code = request.form['view_button']
+    is_modal = request.args.get('modal') == '1'
+    code = request.form.get('view_button') if request.method == 'POST' else request.args.get('code')
+    
+    if request.method == 'POST' and "delete_entry" in request.form:
+        delete_code = request.form['delete_entry']
+        print("Deleting evaluation for Code:", delete_code)
+        delete_entry(delete_code)
+        return redirect(url_for("results"))
+        
+    if code:
+        if True: # Preserve original indentation block
             print("Viewing evaluation for Code:", code)
 
             entry_id = fetch_responses(code)
@@ -687,13 +695,8 @@ def admin_view_evaluation():
                 ("Positive" in sbqr_result if sbqr_result else False)
             )
             
-        if "delete_entry" in request.form:
-            code = request.form['delete_entry']
-            print("Deleting evaluation for Code:", code)
-            delete_entry(code)
-            return redirect(url_for("results"))
-        
-        return render_template("admin_view_evaluation.html", id=id,
+        return render_template("admin_view_evaluation.html", id=code,
+                               is_modal=is_modal,
                                first_name=first_name,
                                middle_name=middle_name,
                                last_name=last_name,

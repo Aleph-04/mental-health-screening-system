@@ -81,7 +81,7 @@
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->
                           <form method="post" action="/admin-view-evaluation">
 
-                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('code') }}><i class="fa-solid fa-file-lines"></i></button>
+                            <button type='button' class="btn btn-sm btn-primary view-eval-btn" data-toggle="modal" data-target="#evaluationModal" data-code="{{ i.get('code') }}"><i class="fa-solid fa-file-lines"></i></button>
                             <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('code') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
                           
                           </form>
@@ -132,7 +132,7 @@
                           <!--FORMS FOR VIEW AND DETELET BUTTON-->
                           <form method="post" action="/admin-view-evaluation">
 
-                            <button name='view_button' id='view_button' type='submit' class="btn btn-sm btn-primary" value={{ i.get('code') }}><i class="fa-solid fa-file-lines"></i></button>
+                            <button type='button' class="btn btn-sm btn-primary view-eval-btn" data-toggle="modal" data-target="#evaluationModal" data-code="{{ i.get('code') }}"><i class="fa-solid fa-file-lines"></i></button>
                             <button name="delete_entry" id="delete_entry" type=submit class="btn btn-sm btn-danger" value={{ i.get('code') }} onclick="return confirm('Delete this entry? This cannot be undone.');"><i class="fa-solid fa-trash-can"></i></button>
                           
                           </form>
@@ -191,7 +191,39 @@
     <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+    <!-- Evaluation Modal -->
+    <div class="modal fade" id="evaluationModal" tabindex="-1" role="dialog" aria-labelledby="evaluationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="evaluationModalLabel">Student Evaluation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0" style="height: 80vh;">
+            <iframe id="evaluationIframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Page level custom scripts -->
     <script src="static/js/demo/datatables-demo.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        // When any view button is clicked, set the iframe src to the evaluation endpoint
+        $('.view-eval-btn').on('click', function() {
+          var code = $(this).data('code');
+          $('#evaluationIframe').attr('src', '/admin-view-evaluation?modal=1&code=' + code);
+        });
+
+        // Clear iframe when modal is closed to stop audio/video and reset state
+        $('#evaluationModal').on('hidden.bs.modal', function () {
+          $('#evaluationIframe').attr('src', '');
+        });
+      });
+    </script>
   </body>
 </html>
